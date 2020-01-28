@@ -98,11 +98,11 @@ static scanTrap0(){
                     OpEnumEx(addr+2,0,GetEnum("SoundCommands"),0);
                     param = GetConstName(GetConstEx(GetEnum("SoundCommands"),parameter,0,0));
             }
-            else if(parameter >= 0 && parameter <= 0x29){
+            else if(parameter >= 0 && parameter <= 0x30){
                     OpEnumEx(addr+2,0,GetEnum("Music"),0);
                     param = GetConstName(GetConstEx(GetEnum("Music"),parameter,0,0));
             }
-            else if(parameter >= 0x41 && parameter <= 0x78){
+            else if(parameter >= 0x41 && parameter <= 0x80){
                     OpEnumEx(addr+2,0,GetEnum("Sfx"),0);
                     param = GetConstName(GetConstEx(GetEnum("Sfx"),parameter,0,0));
             }    

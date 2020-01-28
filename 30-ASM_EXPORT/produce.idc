@@ -41,8 +41,7 @@ static produceEnums(){
                 j=0;
                 constId = GetConstEx(id,constant,j,bmask);
                 while(constId != -1){
-                    //output = form("\n%s: equ $%s",GetConstName(constId),ltoa(constant,16));
-                    output = conditionalEnumOutput(id,enumName,enumCount,constant,constId);
+                    output = form("\n%s: equ $%s",GetConstName(constId),ltoa(constant,16));
                     //Message(output);
                     writestr(file,output);
                     j++;
@@ -58,214 +57,6 @@ static produceEnums(){
     }
     fclose(file);
     Message("DONE.");
-}
-
-static conditionalEnumOutput(id,enumName,enumCount,constant,constId){
-    auto i,j,constName,constStr,enumMember,output;
-    constName = GetConstName(constId);
-    //constStr = ltoa(constant,16);
-    if(enumName=="Combatant"&&constName=="COM_ALLIES_COUNTER"||constName=="COM_ALLY_END"){
-        output = form("\n%s: equ COM_ALLIES_NUM-1", constName);
-    }else if(enumName=="Combatant"&&constName=="COM_ALLIES_NUM"){
-        output = form("\n                equIfVanillaRom %s, $%s\n                equIfExpandedRom %s, $20", constName, ltoa(constant,16), constName);
-    }else if(enumName=="Combatant"&&constName=="COM_ALL_COUNTER"){
-        output = form("\n%s: equ COM_ALLIES_NUM+COM_ENEMIES_NUM-1", constName);
-    }else if(enumName=="Followers"&&constName=="FOLLOWER_A"){
-        output = form("\n                equIfVanillaRom %s, $%s\n                equIfExpandedRom %s, $9C", constName, ltoa(constant,16), constName);
-    }else if(enumName=="Followers"&&constName=="FOLLOWER_B"){
-        output = form("\n                equIfVanillaRom %s, $%s\n                equIfExpandedRom %s, $9D", constName, ltoa(constant,16), constName);
-        
-    // ---------------------------------------------------------------------------
-    
-    // patch Three_Digits_Stats
-    
-    // enum Window_BattleEquip_Stats
-    }else if(enumName=="Window_BattleEquip_Stats"){
-        if (constant==0x701){
-            enumMember = formEnumMember(constName,"$601");      // constant WINDOW_BATTLEEQUIP_STATS_TILE_COORDS
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // enum Window_FighterMiniStatus
-    }else if(enumName=="Window_FighterMiniStatus_Patch_ThreeDigitsStats"){
-        if(constant==6){
-            enumMember = formEnumMember(constName,"8");         // constant WINDOW_FIGHTERMINISTATUS_MAX_HP_OFFSET
-        }else if(constant==9){
-            enumMember = formEnumMember(constName,"$A");        // constant WINDOW_FIGHTERMINISTATUS_WIDTH_COUNTER
-        }else if(constant==0xA){
-            enumMember = formEnumMember(constName,"$C");        // constant WINDOW_FIGHTERMINISTATUS_MIN_WIDTH
-        }else if(constant==0xC){
-            enumMember = formEnumMember(constName,"$10");       // constant WINDOW_FIGHTERMINISTATUS_STAT_VALUES_OFFSET
-        }else if(constant==0x16){
-            enumMember = formEnumMember(constName,"$18");       // constant WINDOW_FIGHTERMINISTATUS_MAX_WIDTH
-        }else if(constant==0x2C){
-            enumMember = formEnumMember(constName,"$30");       // constant WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET
-        }else if(constant==0x36){
-            enumMember = formEnumMember(constName,"$3B");       // constant WINDOW_FIGHTERMINISTATUS_COUNTER
-        }else if(constant==0x58){
-            enumMember = formEnumMember(constName,"WINDOW_FIGHTERMINISTATUS_NEXT_LINE_OFFSET*2");       // constant WINDOW_FIGHTERMINISTATUS_TWO_LINES_OFFSET
-        }else if(constant==0x1605){
-            enumMember = formEnumMember(constName,"$1805");     // constant WINDOW_BATTLEEQUIP_STATS_TILE_COORDS
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // enum Window_LandEffect
-    }else if(enumName=="Window_LandEffect"){
-        if(constant==0xF){
-            enumMember = formEnumMember(constName,"2");         // constant WINDOW_LANDEFFECT_TEXT_HEADER_LENGTH
-        }else if(constant==0x12){
-            enumMember = formEnumMember(constName,"$E");        // constant WINDOW_LANDEFFECT_TEXT_HEADER_OFFSET
-        }else if(constant==0x38){
-            enumMember = formEnumMember(constName,"$28");       // constant WINDOW_LANDEFFECT_TEXT_VALUE_OFFSET
-        }else if(constant==0x805){
-            enumMember = formEnumMember(constName,"$605");      // constant WINDOW_LANDEFFECT_SIZE
-        }else if(constant==0xF801){
-            enumMember = formEnumMember(constName,"$FA01");     // constant WINDOW_LANDEFFECT_DEST
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // enum Window_Member_Stats
-    }else if(enumName=="Window_Member_Stats_Patch_ThreeDigitsStats"){
-        if(constant==0x8C){
-            enumMember = formEnumMember(constName,"$8E");       // constant WINDOW_MEMBER_STATS_ENEMY_LEVEL_OFFSET
-        }else if(constant==0x8E){
-            enumMember = formEnumMember(constName,"$90");       // constant WINDOW_MEMBER_STATS_LEVEL_OFFSET
-        }else if(constant==0xDC){
-            enumMember = formEnumMember(constName,"$DA");       // constant WINDOW_MEMBER_STATS_CURRENT_HP_OFFSET
-        }else if(constant==0x130){
-            enumMember = formEnumMember(constName,"$12E");      // constant WINDOW_MEMBER_STATS_CURRENT_MP_OFFSET
-        }else if(constant==0x188){
-            enumMember = formEnumMember(constName,"$18A");      // constant WINDOW_MEMBER_STATS_ENEMY_EXP_OFFSET
-        }else if(constant==0x18A){
-            enumMember = formEnumMember(constName,"$18C");      // constant WINDOW_MEMBER_STATS_EXP_OFFSET
-        }else if(constant==0x19C){
-            enumMember = formEnumMember(constName,"$19E");      // constant WINDOW_MEMBER_STATS_MOV_OFFSET
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // enum Window_MemberList
-    }else if(enumName=="Window_MemberList_Patch_ThreeDigitsStats"){
-        if(constant==8){
-            enumMember = formEnumMember(constName,"4");         // constant WINDOW_MEMBERLIST_ENTRY_NEWDEFENSE_OFFSET
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // enum Stats
-    }else if(enumName=="Stats_Patch_ThreeDigitsStats"){
-        if(constant==2){
-            enumMember = formEnumMember(constName,"3");         // constant STATS_DIGITS_NUM
-        }else if(constant==0x64){
-            enumMember = formEnumMember(constName,"400");       // constant STATS_UNKNOWN_VALUE_THRESHOLD
-        }else{
-            enumMember = formEnumMember(constName,ltoa(constant,10));
-        }
-        output = formPatchOutput(id,enumCount,enumMember,"THREE_DIGITS_STATS");
-        
-    // End of patch Three_Digits_Stats
-    
-    
-    // ---------------------------------------------------------------------------
-    
-    // patch Eight_Characters_Member_Names
-    
-    // enum Window_MemberList
-    }else if(enumName=="Window_MemberList_Patch_EightCharactersMemberNames"){
-        if(constant==1){
-            enumMember = formEnumMember(constName,"2");         // constant WINDOW_MEMBERLIST_HIGHLIGHT_SPRITES_COUNTER
-        }else if(constant==0x10){
-            enumMember = formEnumMember(constName,"$12");       // constant WINDOW_MEMBERLIST_ENTRY_INIT_OFFSET
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"EIGHT_CHARACTERS_MEMBER_NAMES");
-    
-    // enum Window_NameCharacter
-    }else if(enumName=="Window_NameCharacter_Patch_EightCharactersMemberNames"){
-        if(constant==0x14){
-            enumMember = formEnumMember(constName,"$16");       // constant WINDOW_NAMECHARACTER_ENTRY_NAME_OFFSET
-        }else if(constant==0x903){
-            enumMember = formEnumMember(constName,"$A03");      // constant WINDOW_NAMECHARACTER_ENTRY_SIZE
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"EIGHT_CHARACTERS_MEMBER_NAMES");
-    
-    // enum Member_Name
-    }else if(enumName=="Member_Name_Patch_EightCharactersMemberNames"){
-        if(constant==7){
-            enumMember = formEnumMember(constName,"8");         // constant MEMBER_NAME_DISPLAYED_CHARS_NUM
-        }else{
-            enumMember = formEnumMember(constName,ltoa(constant,10));
-        }
-        output = formPatchOutput(id,enumCount,enumMember,"EIGHT_CHARACTERS_MEMBER_NAMES");
-    
-    // enum SpriteDefs_TextHighlight_MemberList
-    }else if(enumName=="SpriteDefs_TextHighlight_MemberList_Patch_EightCharactersMemberNames"){
-        if(constant==0xA){
-            enumMember = formEnumMember(constName,"$B");        // constant SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_LINK
-        }else if(constant==0xB){
-            enumMember = formEnumMember(constName,"$C");        // constant SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_3_LINK
-        }else if(constant==0xBC){
-            enumMember = formEnumMember(constName,"$C4");       // constant SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_X
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"EIGHT_CHARACTERS_MEMBER_NAMES");
-    
-    // enum SpriteDefs_TextHighlight_ItemList
-    }else if(enumName=="SpriteDefs_TextHighlight_ItemList_Patch_EightCharactersMemberNames"){
-        if(constant==5){
-            enumMember = formEnumMember(constName,"1");         // constant SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_SIZE
-        }else if(constant==0xB){
-            enumMember = formEnumMember(constName,"$C");        // constant SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_1_LINK
-        }else if(constant==0xC){
-            enumMember = formEnumMember(constName,"$D");        // constant SPRITEDEF_TEXTHIGHLIGHT_ITEMLIST_2_LINK
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"EIGHT_CHARACTERS_MEMBER_NAMES");
-    
-    // End of patch Eight_Characters_Member_Names
-    
-    
-    // ---------------------------------------------------------------------------
-    
-    // patch Full_Class_Names
-    
-    // enum Window_MemberList
-    }else if(enumName=="Window_MemberList_Patch_FullClassNames"){
-        if(constant==1){
-            enumMember = formEnumMember(constName,"2");         // constant WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV
-        }else if(constant==2){
-            enumMember = formEnumMember(constName,"3");         // constant WINDOW_MEMBERLIST_PAGE_NEWATKANDDEF
-        }else if(constant==0x16){
-            enumMember = formEnumMember(constName,"$1E");       // constant WINDOW_MEMBERLIST_ENTRY_LEVEL_OFFSET
-        }else if(constant==0x1E){
-            enumMember = formEnumMember(constName,"$11");       // constant WINDOW_MEMBERLIST_HEADER_LENGTH
-        }else{
-            enumMember = formEnumMemberWithHex(constName,ltoa(constant,16));
-        }
-        output = formPatchOutputWithHex(id,enumCount,enumMember,"FULL_CLASS_NAMES");
-    
-    // End of patch Full_Class_Names
-    
-    
-    }else{
-        output = form("\n%s", formEnumMemberWithHex(constName,ltoa(constant,16)));
-    }
-    
-    return output;
-    
 }
 
 static formEnumMember(constName,constant) {
@@ -288,60 +79,11 @@ static formEnumMemberEx(constName,constant,hex) {
     return enumMember;
 }
 
-static formPatchOutput(id,enumCount,enumMember,patchName) {
-    auto output;
-    output = formPatchOutputEx(id,enumCount,enumMember,patchName,0);
-    return output;
-}
-
-static formPatchOutputWithHex(id,enumCount,enumMember,patchName) {
-    auto output;
-    output = formPatchOutputEx(id,enumCount,enumMember,patchName,1);
-    return output;
-}
-
-static formPatchOutputEx(id,enumCount,enumMember,patchName,hex) {
-    auto j,constant,constId,constName,output;
-    if(enumCount==GetEnumSize(id)){
-        output = form("\n%s%s%s\n%s", "                if (", patchName, "=1)", enumMember);
-    }else{
-        output = "";
-    }
-    if(enumCount==1){
-        if(output==""){
-            output = form("%s\n%s\n%s", output, enumMember, "                else");
-        }else{
-            output = form("%s\n%s", output, "                else");
-        }
-        enumCount = GetEnumSize(id);
-        constant = GetFirstConst(id,-1);
-        // Iterate constants
-        while(enumCount>0){
-            j=0;
-            constId = GetConstEx(id,constant,j,-1);
-            while(constId != -1){
-                constName = GetConstName(constId);
-                if(hex==1){output = form("%s\n%s", output, formEnumMemberWithHex(constName,ltoa(constant,16)));}
-                else{output = form("%s\n%s", output, formEnumMember(constName,ltoa(constant,10)));}
-                j++;
-                constId = GetConstEx(id,constant,j,-1);
-            }
-            constant = GetNextConst(id,constant,-1);
-            enumCount--;
-        }
-        output = form("%s\n%s", output, "                endif");
-    }else if(output==""){
-        output = form("%s\n%s", output, enumMember);
-    }
-    return output;
-}
-
-
 static produceConst(void) {
     auto seg,end,ea,segName,name,file;
     Message("\nWriting offset constants to lsconst.asm ...");
     file = fopen("disasm\\lsconst.asm","w");
-    writestr(file,"; SF2CONST.ASM INCLUDED AT START OF SF2.ASM\n\n");
+    writestr(file,"; LSCONST.ASM INCLUDED AT START OF LS.ASM\n\n");
     seg = FirstSeg();
     seg = NextSeg(seg);
     while(seg != BADADDR){
@@ -388,30 +130,26 @@ static produceLayoutFile(){
     writestr(file,"\n; (beware : ROMs over 2MB imply to manage SRAM bankswitching first)");
     writestr(file,"\n\n");
 
-    produceSpecificSectionOne(file,        "01",    0x0,        0x8000,        90,    "0x000000..0x008000 : Technical Layer, Low Level Game Engine, Map/Exploration Engine, Entity Script Commands, Witch Functions");
-    produceSpecificSectionTwo(file,        "02",    0x8000,        0x10000,    121,    "0x008000..0x010000 : Character Stats Engine, Battle engine, Item Effects Engine, Enemy AI Engine");
-    produceSpecificSectionThree(file,    "03",    0x10000,    0x18000,    38,    "0x010000..0x018000 : Menu Engine");
-    produceSpecificSectionFour(file,    "04",    0x18000,    0x20000,    532,    "0x018000..0x020000 : BattleScene Engine");
-    produceSpecificSectionFive(file,    "05",    0x20000,    0x28000,    626,    "0x020000..0x028000 : Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine, Battle Engine, Exploration Engine, Special Sprites");
-    produceSpecificSectionSix(file,        "06",    0x28000,    0x44000,    6681,    "0x028000..0x044000 : Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Text Huffman Trees, Textbanks");
-    produceSpecificSectionSeven(file,    "07",    0x44000,    0x64000,    2931,    "0x044000..0x064000 : Entity ActScripts, CutScene Scripts, Battle CutScenes, Intro cutscene, End cutscene, Map Setups");
-    produceSpecificSectionEight(file,    "08",    0x64000,    0xC8000,    953 ,    "0x064000..0x0C8000 : Map Tiles, Map Palettes, Map Data");
-    produceSpecificSectionNine(file,    "09",    0xC8000,    0x100000,    1315,    "0x0C8000..0x100000 : Entity Sprites");
-    produceSpecificSectionTen(file,        "10",    0x100000,    0x130000,    432,    "0x100000..0x130000 : Backgrounds, invocation sprites, title screen");
-    produceSpecificSectionEleven(file,    "11",    0x130000,    0x180000,    429,    "0x130000..0x180000 : Enemy battle sprites");
-    produceSpecificSectionTwelve(file,    "12",    0x180000,    0x1AC000,    871,    "0x180000..0x1AC000 : Ally battle sprites, status anim tiles, battlescene transition tiles, bolt graphics, ally and enemy animations");
-    produceSpecificSectionThirteen(file,    "13",    0x1AC000,    0x1B8000,    133,    "0x1AC000..0x1B8000 : Battle setup functions, battle terrains, battle entity setups, end kiss graphics");
-    produceSpecificSectionFourteen(file,    "14",    0x1B8000,    0x1C8000,    474,    "0x1B8000..0x1C8000 : Battlescene grounds, weapons, spell graphics, witch screens");
-    produceSpecificSectionFifteen(file,    "15",    0x1C8000,    0x1D8000,    1467,    "0x1C8000..0x1D8000 : Portraits");
-    produceSection(file,            "16",    0x1D8000,    0x1E0000,    126,    "0x1D8000..0x1E0000 : Icons");
-    produceSpecificSectionSeventeen(file,    "17",    0x1E0000,    0x1F0000,    462,    "0x1E0000..0x1F0000 : PCM Banks, YM Instruments, sound driver, char stats, witch screens");
-    produceSection(file,            "18",    0x1F0000,    0x200000,    1038,    "0x1F0000..0x200000 : Music banks 1 and 0");
-    writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
+    produceSection(file,        "01",    0x000000,    0x010300,    0x010300-0x01008C,    "0x000000..0x010300 : Technical Layer, Initialization, Low Level Game Engine, To figure out and describe succinctly");
+    produceSection(file,        "02",    0x010300,    0x019514,    0x019514-0x019314,    "0x010300..0x019514 : To figure out and describe succinctly");
+    produceSection(file,        "03",    0x019514,    0x022E80,    0x022E80-0x022E50,    "0x019514..0x022E80 : To figure out and describe succinctly");
+    produceSection(file,        "04",    0x022E80,    0x038600,    0x038600-0x03838C,    "0x022E80..0x038600 : To figure out and describe succinctly");
+    produceSection(file,        "05",    0x038600,    0x044010,    0x044010-0x043E70,    "0x038600..0x044010 : To figure out and describe succinctly");
+    produceSection(file,        "06",    0x044010,    0x09B000,    0x09B000-0x09AC6C,    "0x044010..0x09B000 : To figure out and describe succinctly");
+    produceSection(file,        "07",    0x09B000,    0x0A0A00,    0x0A0A00-0x0A08AC,    "0x09B000..0x0A0A00 : To figure out and describe succinctly");
+    produceSection(file,        "08",    0x0A0A00,    0x1A4400,    0x1A4400-0x1A42DE,    "0x0A0A00..0x1A4400 : To figure out and describe succinctly");
+    produceSection(file,        "09",    0x1A4400,    0x1AF800,    0x1AF800-0x1AF5FA,    "0x1A4400..0x1AF800 : To figure out and describe succinctly");
+    produceSection(file,        "10",    0x1AF800,    0x1E0000,    0x1E0000-0x1DF9F8,    "0x1AF800..0x1E0000 : To figure out and describe succinctly");
+    produceSection(file,        "11",    0x1E0000,    0x1F6000,    0x1F6000-0x1F5D48,    "0x1E0000..0x1F6000 : PCM Banks, Music bank 0");
+    produceSection(file,        "12",    0x1F6000,    0x200000,    0x200000-0x1FFAB1,    "0x1F6000..0x200000 : Sound driver, Music Bank 1");
+    // Expanded 4MB layout to implement later
+    //writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
 
     fclose(file);
 
 }
 
+/* SF2 examples of specific section productions to included conditional macros where needed for 4MB builds 
 
 static produceSpecificSectionOne(mainFile,sectionName,start,end,fs,sectionComment){
     auto ea,itemSize,action,currentLine,previousLine,fileName,file;
@@ -2769,6 +2507,8 @@ static produceSpecificSectionSeventeen(mainFile,sectionName,start,end,fs,section
     Message("DONE.\n");    
 }
 
+*/
+
 static produceAsmDataEntries(mainFile,sectionName,entryName,start,end,lastEntryDataEnd,chunkEnd,maxIndex,indexLength,sectionComment){
     auto fileName, file, addr, i, j, dref, dataEnd, from, index, entryFileName, entryComment;
     // Produce main file
@@ -2813,7 +2553,12 @@ static produceSection(mainFile,sectionName,start,end,fs,sectionComment){
 static produceSectionWithPrettyPrintParam(mainFile,sectionName,start,end,fs,sectionComment,prettyPrint){
     auto ea,itemSize,action,currentLine,previousLine,fileName,file;
     auto output, name, indent, comment, commentEx, commentIndent;
-    fileName = form("layout\\ls-%s-0x%s-0x%s.asm",sectionName,ltoa(start,16),ltoa(end,16));
+    auto startString, endString;
+    startString = ltoa(start,16);
+    while(strlen(startString)<6){startString = form("0%s",startString);} 
+    endString = ltoa(end,16);
+    while(strlen(endString)<6){endString = form("0%s",endString);} 
+    fileName = form("layout\\ls-%s-0x%s-0x%s.asm",sectionName,startString,endString);
     Message(form("Writing assembly section %s to %s (%s) ... ",sectionName,fileName,sectionComment));    
     //form("0x%s..0x%s %s",ltoa(start,16),ltoa(end,16),sectionComment)
     action = 1;
@@ -2920,7 +2665,7 @@ static produceAsmSectionWithPrettyParam(file,extName,start,end,prettyWriteFuncti
 static writeHeader(file){
     writestr(file,"\n");
     writestr(file,"   include \"lsmacros.asm\"\n");
-    writestr(file,"   include \"lspatches.asm\"\n");    
+    //writestr(file,"   include \"lspatches.asm\"\n");    
     writestr(file,"   include \"lsenums.asm\"\n");
     writestr(file,"   include \"lsconst.asm\"\n");
     writestr(file,"\n");

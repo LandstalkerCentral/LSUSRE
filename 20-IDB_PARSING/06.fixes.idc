@@ -131,7 +131,7 @@ static fixInstructionRepresentations(){
     fix("4E F8","jmp     (%s).w","jmp loc","jmp (loc).w");
     fix("4E FA","jmp     %s(pc)","jmp loc","jmp loc(pc)");
     
-    fixWithMapscriptException("41 FA","lea     %s(pc), a0","lea loc, a0","lea loc(pc),a0");
+    fix("41 FA","lea     %s(pc), a0","lea loc, a0","lea loc(pc),a0");
     fix("43 FA","lea     %s(pc), a1","lea loc, a1","lea loc(pc),a1");
     fix("45 FA","lea     %s(pc), a2","lea loc, a2","lea loc(pc),a2");
     fix("47 FA","lea     %s(pc), a3","lea loc, a3","lea loc(pc),a3");
@@ -139,6 +139,9 @@ static fixInstructionRepresentations(){
     fix("4B FA","lea     %s(pc), a5","lea loc, a5","lea loc(pc),a5");
     fix("4D FA","lea     %s(pc), a6","lea loc, a6","lea loc(pc),a6");
     fix("4F FA","lea     %s(pc), a7","lea loc, a7","lea loc(pc),a7");
+    
+    fix("30 3A","move.w     (%s).w, d0","move.w loc, d0","move.w (loc).w,d0");
+    
 
 }
 
@@ -194,6 +197,10 @@ static fixSingleInstructions(){
 
 static insertRomExpandTweaks(){
     auto ea;
+    
+    /* Illegal operand values */
+    SetManualInsn(0xDEE,"movep.w d0,-3(a6)");
+    SetManualInsn(0xDFC,"movep.w d0,-3(a6)");
 
     /* Align directives being not permissive enough 
     to remove data chunks for ROM expansion */

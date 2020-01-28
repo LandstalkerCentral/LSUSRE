@@ -162,6 +162,14 @@ static splitSingleChunks(file) {
     
     // Template : splitSingleChunk(0x,0x,"","",file);
     
+    splitSingleChunk(0x1E0000, 0x1E8000, "PCMBank0","data/sound/pcmbank0.bin",file);
+    splitSingleChunk(0x1E8000, 0x1F0000, "PCMBank1","data/sound/pcmbank1.bin",file);
+    splitSingleChunk(0x1F0000, 0x1F5D48, "MusibBank0","data/sound/musicbank0.bin",file);
+    MakeAlign(0x1F5D48, 0x1F6000-0x1F5D48,15);
+    splitSingleChunk(0x1F6000, 0x1F8000, "SoundDriver","data/sound/sounddriver.bin",file);
+    splitSingleChunk(0x1F8000, 0x1FFAB1, "MusicBank1","data/sound/musicbank1.bin",file);
+    MakeAlign(0x1FFAB1, 0x200000-0x1FFAB1,15);
+    
     /* SF2 examples
     
     splitSingleChunk(0xB1E,0xB96,"FadingData","data/graphics/tech/fadingdata.bin",file);
@@ -371,12 +379,6 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x1F8000, 0x200000, "","data/sound/musicbank0.bin",file);
     
     */
-    
-    splitSingleChunk(0x1E0000, 0x1E8000, "","data/sound/pcmbank0.bin",file);
-    splitSingleChunk(0x1E8000, 0x1F0000, "","data/sound/pcmbank1.bin",file);
-    splitSingleChunk(0x1F0000, 0x1F5D48, "","data/sound/musicbank0.bin",file);
-    splitSingleChunk(0x1F6000, 0x1F8000, "","data/sound/sounddriver.bin",file);
-    splitSingleChunk(0x1F8000, 0x1FFAB1, "","data/sound/musicbank1.bin",file);
     
 }
 
