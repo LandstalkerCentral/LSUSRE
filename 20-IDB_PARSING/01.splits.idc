@@ -164,11 +164,10 @@ static splitSingleChunks(file) {
     
     splitSingleChunk(0x1E0000, 0x1E8000, "PCMBank0","data/sound/pcmbank0.bin",file);
     splitSingleChunk(0x1E8000, 0x1F0000, "PCMBank1","data/sound/pcmbank1.bin",file);
-    splitSingleChunk(0x1F0000, 0x1F5D48, "MusibBank0","data/sound/musicbank0.bin",file);
-    MakeAlign(0x1F5D48, 0x1F6000-0x1F5D48,15);
+    splitSingleChunk(0x1F0000, 0x1F6000, "MusibBank0","data/sound/musicbank0build.bin",file);
     splitSingleChunk(0x1F6000, 0x1F8000, "SoundDriver","data/sound/sounddriver.bin",file);
-    splitSingleChunk(0x1F8000, 0x1FFAB1, "MusicBank1","data/sound/musicbank1.bin",file);
-    MakeAlign(0x1FFAB1, 0x200000-0x1FFAB1,15);
+    splitSingleChunk(0x1F8000, 0x1F8910, "YMInstruments","data/sound/yminst.bin",file);
+    splitSingleChunk(0x1F8000, 0x200000, "MusicBank1","data/sound/musicbank1build.bin",file);
     
     /* SF2 examples
     

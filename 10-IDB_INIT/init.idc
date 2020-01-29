@@ -17312,18 +17312,14 @@ static Bytes_2(void) {
 	MakeArray	(0X1E8000,	0X8000);
 	MakeName	(0X1E8000,	"PCMBank1");
 	MakeByte	(0X1F0000);
-	MakeArray	(0X1F0000,	0X5D48);
-	MakeName	(0X1F0000,	"MusicBank0");
-	MakeByte	(0X1F5D48);
-	MakeArray	(0X1F5D48,	0X2B8);
+	MakeArray	(0X1F0000,	0X6000);
+	MakeName	(0X1F0000,	"MusibBank0");
 	MakeByte	(0X1F6000);
 	MakeArray	(0X1F6000,	0X2000);
 	MakeName	(0X1F6000,	"SoundDriver");
 	MakeByte	(0X1F8000);
-	MakeArray	(0X1F8000,	0X7AB1);
+	MakeArray	(0X1F8000,	0X8000);
 	MakeName	(0X1F8000,	"MusicBank1");
-	MakeByte	(0X1FFAB1);
-	MakeArray	(0X1FFAB1,	0X54F);
 	MakeByte	(0X200000);
 	MakeArray	(0X200000,	0X10);
 	MakeByte	(0X200010);
@@ -17477,6 +17473,11 @@ static Bytes_2(void) {
 	MakeWord	(0XFF0F9C);
 	MakeName	(0XFF0FA0,	"SOUND_COMMAND_QUEUE");
 	MakeDword	(0XFF0FA4);
+	MakeWord	(0XFF0FA8);
+	MakeWord	(0XFF0FAA);
+	MakeWord	(0XFF0FAC);
+	MakeWord	(0XFF0FAE);
+	MakeByte	(0XFF0FB3);
 }
 
 //------------------------------------------------------------------------
@@ -17486,11 +17487,6 @@ static Bytes_3(void) {
         auto x;
 #define id x
 
-	MakeWord	(0XFF0FA8);
-	MakeWord	(0XFF0FAA);
-	MakeWord	(0XFF0FAC);
-	MakeWord	(0XFF0FAE);
-	MakeByte	(0XFF0FB3);
 	MakeWord	(0XFF0FC4);
 	MakeWord	(0XFF0FD4);
 	MakeDword	(0XFF0FD6);

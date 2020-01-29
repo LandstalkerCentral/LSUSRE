@@ -140,8 +140,7 @@ static produceLayoutFile(){
     produceSection(file,        "08",    0x0A0A00,    0x1A4400,    0x1A4400-0x1A42DE,    "0x0A0A00..0x1A4400 : To figure out and describe succinctly");
     produceSection(file,        "09",    0x1A4400,    0x1AF800,    0x1AF800-0x1AF5FA,    "0x1A4400..0x1AF800 : To figure out and describe succinctly");
     produceSection(file,        "10",    0x1AF800,    0x1E0000,    0x1E0000-0x1DF9F8,    "0x1AF800..0x1E0000 : To figure out and describe succinctly");
-    produceSection(file,        "11",    0x1E0000,    0x1F6000,    0x1F6000-0x1F5D48,    "0x1E0000..0x1F6000 : PCM Banks, Music bank 0");
-    produceSection(file,        "12",    0x1F6000,    0x200000,    0x200000-0x1FFAB1,    "0x1F6000..0x200000 : Sound driver, Music Bank 1");
+    produceSection(file,        "11",    0x1E0000,    0x200000,    0x200000-0x1E0000,    "0x1E0000..0x1F6000 : PCM Bank 0, PCM Bank 1, Music bank 0, Sound driver, Music Bank 1.");
     // Expanded 4MB layout to implement later
     //writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
 
