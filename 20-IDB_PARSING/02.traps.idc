@@ -120,9 +120,22 @@ static scanTrap0(){
                 MakeData(addr,FF_BYTE,4,1);
                 SetManualInsn(addr, form("sndCom  %s", param));
             }else{
+                MakeUnkn(addr+2,DOUNK_DELNAMES);
+                MakeUnkn(addr+3,DOUNK_DELNAMES);
+                MakeData(addr+2,FF_BYTE,2,1);
                 SetManualInsn(addr, " ");
                 SetManualInsn(addr+2, form("sndCom  %s", param));
             }
+            if(GetFunctionAttr(addr,FUNCATTR_START)==GetFunctionAttr(addr+4,FUNCATTR_START)){
+                MakeUnkn(addr+4,DOUNK_SIMPLE);
+            }
+            if(GetFunctionAttr(addr,FUNCATTR_START)==GetFunctionAttr(addr+5,FUNCATTR_START)){
+                MakeUnkn(addr+5,DOUNK_SIMPLE);
+            }
+            if(GetFunctionAttr(addr,FUNCATTR_START)==GetFunctionAttr(addr+6,FUNCATTR_START)){
+                MakeUnkn(addr+6,DOUNK_SIMPLE);
+            }
+            MakeCode(addr+4);
             
             //cont = AskYN(1,"Continue ?");
             //if (cont==-1 || cont==0) return;    
