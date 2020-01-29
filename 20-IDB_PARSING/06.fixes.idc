@@ -140,7 +140,13 @@ static fixInstructionRepresentations(){
     fix("4D FA","lea     %s(pc), a6","lea loc, a6","lea loc(pc),a6");
     fix("4F FA","lea     %s(pc), a7","lea loc, a7","lea loc(pc),a7");
     
-    fix("30 3A","move.w     (%s).w, d0","move.w loc, d0","move.w (loc).w,d0");
+    // New Landstalker-specific instruction improperly represented by IDA.
+    
+    fix("30 3A","move.w     %s(pc), d0","move.w loc, d0","move.w (loc).w,d0");
+    fix("32 3A","move.w     %s(pc), d1","move.w loc, d1","move.w (loc).w,d1");
+    
+    fix("23 FA","move.l     %s(pc), %s","move.l loc1, (loc2).l","move.l (loc1).w,(loc2).l");
+    fix("33 FA","move.w     %s(pc), %s","move.w loc1, (loc2).l","move.w (loc1).w,(loc2).l");
     
 
 }
@@ -252,6 +258,7 @@ static fix(pattern, manualInstruction, wrongInstString, newInstString){
 
     auto addr; // current location
     auto opnd; // operand found at current location
+    auto secondopnd; // operand found at current location
     auto action; // action asked to user
     auto rep; // proper representation of instruction
     action = 1;
@@ -259,17 +266,32 @@ static fix(pattern, manualInstruction, wrongInstString, newInstString){
     // Start search from current address on screen
     for(addr=0;addr!=BADADDR;addr=FindBinary(addr+1,7,pattern)){
         opnd = GetOpnd(addr,0);
+        secondopnd = GetOpnd(addr,1);
         if (opnd!=""){
-            rep = form(manualInstruction,opnd);
-            //Jump(addr);
-            //action = AskYN(1,form("Change representation from %s to %s ?",wrongInstString, newInstString));
-            if (action==-1) break;
-            if (action==1){
-                //Message(form("\n0x%d : %s changed to %s",addr,wrongInstString, newInstString));
-                SetManualInsn(addr,rep);
-            }
-            else{
-                //Message(form("\n0x%d : %s NOT changed to %s",addr,wrongInstString, newInstString));
+            if(secondopnd!=""){
+                rep = form(manualInstruction,opnd,secondopnd);
+                //Jump(addr);
+                //action = AskYN(1,form("Change representation from %s to %s ?",wrongInstString, newInstString));
+                if (action==-1) break;
+                if (action==1){
+                    //Message(form("\n0x%d : %s changed to %s",addr,wrongInstString, newInstString));
+                    SetManualInsn(addr,rep);
+                }
+                else{
+                    //Message(form("\n0x%d : %s NOT changed to %s",addr,wrongInstString, newInstString));
+                }
+            }else{
+                rep = form(manualInstruction,opnd);
+                //Jump(addr);
+                //action = AskYN(1,form("Change representation from %s to %s ?",wrongInstString, newInstString));
+                if (action==-1) break;
+                if (action==1){
+                    //Message(form("\n0x%d : %s changed to %s",addr,wrongInstString, newInstString));
+                    SetManualInsn(addr,rep);
+                }
+                else{
+                    //Message(form("\n0x%d : %s NOT changed to %s",addr,wrongInstString, newInstString));
+                }
             }
         }
     }
