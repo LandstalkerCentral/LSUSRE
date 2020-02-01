@@ -101,7 +101,14 @@ writestr(file,"#dir    data/tech/\n");
 writestr(file,"#dir    data/scripting/\n");
 writestr(file,"#dir    data/scripting/text\n");
 */
-writestr(file,"#dir    data/sound/\n");
+writestr(file,"#dir    data/sound\n");
+writestr(file,"#dir    data/scripting\n");
+writestr(file,"#dir    data/scripting/text\n");
+writestr(file,"#dir    data/graphics\n");
+writestr(file,"#dir    data/graphics/specialscreens\n");
+writestr(file,"#dir    data/graphics/tech\n");
+writestr(file,"#dir    data/graphics/tech/fonts\n");
+writestr(file,"#dir    data/graphics/tech/menus\n");
 writestr(file,"\n");
 writestr(file,"/***********************Data***************************/\n");
 writestr(file,"\n");
@@ -161,6 +168,39 @@ static splitSingleChunks(file) {
     auto start,base,addr,end,dref,section,action;
     
     // Template : splitSingleChunk(0x,0x,"","",file);
+    
+    
+    splitSingleChunk(0x009242, 0x0095AC, "StatusBarTileset","data/graphics/tech/menus/statusbartileset.bin",file);
+    
+    splitSingleChunk(0x00FD5C, 0x00FE37, "SaveScreenTileset","data/graphics/specialscreens/savescreentileset.bin",file);
+    
+    splitSingleChunk(0x02A884, 0x02B27A, "MainFont","data/graphics/tech/fonts/mainfont.bin",file);
+    splitSingleChunk(0x02B27A, 0x02C29B, "TextBank0","data/scripting/text/textbank0.bin",file);
+    splitSingleChunk(0x02C29B, 0x02DCC8, "TextBank1","data/scripting/text/textbank1.bin",file);
+    splitSingleChunk(0x02DCC8, 0x02F787, "TextBank2","data/scripting/text/textbank2.bin",file);
+    splitSingleChunk(0x02F787, 0x03153E, "TextBank3","data/scripting/text/textbank3.bin",file);
+    splitSingleChunk(0x03153E, 0x0330AB, "TextBank4","data/scripting/text/textbank4.bin",file);
+    splitSingleChunk(0x0330AB, 0x034830, "TextBank5","data/scripting/text/textbank5.bin",file);
+    splitSingleChunk(0x034830, 0x036087, "TextBank6","data/scripting/text/textbank6.bin",file);
+    splitSingleChunk(0x036087, 0x0377E3, "TextBank7","data/scripting/text/textbank7.bin",file);
+    splitSingleChunk(0x0377E3, 0x038368, "TextBank8","data/scripting/text/textbank8.bin",file);
+    
+    splitSingleChunk(0x039ED8, 0x03A564, "TitleScreenTileset1","data/graphics/specialscreens/titlescreentileset1.bin",file);
+    splitSingleChunk(0x03A564, 0x03BCAE, "TitleScreenTileset2","data/graphics/specialscreens/titlescreentileset2.bin",file);
+    splitSingleChunk(0x03BCAE, 0x03DD92, "TitleScreenTileset3","data/graphics/specialscreens/titlescreentileset3.bin",file);
+    splitSingleChunk(0x03DD92, 0x03DDFE, "TitleScreenLayout1","data/graphics/specialscreens/titlescreenlayout1.bin",file);
+    splitSingleChunk(0x03DDFE, 0x03DE52, "TitleScreenLayout2","data/graphics/specialscreens/titlescreenlayout2.bin",file);
+    splitSingleChunk(0x03DE52, 0x03DECA, "TitleScreenLayout3","data/graphics/specialscreens/titlescreenlayout3.bin",file);
+    splitSingleChunk(0x03DECA, 0x03DEEA, "TitleScreenPalette1","data/graphics/specialscreens/titlescreenpalette1.bin",file);
+    splitSingleChunk(0x03DEEA, 0x03DF0A, "TitleScreenPalette2","data/graphics/specialscreens/titlescreenpalette2.bin",file);
+    splitSingleChunk(0x03DF8A, 0x03E621, "ClimaxLogoTileset","data/graphics/specialscreens/climaxlogotileset.bin",file);
+    splitSingleChunk(0x03E621, 0x03E64C, "ClimaxLogoLayout","data/graphics/specialscreens/climaxlogolayout.bin",file);
+    splitSingleChunk(0x03E64C, 0x03E654, "ClimaxLogoPalette","data/graphics/specialscreens/climaxlogopalette.bin",file);
+    
+    splitSingleChunk(0x09A4EA, 0x09AC6C, "IntroFont","data/graphics/tech/fonts/introfont.bin",file);
+    
+    splitSingleChunk(0x11EBB4, 0x11F314, "RegionLockFont","data/graphics/tech/fonts/regionlockfont.bin",file);
+    MakeAlign(0x11F314, 0x120000-0x11F314,15);
     
     splitSingleChunk(0x1E0000, 0x1E8000, "PCMBank0","data/sound/pcmbank0.bin",file);
     splitSingleChunk(0x1E8000, 0x1F0000, "PCMBank1","data/sound/pcmbank1.bin",file);

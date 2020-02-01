@@ -137,10 +137,11 @@ static produceLayoutFile(){
     produceSection(file,        "05",    0x038600,    0x044010,    0x044010-0x043E70,    "0x038600..0x044010 : To figure out and describe succinctly");
     produceSection(file,        "06",    0x044010,    0x09B000,    0x09B000-0x09AC6C,    "0x044010..0x09B000 : To figure out and describe succinctly");
     produceSection(file,        "07",    0x09B000,    0x0A0A00,    0x0A0A00-0x0A08AC,    "0x09B000..0x0A0A00 : To figure out and describe succinctly");
-    produceSection(file,        "08",    0x0A0A00,    0x1A4400,    0x1A4400-0x1A42DE,    "0x0A0A00..0x1A4400 : To figure out and describe succinctly");
-    produceSection(file,        "09",    0x1A4400,    0x1AF800,    0x1AF800-0x1AF5FA,    "0x1A4400..0x1AF800 : To figure out and describe succinctly");
-    produceSection(file,        "10",    0x1AF800,    0x1E0000,    0x1E0000-0x1DF9F8,    "0x1AF800..0x1E0000 : To figure out and describe succinctly");
-    produceSection(file,        "11",    0x1E0000,    0x200000,    0x200000-0x1E0000,    "0x1E0000..0x1F6000 : PCM Bank 0, PCM Bank 1, Music bank 0, Sound driver, Music Bank 1.");
+    produceSection(file,        "08",    0x0A0A00,    0x120000,    0x120000-0x0A0A00,    "0x0A0A00..0x120000 : To figure out and describe succinctly");
+    produceSection(file,        "09",    0x120000,    0x1A4400,    0x1A4400-0x120000,    "0x120000..0x1A4400 : To figure out and describe succinctly");
+    produceSection(file,        "10",    0x1A4400,    0x1AF800,    0x1AF800-0x1AF5FA,    "0x1A4400..0x1AF800 : To figure out and describe succinctly");
+    produceSection(file,        "11",    0x1AF800,    0x1E0000,    0x1E0000-0x1DF9F8,    "0x1AF800..0x1E0000 : To figure out and describe succinctly");
+    produceSection(file,        "12",    0x1E0000,    0x200000,    0x200000-0x1E0000,    "0x1E0000..0x1F6000 : PCM Bank 0, PCM Bank 1, Music bank 0, Sound driver, Music Bank 1.");
     // Expanded 4MB layout to implement later
     //writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
 
