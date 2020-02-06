@@ -210,6 +210,17 @@ static insertRomExpandTweaks(){
 
     /* Align directives being not permissive enough 
     to remove data chunks for ROM expansion */
+    SetManualInsn(0x01008C,"align $010300");
+    SetManualInsn(0x019314,"align $019514");
+    SetManualInsn(0x022E50,"align $022E80");
+    SetManualInsn(0x03838C,"align $038600");
+    SetManualInsn(0x043E70,"align $044010");
+    SetManualInsn(0x09AC6C,"align $09B000");
+    SetManualInsn(0x0A08AC,"align $0A0A00");
+    SetManualInsn(0x11F314,"align $120000");
+    SetManualInsn(0x1A42DE,"align $1A4400");
+    SetManualInsn(0x1AF5FA,"align $1AF800");
+    SetManualInsn(0x1DF9F8,"align $1E0000");
     /* SF2 examples
     SetManualInsn(0x17FDA,"align $18000");
     SetManualInsn(0x27D8E,"align $28000");
@@ -226,6 +237,7 @@ static insertRomExpandTweaks(){
     SetManualInsn(0x1DFA46,"align $1E0000");
     SetManualInsn(0x1EFE33,"align $1F0000");
     */
+    
     
     /* Conditional manual instructions when implied by moved data */
     /* SF2 examples
