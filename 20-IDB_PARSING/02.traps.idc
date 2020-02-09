@@ -96,7 +96,8 @@ static scanTrap0(){
             param = "";
             
             if(parameter == 0x20
-                    || (parameter >= 0xF0 &&  parameter <= 0x00FF)){
+                    || (parameter >= 0xF0 &&  parameter <= 0xFF)
+                    || (parameter >= 0xFFF0 &&  parameter <= 0xFFFF)){
                     OpEnumEx(addr+2,0,GetEnum("SoundCommands"),0);
                     param = GetConstName(GetConstEx(GetEnum("SoundCommands"),parameter,0,0));
             }

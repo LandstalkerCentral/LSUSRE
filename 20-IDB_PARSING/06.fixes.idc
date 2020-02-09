@@ -50,6 +50,7 @@ static main(void) {
 
 static fixRJTs() {
 
+    
 		/* SF2 examples
     makeRjt(0x4F1C,0x4FBC);
     makeRjt(0x10408,0x10410);

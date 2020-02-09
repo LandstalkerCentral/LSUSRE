@@ -104,6 +104,7 @@ writestr(file,"#dir    data/scripting/text\n");
 writestr(file,"#dir    data/sound\n");
 writestr(file,"#dir    data/scripting\n");
 writestr(file,"#dir    data/scripting/text\n");
+writestr(file,"#dir    data/scripting/text/intro\n");
 writestr(file,"#dir    data/graphics\n");
 writestr(file,"#dir    data/graphics/specialscreens\n");
 writestr(file,"#dir    data/graphics/tech\n");
@@ -171,6 +172,19 @@ static splitSingleChunks(file) {
     
     
     splitSingleChunk(0x009242, 0x0095AC, "StatusBarTileset","data/graphics/tech/menus/statusbartileset.bin",file);
+    
+    splitSingleChunk(0x00C5CE, 0x00C5F4, "IntroTextBlock00","data/scripting/text/intro/introtextblock00.bin",file);
+    splitSingleChunk(0x00C5F4, 0x00C618, "IntroTextBlock01","data/scripting/text/intro/introtextblock01.bin",file);
+    splitSingleChunk(0x00C618, 0x00C640, "IntroTextBlock02","data/scripting/text/intro/introtextblock02.bin",file);
+    splitSingleChunk(0x00C640, 0x00C662, "IntroTextBlock03","data/scripting/text/intro/introtextblock03.bin",file);
+    splitSingleChunk(0x00C662, 0x00C67E, "IntroTextBlock04","data/scripting/text/intro/introtextblock04.bin",file);
+    splitSingleChunk(0x00C67E, 0x00C6A4, "IntroTextBlock05","data/scripting/text/intro/introtextblock05.bin",file);
+    splitSingleChunk(0x00C6A4, 0x00C6C0, "IntroTextBlock06","data/scripting/text/intro/introtextblock06.bin",file);
+    splitSingleChunk(0x00C6C0, 0x00C6DC, "IntroTextBlock07","data/scripting/text/intro/introtextblock07.bin",file);
+    splitSingleChunk(0x00C6DC, 0x00C6F8, "IntroTextBlock08","data/scripting/text/intro/introtextblock08.bin",file);
+    splitSingleChunk(0x00C6F8, 0x00C714, "IntroTextBlock09","data/scripting/text/intro/introtextblock09.bin",file);
+    splitSingleChunk(0x00C714, 0x00C732, "IntroTextBlock10","data/scripting/text/intro/introtextblock10.bin",file);
+    splitSingleChunk(0x00C732, 0x00C74E, "IntroTextBlock11","data/scripting/text/intro/introtextblock11.bin",file);
     
     splitSingleChunk(0x00FD5C, 0x00FE37, "SaveScreenTileset","data/graphics/specialscreens/savescreentileset.bin",file);
     
