@@ -29,6 +29,8 @@ static splitAll(){
     splitPTs(file);
     Message(" DONE.\nSingle Chunks...");    
     splitSingleChunks(file); 
+    Message(" DONE.\nSprites ...");
+    splitSprites(file);
     /* SF2-specific examples   
     Message(" DONE.\nMapsprites ...");
     splitMapsprites(file);
@@ -107,6 +109,8 @@ writestr(file,"#dir    data/scripting/text\n");
 writestr(file,"#dir    data/scripting/text/intro\n");
 writestr(file,"#dir    data/graphics\n");
 writestr(file,"#dir    data/graphics/specialscreens\n");
+writestr(file,"#dir    data/graphics/sprites\n");
+writestr(file,"#dir    data/graphics/sprites/palettes\n");
 writestr(file,"#dir    data/graphics/tech\n");
 writestr(file,"#dir    data/graphics/tech/fonts\n");
 writestr(file,"#dir    data/graphics/tech/menus\n");
@@ -186,7 +190,8 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x00C714, 0x00C732, "IntroTextBlock10","data/scripting/text/intro/introtextblock10.bin",file);
     splitSingleChunk(0x00C732, 0x00C74E, "IntroTextBlock11","data/scripting/text/intro/introtextblock11.bin",file);
     
-    splitSingleChunk(0x00FD5C, 0x00FE37, "SaveScreenTileset","data/graphics/specialscreens/savescreentileset.bin",file);
+    splitSingleChunk(0x00FD5C, 0x00FE37, "SaveScreenTileset1","data/graphics/specialscreens/savescreentileset1.bin",file);
+    splitSingleChunk(0x00FE37, 0x00FF12, "SaveScreenTileset2","data/graphics/specialscreens/savescreentileset2.bin",file);
     
     splitSingleChunk(0x02A884, 0x02B27A, "MainFont","data/graphics/tech/fonts/mainfont.bin",file);
     splitSingleChunk(0x02B27A, 0x02C29B, "TextBank0","data/scripting/text/textbank0.bin",file);
@@ -198,6 +203,8 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x034830, 0x036087, "TextBank6","data/scripting/text/textbank6.bin",file);
     splitSingleChunk(0x036087, 0x0377E3, "TextBank7","data/scripting/text/textbank7.bin",file);
     splitSingleChunk(0x0377E3, 0x038368, "TextBank8","data/scripting/text/textbank8.bin",file);
+    
+    splitSingleChunk(0x0386E4, 0x0389D4, "SegaLogoTileset","data/graphics/specialscreens/segalogotileset.bin",file);
     
     splitSingleChunk(0x039ED8, 0x03A564, "TitleScreenTileset1","data/graphics/specialscreens/titlescreentileset1.bin",file);
     splitSingleChunk(0x03A564, 0x03BCAE, "TitleScreenTileset2","data/graphics/specialscreens/titlescreentileset2.bin",file);
@@ -214,7 +221,107 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x09A4EA, 0x09AC6C, "IntroFont","data/graphics/tech/fonts/introfont.bin",file);
     
     splitSingleChunk(0x11EBB4, 0x11F314, "RegionLockFont","data/graphics/tech/fonts/regionlockfont.bin",file);
-    MakeAlign(0x11F314, 0x120000-0x11F314,15);
+    
+    for(j=0x1A47E1;j<0x1A4BA0+16*14+8;j++){undefineByte(j);}
+    
+    splitSingleChunk(0x1A47E0+12*0,   0x1A47E0+12*0+12,   "SpritePalette000","data/graphics/sprites/palettes/spritepalette000.bin",file);
+    splitSingleChunk(0x1A47E0+12*1,   0x1A47E0+12*1+12,   "SpritePalette001","data/graphics/sprites/palettes/spritepalette001.bin",file);
+    splitSingleChunk(0x1A47E0+12*2,   0x1A47E0+12*2+12,   "SpritePalette002","data/graphics/sprites/palettes/spritepalette002.bin",file);
+    splitSingleChunk(0x1A47E0+12*3,   0x1A47E0+12*3+12,   "SpritePalette003","data/graphics/sprites/palettes/spritepalette003.bin",file);
+    splitSingleChunk(0x1A47E0+12*4,   0x1A47E0+12*4+12,   "SpritePalette004","data/graphics/sprites/palettes/spritepalette004.bin",file);
+    splitSingleChunk(0x1A47E0+12*5,   0x1A47E0+12*5+12,   "SpritePalette005","data/graphics/sprites/palettes/spritepalette005.bin",file);
+    splitSingleChunk(0x1A47E0+12*6,   0x1A47E0+12*6+12,   "SpritePalette006","data/graphics/sprites/palettes/spritepalette006.bin",file);
+    splitSingleChunk(0x1A47E0+12*7,   0x1A47E0+12*7+12,   "SpritePalette007","data/graphics/sprites/palettes/spritepalette007.bin",file);
+    splitSingleChunk(0x1A47E0+12*8,   0x1A47E0+12*8+12,   "SpritePalette008","data/graphics/sprites/palettes/spritepalette008.bin",file);
+    splitSingleChunk(0x1A47E0+12*9,   0x1A47E0+12*9+12,   "SpritePalette009","data/graphics/sprites/palettes/spritepalette009.bin",file);
+    splitSingleChunk(0x1A47E0+12*10,  0x1A47E0+12*10+12,  "SpritePalette010","data/graphics/sprites/palettes/spritepalette010.bin",file);
+    splitSingleChunk(0x1A47E0+12*11,  0x1A47E0+12*11+12,  "SpritePalette011","data/graphics/sprites/palettes/spritepalette011.bin",file);
+    splitSingleChunk(0x1A47E0+12*12,  0x1A47E0+12*12+12,  "SpritePalette012","data/graphics/sprites/palettes/spritepalette012.bin",file);
+    splitSingleChunk(0x1A47E0+12*13,  0x1A47E0+12*13+12,  "SpritePalette013","data/graphics/sprites/palettes/spritepalette013.bin",file);
+    splitSingleChunk(0x1A47E0+12*14,  0x1A47E0+12*14+12,  "SpritePalette014","data/graphics/sprites/palettes/spritepalette014.bin",file);
+    splitSingleChunk(0x1A47E0+12*15,  0x1A47E0+12*15+12,  "SpritePalette015","data/graphics/sprites/palettes/spritepalette015.bin",file);
+    splitSingleChunk(0x1A47E0+12*16,  0x1A47E0+12*16+12,  "SpritePalette016","data/graphics/sprites/palettes/spritepalette016.bin",file);
+    splitSingleChunk(0x1A47E0+12*17,  0x1A47E0+12*17+12,  "SpritePalette017","data/graphics/sprites/palettes/spritepalette017.bin",file);
+    splitSingleChunk(0x1A47E0+12*18,  0x1A47E0+12*18+12,  "SpritePalette018","data/graphics/sprites/palettes/spritepalette018.bin",file);
+    splitSingleChunk(0x1A47E0+12*19,  0x1A47E0+12*19+12,  "SpritePalette019","data/graphics/sprites/palettes/spritepalette019.bin",file);
+    splitSingleChunk(0x1A47E0+12*20,  0x1A47E0+12*20+12,  "SpritePalette020","data/graphics/sprites/palettes/spritepalette020.bin",file);
+    splitSingleChunk(0x1A47E0+12*21,  0x1A47E0+12*21+12,  "SpritePalette021","data/graphics/sprites/palettes/spritepalette021.bin",file);
+    splitSingleChunk(0x1A47E0+12*22,  0x1A47E0+12*22+12,  "SpritePalette022","data/graphics/sprites/palettes/spritepalette022.bin",file);
+    splitSingleChunk(0x1A47E0+12*23,  0x1A47E0+12*23+12,  "SpritePalette023","data/graphics/sprites/palettes/spritepalette023.bin",file);
+    splitSingleChunk(0x1A47E0+12*24,  0x1A47E0+12*24+12,  "SpritePalette024","data/graphics/sprites/palettes/spritepalette024.bin",file);
+    splitSingleChunk(0x1A47E0+12*25,  0x1A47E0+12*25+12,  "SpritePalette025","data/graphics/sprites/palettes/spritepalette025.bin",file);
+    splitSingleChunk(0x1A47E0+12*26,  0x1A47E0+12*26+12,  "SpritePalette026","data/graphics/sprites/palettes/spritepalette026.bin",file);
+    splitSingleChunk(0x1A47E0+12*27,  0x1A47E0+12*27+12,  "SpritePalette027","data/graphics/sprites/palettes/spritepalette027.bin",file);
+    splitSingleChunk(0x1A47E0+12*28,  0x1A47E0+12*28+12,  "SpritePalette028","data/graphics/sprites/palettes/spritepalette028.bin",file);
+    splitSingleChunk(0x1A47E0+12*29,  0x1A47E0+12*29+12,  "SpritePalette029","data/graphics/sprites/palettes/spritepalette029.bin",file);
+    splitSingleChunk(0x1A47E0+12*30,  0x1A47E0+12*30+12,  "SpritePalette030","data/graphics/sprites/palettes/spritepalette030.bin",file);
+    splitSingleChunk(0x1A47E0+12*31,  0x1A47E0+12*31+12,  "SpritePalette031","data/graphics/sprites/palettes/spritepalette031.bin",file);
+    splitSingleChunk(0x1A47E0+12*32,  0x1A47E0+12*32+12,  "SpritePalette032","data/graphics/sprites/palettes/spritepalette032.bin",file);
+    splitSingleChunk(0x1A47E0+12*33,  0x1A47E0+12*33+12,  "SpritePalette033","data/graphics/sprites/palettes/spritepalette033.bin",file);
+    splitSingleChunk(0x1A47E0+12*34,  0x1A47E0+12*34+12,  "SpritePalette034","data/graphics/sprites/palettes/spritepalette034.bin",file);
+    splitSingleChunk(0x1A47E0+12*35,  0x1A47E0+12*35+12,  "SpritePalette035","data/graphics/sprites/palettes/spritepalette035.bin",file);
+    splitSingleChunk(0x1A47E0+12*36,  0x1A47E0+12*36+12,  "SpritePalette036","data/graphics/sprites/palettes/spritepalette036.bin",file);
+    splitSingleChunk(0x1A47E0+12*37,  0x1A47E0+12*37+12,  "SpritePalette037","data/graphics/sprites/palettes/spritepalette037.bin",file);
+    splitSingleChunk(0x1A47E0+12*38,  0x1A47E0+12*38+12,  "SpritePalette038","data/graphics/sprites/palettes/spritepalette038.bin",file);
+    splitSingleChunk(0x1A47E0+12*39,  0x1A47E0+12*39+12,  "SpritePalette039","data/graphics/sprites/palettes/spritepalette039.bin",file);
+    splitSingleChunk(0x1A47E0+12*40,  0x1A47E0+12*40+12,  "SpritePalette040","data/graphics/sprites/palettes/spritepalette040.bin",file);
+    splitSingleChunk(0x1A47E0+12*41,  0x1A47E0+12*41+12,  "SpritePalette041","data/graphics/sprites/palettes/spritepalette041.bin",file);
+    splitSingleChunk(0x1A47E0+12*42,  0x1A47E0+12*42+12,  "SpritePalette042","data/graphics/sprites/palettes/spritepalette042.bin",file);
+    splitSingleChunk(0x1A47E0+12*43,  0x1A47E0+12*43+12,  "SpritePalette043","data/graphics/sprites/palettes/spritepalette043.bin",file);
+    splitSingleChunk(0x1A47E0+12*44,  0x1A47E0+12*44+12,  "SpritePalette044","data/graphics/sprites/palettes/spritepalette044.bin",file);
+    splitSingleChunk(0x1A47E0+12*45,  0x1A47E0+12*45+12,  "SpritePalette045","data/graphics/sprites/palettes/spritepalette045.bin",file);
+    splitSingleChunk(0x1A47E0+12*46,  0x1A47E0+12*46+12,  "SpritePalette046","data/graphics/sprites/palettes/spritepalette046.bin",file);
+    splitSingleChunk(0x1A47E0+12*47,  0x1A47E0+12*47+12,  "SpritePalette047","data/graphics/sprites/palettes/spritepalette047.bin",file);
+    splitSingleChunk(0x1A47E0+12*48,  0x1A47E0+12*48+12,  "SpritePalette048","data/graphics/sprites/palettes/spritepalette048.bin",file);
+    splitSingleChunk(0x1A47E0+12*49,  0x1A47E0+12*49+12,  "SpritePalette049","data/graphics/sprites/palettes/spritepalette049.bin",file);
+    splitSingleChunk(0x1A47E0+12*50,  0x1A47E0+12*50+12,  "SpritePalette050","data/graphics/sprites/palettes/spritepalette050.bin",file);
+    splitSingleChunk(0x1A47E0+12*51,  0x1A47E0+12*51+12,  "SpritePalette051","data/graphics/sprites/palettes/spritepalette051.bin",file);
+    splitSingleChunk(0x1A47E0+12*52,  0x1A47E0+12*52+12,  "SpritePalette052","data/graphics/sprites/palettes/spritepalette052.bin",file);
+    splitSingleChunk(0x1A47E0+12*53,  0x1A47E0+12*53+12,  "SpritePalette053","data/graphics/sprites/palettes/spritepalette053.bin",file);
+    splitSingleChunk(0x1A47E0+12*54,  0x1A47E0+12*54+12,  "SpritePalette054","data/graphics/sprites/palettes/spritepalette054.bin",file);
+    splitSingleChunk(0x1A47E0+12*55,  0x1A47E0+12*55+12,  "SpritePalette055","data/graphics/sprites/palettes/spritepalette055.bin",file);
+    splitSingleChunk(0x1A47E0+12*56,  0x1A47E0+12*56+12,  "SpritePalette056","data/graphics/sprites/palettes/spritepalette056.bin",file);
+    splitSingleChunk(0x1A47E0+12*57,  0x1A47E0+12*57+12,  "SpritePalette057","data/graphics/sprites/palettes/spritepalette057.bin",file);
+    splitSingleChunk(0x1A47E0+12*58,  0x1A47E0+12*58+12,  "SpritePalette058","data/graphics/sprites/palettes/spritepalette058.bin",file);
+    splitSingleChunk(0x1A47E0+12*59,  0x1A47E0+12*59+12,  "SpritePalette059","data/graphics/sprites/palettes/spritepalette059.bin",file);
+    splitSingleChunk(0x1A47E0+12*60,  0x1A47E0+12*60+12,  "SpritePalette060","data/graphics/sprites/palettes/spritepalette060.bin",file);
+    splitSingleChunk(0x1A47E0+12*61,  0x1A47E0+12*61+12,  "SpritePalette061","data/graphics/sprites/palettes/spritepalette061.bin",file);
+    splitSingleChunk(0x1A47E0+12*62,  0x1A47E0+12*62+12,  "SpritePalette062","data/graphics/sprites/palettes/spritepalette062.bin",file);
+    splitSingleChunk(0x1A47E0+12*63,  0x1A47E0+12*63+12,  "SpritePalette063","data/graphics/sprites/palettes/spritepalette063.bin",file);
+    splitSingleChunk(0x1A47E0+12*64,  0x1A47E0+12*64+12,  "SpritePalette064","data/graphics/sprites/palettes/spritepalette064.bin",file);
+    splitSingleChunk(0x1A47E0+12*65,  0x1A47E0+12*65+12,  "SpritePalette065","data/graphics/sprites/palettes/spritepalette065.bin",file);
+    splitSingleChunk(0x1A47E0+12*66,  0x1A47E0+12*66+12,  "SpritePalette066","data/graphics/sprites/palettes/spritepalette066.bin",file);
+    splitSingleChunk(0x1A47E0+12*67,  0x1A47E0+12*67+12,  "SpritePalette067","data/graphics/sprites/palettes/spritepalette067.bin",file);
+    splitSingleChunk(0x1A47E0+12*68,  0x1A47E0+12*68+12,  "SpritePalette068","data/graphics/sprites/palettes/spritepalette068.bin",file);
+    splitSingleChunk(0x1A47E0+12*69,  0x1A47E0+12*69+12,  "SpritePalette069","data/graphics/sprites/palettes/spritepalette069.bin",file);
+    splitSingleChunk(0x1A47E0+12*70,  0x1A47E0+12*70+12,  "SpritePalette070","data/graphics/sprites/palettes/spritepalette070.bin",file);
+    splitSingleChunk(0x1A47E0+12*71,  0x1A47E0+12*71+12,  "SpritePalette071","data/graphics/sprites/palettes/spritepalette071.bin",file);
+    splitSingleChunk(0x1A47E0+12*72,  0x1A47E0+12*72+12,  "SpritePalette072","data/graphics/sprites/palettes/spritepalette072.bin",file);
+    splitSingleChunk(0x1A47E0+12*73,  0x1A47E0+12*73+12,  "SpritePalette073","data/graphics/sprites/palettes/spritepalette073.bin",file);
+    splitSingleChunk(0x1A47E0+12*74,  0x1A47E0+12*74+12,  "SpritePalette074","data/graphics/sprites/palettes/spritepalette074.bin",file);
+    splitSingleChunk(0x1A47E0+12*75,  0x1A47E0+12*75+12,  "SpritePalette075","data/graphics/sprites/palettes/spritepalette075.bin",file);
+    splitSingleChunk(0x1A47E0+12*76,  0x1A47E0+12*76+12,  "SpritePalette076","data/graphics/sprites/palettes/spritepalette076.bin",file);
+    splitSingleChunk(0x1A47E0+12*77,  0x1A47E0+12*77+12,  "SpritePalette077","data/graphics/sprites/palettes/spritepalette077.bin",file);
+    splitSingleChunk(0x1A47E0+12*78,  0x1A47E0+12*78+12,  "SpritePalette078","data/graphics/sprites/palettes/spritepalette078.bin",file);
+    splitSingleChunk(0x1A47E0+12*79,  0x1A47E0+12*79+12,  "SpritePalette079","data/graphics/sprites/palettes/spritepalette079.bin",file);
+    splitSingleChunk(0x1A4BA0+14*0,   0x1A4BA0+14*0+14,   "SpritePalette128","data/graphics/sprites/palettes/spritepalette128.bin",file);
+    splitSingleChunk(0x1A4BA0+14*1,   0x1A4BA0+14*1+14,   "SpritePalette129","data/graphics/sprites/palettes/spritepalette129.bin",file);
+    splitSingleChunk(0x1A4BA0+14*2,   0x1A4BA0+14*2+14,   "SpritePalette130","data/graphics/sprites/palettes/spritepalette130.bin",file);
+    splitSingleChunk(0x1A4BA0+14*3,   0x1A4BA0+14*3+14,   "SpritePalette131","data/graphics/sprites/palettes/spritepalette131.bin",file);
+    splitSingleChunk(0x1A4BA0+14*4,   0x1A4BA0+14*4+14,   "SpritePalette132","data/graphics/sprites/palettes/spritepalette132.bin",file);
+    splitSingleChunk(0x1A4BA0+14*5,   0x1A4BA0+14*5+14,   "SpritePalette133","data/graphics/sprites/palettes/spritepalette133.bin",file);
+    splitSingleChunk(0x1A4BA0+14*6,   0x1A4BA0+14*6+14,   "SpritePalette134","data/graphics/sprites/palettes/spritepalette134.bin",file);
+    splitSingleChunk(0x1A4BA0+14*7,   0x1A4BA0+14*7+14,   "SpritePalette135","data/graphics/sprites/palettes/spritepalette135.bin",file);
+    splitSingleChunk(0x1A4BA0+14*8,   0x1A4BA0+14*8+14,   "SpritePalette136","data/graphics/sprites/palettes/spritepalette136.bin",file);
+    splitSingleChunk(0x1A4BA0+14*9,   0x1A4BA0+14*9+14,   "SpritePalette137","data/graphics/sprites/palettes/spritepalette137.bin",file);
+    splitSingleChunk(0x1A4BA0+14*10,  0x1A4BA0+14*10+14,  "SpritePalette138","data/graphics/sprites/palettes/spritepalette138.bin",file);
+    splitSingleChunk(0x1A4BA0+14*11,  0x1A4BA0+14*11+14,  "SpritePalette139","data/graphics/sprites/palettes/spritepalette139.bin",file);
+    splitSingleChunk(0x1A4BA0+14*12,  0x1A4BA0+14*12+14,  "SpritePalette140","data/graphics/sprites/palettes/spritepalette140.bin",file);
+    splitSingleChunk(0x1A4BA0+14*13,  0x1A4BA0+14*13+14,  "SpritePalette141","data/graphics/sprites/palettes/spritepalette141.bin",file);
+    splitSingleChunk(0x1A4BA0+14*14,  0x1A4BA0+14*14+14,  "SpritePalette142","data/graphics/sprites/palettes/spritepalette142.bin",file);
+    splitSingleChunk(0x1A4BA0+14*15,  0x1A4BA0+14*15+14,  "SpritePalette143","data/graphics/sprites/palettes/spritepalette143.bin",file);
+    splitSingleChunk(0x1A4BA0+14*16,  0x1A4BA0+14*16+14,  "SpritePalette144","data/graphics/sprites/palettes/spritepalette144.bin",file);
+
     
     splitSingleChunk(0x1E0000, 0x1E8000, "PCMBank0","data/sound/pcmbank0.bin",file);
     splitSingleChunk(0x1E8000, 0x1F0000, "PCMBank1","data/sound/pcmbank1.bin",file);
@@ -222,216 +329,7 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x1F6000, 0x1F8000, "SoundDriver","data/sound/sounddriver.bin",file);
     splitSingleChunk(0x1F8000, 0x1F8910, "YMInstruments","data/sound/yminst.bin",file);
     splitSingleChunk(0x1F8000, 0x200000, "MusicBank1","data/sound/musicbank1build.bin",file);
-    
-    /* SF2 examples
-    
-    splitSingleChunk(0xB1E,0xB96,"FadingData","data/graphics/tech/fadingdata.bin",file);
-    
-    splitSingleChunk(0x309E,0x30BE,"plt_BasePalette","data/graphics/tech/basepalette.bin",file);    
-    
-    splitSingleChunk(0x31CE,0x364E,"MapOffsetHashTable","data/maps/global/mapoffsethashtable.bin",file);
-    
-    //splitSingleChunk(0x7186,0x71C0,"DebugModeAvailableMaps","data/maps/global/debugmodeavailablemaps.bin",file);
-    
-    //splitSingleChunk(0x7988,0x799C,"FlagSwitchedMaps","data/maps/global/flagswitchedmaps.bin",file);
-    
-    //splitSingleChunk(0x7A36,0x7B71,"BattleMapCoords","data/battles/global/battlemapcoords.bin",file);
-    //splitSingleChunk(0x7B71,0x7BCA,"SavepointMapCoords","data/battles/global/savepointmapcoords.bin",file);
-    //splitSingleChunk(0x7BCA,0x7BDE,"RaftResetMapCoords","data/battles/global/raftresetmapcoords.bin",file);
-    
-    MakeAlign(0x7FA6, 0x8000-0x7FA6,15);
-    
-    //splitSingleChunk(0x853A,0x855A,"ClassTypes","data/stats/allies/classes/classtypes.bin",file);
-    
-    //splitSingleChunk(0xACCA,0xACEA,"CriticalHitSettings","data/stats/allies/classes/criticalhitsettings.bin",file);
-    
-    //splitSingleChunk(0xBCF0,0xBD24,"ItemBreakMessages","data/stats/items/itembreakmessages.bin",file);
-    
-    //splitSingleChunk(0xBE52,0xBECC,"EnemyItemDrops","data/battles/global/enemyitemdrops.bin",file);
-    //splitSingleChunk(0xBECC,0xC024,"EnemyGold","data/stats/enemies/enemygold.bin",file);
-    //splitSingleChunk(0xC24E,0xC27A,"SpellElements","data/stats/spells/spellelements.bin",file);
-    
-    splitSingleChunk(0xD824,0xD8F4,"MoveTypeTerrainCosts","data/battles/global/movetypeterraincosts.bin",file);
-    
-    //splitSingleChunk(0xF9C4,0xFAD6,"SpellNames","data/stats/spells/spellnames.bin",file);
-    //splitSingleChunk(0xFAD6,0xFB8A,"AllyNames","data/stats/allies/allynames.bin",file);
-    //splitSingleChunk(0xFB8A,0xFF87,"EnemyNames","data/stats/enemies/enemynames.bin",file);
-    MakeAlign(0xFF87, 0x10000-0xFF87,15);
-    
-    splitSingleChunk(0x1098A,0x10A4A,"IconHighlightTiles","data/graphics/tech/iconhighlighttiles.bin",file);    
-    
-    splitSingleChunk(0x10E1C,0x10EF4,"DiamondMenuLayout","data/graphics/tech/menus/diamondmenulayout.bin",file);
-    splitSingleChunk(0x10EF4,0x10FCC,"UnidentifiedLayout01","data/graphics/tech/menus/unidentifiedlayout01.bin",file);
-    splitSingleChunk(0x10FCC,0x110A4,"UnidentifiedLayout02","data/graphics/tech/menus/unidentifiedlayout02.bin",file);
-    
-    splitSingleChunk(0x114BE,0x11572,"BattleEquipWindowLayout","data/graphics/tech/windowlayouts/battleequipwindowlayout.bin",file);
-    
-    splitSingleChunk(0x1264E,0x126EE,"WindowBorderTiles","data/graphics/tech/windowbordertiles.bin",file);
-    splitSingleChunk(0x126EE,0x1278E,"PortraitWindowLayout","data/graphics/tech/windowlayouts/portraitwindowlayout.bin",file);
-    splitSingleChunk(0x1278E,0x1284E,"AllyKillDefeatWindowLayout","data/graphics/tech/windowlayouts/allykilldefeatwindowlayout.bin",file);
-    splitSingleChunk(0x1284E,0x1288E,"CharacterStatsWindowLayout","data/graphics/tech/windowlayouts/characterstatsdefeatwindowlayout.bin",file);
-    
-    splitSingleChunk(0x13D9E,0x13EDE,"TextHighlightTiles","data/graphics/tech/texthighlighttiles.bin",file);
-    
-    splitSingleChunk(0x15A5A,0x15BB0,"BattleConfigWindowLayout","data/graphics/tech/windowlayouts/battleconfigwindowlayout.bin",file);
-    
-    splitSingleChunk(0x1607C,0x160B4,"AlphabetTopBorderWindowLayout","data/graphics/tech/windowlayouts/alphabettopborderwindowlayout.bin",file);
-    splitSingleChunk(0x160B4,0x16204,"AlphabetWindowLayout","data/graphics/tech/windowlayouts/alphabetwindowlayout.bin",file);
-    //splitSingleChunk(0x16204,0x1623A,"NameEntryWindowLayout","data/graphics/tech/windowlayouts/nameentrywindowlayout.bin",file);
-    splitSingleChunk(0x1623A,0x16282,"AlphabetHighlightTiles","data/graphics/tech/alphabethighlighttiles.bin",file);
-    
-    splitSingleChunk(0x16618,0x16658,"TimerWindowLayout","data/graphics/tech/windowlayouts/timerwindowwindowlayout.bin",file);
-    
-    //splitSingleChunk(0x16A62,0x16EA6,"MemberStatsWindowLayout","data/graphics/tech/windowlayouts/memberstatswindowslayout.bin",file);
-    //splitSingleChunk(0x16EA6,0x176A6,"ItemDefs","data/stats/items/itemdefs.bin",file);
-    //splitSingleChunk(0x176A6,0x1796E,"SpellDefs","data/stats/spells/spelldefs.bin",file);
-    //splitSingleChunk(0x1796E,0x17F3E,"ItemNames","data/stats/items/itemnames.bin",file);
-    //splitSingleChunk(0x17F3E,0x17FDA,"ClassNames","data/stats/allies/classes/classnames.bin",file);
-    MakeAlign(0x17FDA, 0x18000-0x17FDA,15);
-    
-    splitSingleChunk(0x198A8,0x198C8,"plt_BattleSceneBasePalette","data/graphics/battles/plt_battlescenebasepalette.bin",file);
-    
-    splitSingleChunk(0x19E5E,0x19E6E,"TerrainBackgrounds","data/battles/global/terrainbackgrounds.bin",file);
-    
-    //splitSingleChunk(0x1F806,0x1F914,"AllyBattleSprites","data/stats/allies/allybattlesprites.bin",file);
-    //splitSingleChunk(0x1F914,0x1F9E2,"EnemyBattleSprites","data/stats/enemies/enemybattlesprites.bin",file);
-    //splitSingleChunk(0x1F9E2,0x1FA8A,"WeaponBattleSprites","data/stats/items/weaponsprites.bin",file);
-    //splitSingleChunk(0x1FA8A,0x1FAB8,"CustomBackgrounds","data/battles/global/custombackgrounds.bin",file);
-    
-    //splitSingleChunk(0x1FAD6,0x1FADD,"AllyBSpriteIdleAnimate","data/stats/allies/allyidlesprites.bin",file);
-    //splitSingleChunk(0x1FADD,0x1FAEA,"EnemyBSpriteIdleAnimate","data/stats/enemies/enemyidlesprites.bin",file);
-    
-    splitSingleChunk(0x1FAEA,0x1FDEA,"BackgroundLayout","data/graphics/tech/backgroundlayout.bin",file);
-    
-    MakeAlign(0x1FDEA, 0x20000-0x1FDEA,17);
-    
-    //splitSingleChunk(0x20878,0x20A02,"ShopItems","data/stats/items/shopitems.bin",file);
-    splitSingleChunk(0x20981,0x20A02,"DebugShop","data/stats/items/debugshop.bin",file);
-    //splitSingleChunk(0x21046,0x21072,"Promotions","data/stats/allies/promotions.bin",file);
-    
-    //splitSingleChunk(0x21F62,0x21F92,"MithrilWeaponClassLists","data/stats/allies/classes/mithrilweaponclasses.bin",file);
-    //splitSingleChunk(0x21F92,0x21FD2,"MithrilWeaponLists","data/stats/items/mithrilweapons.bin",file);
-    
-    //splitSingleChunk(0x228A2,0x228A8,"SpecialCaravanDescriptions","data/stats/items/specialcaravandescriptions.bin",file);
-    
-    //splitSingleChunk(0x229E2,0x229EC,"UsableOutsideBattleItems","data/stats/items/usableoutsidebattleitems.bin",file);
-    
-    splitSingleChunk(0x23658,0x23758,"UnitCursorTiles","data/graphics/tech/unitcursortiles.bin",file);
-    
-    //splitSingleChunk(0x239AE,0x239C8,"ChestGoldAmounts","data/maps/global/chestgoldamounts.bin",file);
-    
-    splitSingleChunk(0x25DF6,0x261A6,"SpecialSprites_Taros","data/graphics/specialsprites/taros.bin",file);
-    splitSingleChunk(0x261A6,0x26552,"SpecialSprites_Kraken","data/graphics/specialsprites/kraken.bin",file);
-    splitSingleChunk(0x26552,0x268F2,"SpecialSprites_NazcaShip","data/graphics/specialsprites/nazcaship.bin",file);
-    splitSingleChunk(0x268F2,0x26DB8,"SpecialSprites_EvilSpirit","data/graphics/specialsprites/evilspirit.bin",file);
-    splitSingleChunk(0x26DB8,0x27264,"SpecialSprites_EvilSpiritAlt","data/graphics/specialsprites/evilspiritalt.bin",file);
-    splitSingleChunk(0x27264,0x2784C,"SpecialSprites_Zeon","data/graphics/specialsprites/zeon.bin",file);
-    
-    MakeAlign(0x27D8E, 0x28000-0x27D8E,15);
-    
-    splitSingleChunk(0x281AA,0x2822C,"SegaLogoColors","data/graphics/tech/segalogocolors.bin",file);
-    splitSingleChunk(0x2822C,0x2824C,"SegaLogoPalette","data/graphics/tech/segalogopalette.bin",file);
-    splitSingleChunk(0x2824C,0x28B12,"SegaLogo","data/graphics/tech/segalogo.bin",file);
-    
-    splitSingleChunk(0x28FBC,0x28FCC,"InputSequence_ConfigurationMode","data/tech/configurationmodeinputsequence.bin",file);
-    splitSingleChunk(0x28FF0,0x29002,"InputSequence_DebugMode","data/tech/debugmodeinputsequence.bin",file);
-    
-    splitSingleChunk(0x29002,0x29A02,"VariableWidthFont","data/graphics/tech/fonts/variablewidthfont.bin",file);
-    
-    splitSingleChunk(0x29A02,0x2A9C2,"MenuTiles_Uncompressed","data/graphics/tech/menus/mainmenutiles.bin",file);
-    splitSingleChunk(0x2A9C2,0x2ACF6,"MenuTiles_Item","data/graphics/tech/menus/menutilesitem.bin",file);
-    splitSingleChunk(0x2ACF6,0x2B072,"MenuTiles_BattleField","data/graphics/tech/menus/menutilesbattlefield.bin",file);
-    splitSingleChunk(0x2B072,0x2B418,"MenuTiles_Church","data/graphics/tech/menus/menutileschurch.bin",file);
-    splitSingleChunk(0x2B418,0x2B7C0,"MenuTiles_Shop","data/graphics/tech/menus/menutilesshop.bin",file);
-    splitSingleChunk(0x2B7C0,0x2BAE8,"MenuTiles_Caravan","data/graphics/tech/menus/menutilescaravan.bin",file);
-    splitSingleChunk(0x2BAE8,0x2BE2C,"MenuTiles_Depot","data/graphics/tech/menus/menutilesdepot.bin",file);
-    splitSingleChunk(0x2BE2C,0x2C01E,"MenuTiles_YesNo","data/graphics/tech/menus/menutilesyesno.bin",file);
-    splitSingleChunk(0x2C01E,0x2C03E,"plt_WitchChoice","data/graphics/specialscreens/witchscreen/witchchoicepalette.bin",file);
-    splitSingleChunk(0x2C03E,0x2C3FE,"WitchBubbleAnimation","data/graphics/specialscreens/witchscreen/witchbubbleanimation.bin",file);
-    splitSingleChunk(0x2C3FE,0x2C576,"SpeechBalloonTiles","data/graphics/specialscreens/witchscreen/speechballoontiles.bin",file);
-    
-    splitSingleChunk(0x2C7A0,0x2DDDE,"UnusedCloudTiles","data/graphics/tech/unusedcloudtiles.bin",file);
-    splitSingleChunk(0x2DDDE,0x2E08E,"StaticWidthFont","data/graphics/tech/fonts/staticwidthfont.bin",file);
-    splitSingleChunk(0x2E08E,0x2E10E,"TitleScreenPalettes","data/graphics/specialscreens/titlescreen/titlescreenpalettes.bin",file);
-    
-    splitSingleChunk(0x2E196,0x2E394,"TextBankTreeOffsets","data/scripting/text/huffmantreeoffsets.bin",file);
-    splitSingleChunk(0x2E394,0x2EB34,"TextBankTreeData","data/scripting/text/huffmantrees.bin",file);
-    
-    splitSingleChunk(0x4201E,0x425ED,"GameStaff","data/scripting/gamestaff.bin",file);
-    MakeAlign(0x425ED, 0x44000-0x425ED,14);
-    
-    //splitSingleChunk(0x4428A,0x44298,"OverworldMaps","data/maps/global/overworldmaps.bin",file);
-    //splitSingleChunk(0x44338,0x4433C,"OverworldFollowers","data/overworldfollowers.bin",file);
-    //splitSingleChunk(0x4433C,0x4438A,"Followers","data/followers.bin",file);
-    
-    //splitSingleChunk(0x44A5E,0x44A7C,"AllySprites","data/stats/allies/allyspriteids.bin",file);
-    //splitSingleChunk(0x44AA4,0x44B4A,"EnemySprites","data/stats/enemies/enemyspriteids.bin",file);
-    
-    //splitSingleChunk(0x4567A,0x45858,"SpriteDialogProperties","data/spritedialogdefs.bin",file);
-    
-    //splitSingleChunk(0x47C8E,0x47CBC,"EnemyLeaderPresence","data/battles/global/enemyleaderpresence.bin",file);
-    
-    MakeAlign(0x6348C, 0x64000-0x6348C,14);
-    
-    splitSingleChunk(0x1002BE,0x10033E,"plt_TitleScreen","data/graphics/specialscreens/titlescreen/titlepalettes.bin",file);
-    splitSingleChunk(0x10033E,0x1014E0,"TitleScreenTiles","data/graphics/specialscreens/titlescreen/titletiles.bin",file);
-    splitSingleChunk(0x1014E0,0x101BE0,"TitleScreenLayoutA","data/graphics/specialscreens/titlescreen/titlelayoutA.bin",file);
-    splitSingleChunk(0x101BE0,0x101EE0,"TitleScreenLayoutB","data/graphics/specialscreens/titlescreen/titlelayoutB.bin",file);
 
-    splitSingleChunk(0x12A308,0x12CD26,"InvocationSpriteDao","data/graphics/battles/spells/invocations/dao.bin",file);
-    splitSingleChunk(0x12CD26,0x12D9CA,"InvocationSpriteApollo","data/graphics/battles/spells/invocations/apollo.bin",file);
-    splitSingleChunk(0x12D9CA,0x12E988,"InvocationSpriteNeptun","data/graphics/battles/spells/invocations/neptun.bin",file);
-    splitSingleChunk(0x12E988,0x12FADE,"InvocationSpriteAtlas","data/graphics/battles/spells/invocations/atlas.bin",file);
-    MakeAlign(0x12FADE, 0x130000-0x12FADE,15);
-    
-    splitSingleChunk(0x1AA16E,0x1AA316,"StatusAnimationTiles","data/graphics/tech/statusanimationtiles.bin",file);
-    splitSingleChunk(0x1AA31E,0x1AA5FA,"BattlesceneTransitionTilesA","data/graphics/tech/battlescenetransitiontilesa.bin",file);
-    splitSingleChunk(0x1AA5FA,0x1AA8CA,"BattlesceneTransitionTilesB","data/graphics/tech/battlescenetransitiontilesb.bin",file);
-    splitSingleChunk(0x1AA8CA,0x1AAA82,"BoltAnimData_A","data/graphics/battles/spells/animations/boltanimdataa.bin",file);
-    splitSingleChunk(0x1AAA82,0x1AAC3A,"BoltAnimData_B","data/graphics/battles/spells/animations/boltanimdatab.bin",file);        
-    
-    //splitSingleChunk(0x1B1A66,0x1B30EE,"EnemyData","data/stats/enemies/enemydata.bin",file);
-    
-    //splitSingleChunk(0x1B6DB0,0x1B6DBC,"SpecialBattles","data/battles/global/specialbattles.bin",file);    
-    
-    splitSingleChunk(0x1B6DDA,0x1B6DFA,"plt_EndKiss","data/graphics/specialscreens/endingkiss/endingkisspalette.bin",file);
-    splitSingleChunk(0x1B6DFA,0x1B7C9A,"EndKissPicture","data/graphics/specialscreens/endingkiss/endingkisstiles.bin",file);
-    MakeAlign(0x1B7C9A, 0x1B8000-0x1B7C9A,14);
-
-    splitSingleChunk(0x1BEE38,0x1BEEE0,"plt_WeaponPalettes","data/graphics/battles/weapons/weaponpalettes.bin",file);
-
-    splitSingleChunk(0x1C46C2,0x1C4702,"plt_Witch","data/graphics/specialscreens/witchscreen/witchpalette.bin",file);
-    splitSingleChunk(0x1C4702,0x1C4E88,"WitchLayout","data/graphics/specialscreens/witchscreen/witchlayout.bin",file);
-    splitSingleChunk(0x1C4E88,0x1C67C4,"WitchTiles","data/graphics/specialscreens/witchscreen/witchtiles.bin",file);
-    splitSingleChunk(0x1C67C4,0x1C67E4,"plt_WitchEnd","data/graphics/specialscreens/witchscreen/endingwitchpalette.bin",file);
-    splitSingleChunk(0x1C67E4,0x1C6F2C,"WitchEndLayout","data/graphics/specialscreens/witchscreen/endingwitchlayout.bin",file);
-    splitSingleChunk(0x1C6F2C,0x1C7F7C,"WitchEndTiles","data/graphics/specialscreens/witchscreen/endingwitchtiles.bin",file);
-    MakeAlign(0x1C7F7C, 0x1C8000-0x1C7F7C,15);    
-
-    splitSingleChunk(0x1D8004,0x1DFA46,"Icons","data/graphics/icons/icons.bin",file);
-    MakeAlign(0x1DFA46, 0x1E0000-0x1DFA46,15);    
-
-    splitSingleChunk(0x1E0000,0x1E8000,"","data/sound/pcmbank0.bin",file);
-    splitSingleChunk(0x1E8000,0x1EB000,"","data/sound/pcmbank1.bin",file);
-    splitSingleChunk(0x1EB000,0x1EC000,"","data/sound/yminst.bin",file);
-    splitSingleChunkWithCommentedSplitEntry(0x1EC000,0x1EE000,"SoundDriver","data/sound/sounddriver.bin",file);
-    
-    //splitSingleChunk(0x1EE02C,0x1EE270,"StatGrowthCurves","data/stats/allies/growthcurves.bin",file);
-    
-    //splitSingleChunk(0x1EE7D0, 0x1EE890, "AllyStartData","data/stats/allies/allystartdata.bin",file);
-    //splitSingleChunk(0x1EE890, 0x1EE930, "ClassData","data/stats/allies/classes/classdata.bin",file);
-    splitSingleChunk(0x1EE930, 0x1EF102, "JewelsEndScreenLayout","data/graphics/specialscreens/endingjewels/endingjewelslayout.bin",file);
-    splitSingleChunk(0x1EF102, 0x1EF142, "plt_JewelsEndScreen","data/graphics/specialscreens/endingjewels/endingjewelspalette.bin",file);
-    splitSingleChunk(0x1EF142, 0x1EF4BA, "JewelsEndScreenTiles","data/graphics/specialscreens/endingjewels/endingjewelstiles.bin",file);
-    splitSingleChunk(0x1EF4BA, 0x1EF4DA, "plt_SuspendString","data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin",file);
-    splitSingleChunk(0x1EF4DA, 0x1EF5A6, "SuspendStringTiles","data/graphics/specialscreens/suspendscreen/suspendstringtiles.bin",file);
-    splitSingleChunk(0x1EF5A6, 0x1EF5E6, "unused_BasePalettes","data/graphics/tech/unusedbasepalettes.bin",file);
-    splitSingleChunk(0x1EF5E6, 0x1EFE33, "BaseTiles","data/graphics/tech/basetiles.bin",file);
-    MakeAlign(0x1EFE33, 0x1F0000-0x1EFE33,15);
-    splitSingleChunk(0x1F0000, 0x1F8000, "","data/sound/musicbank1.bin",file);
-    splitSingleChunk(0x1F8000, 0x200000, "","data/sound/musicbank0.bin",file);
-    
-    */
     
 }
 
@@ -546,6 +444,140 @@ static splitPT(start, end, lastEntryDataEnd, chunkEnd, ptName, entryName, binDir
     // Put align instruction for padding until chunkEnd
     if(align!=0)MakeAlign(lastEntryDataEnd,chunkEnd-lastEntryDataEnd,align);
 }
+
+
+
+static splitSprites(file) {
+    auto i,j,k,x,s,index,path;
+    auto start,end,lastEntryDataEnd,chunkEnd,addr,dataEnd,from,dref,section,action,binDirIndex,binNameIndex,ptName,binDir,entryDirs,binName,indexLength,align,entryName, subEntryName;
+    auto facingId;
+    auto subStart, subEnd, subIndex, subAddr, currentEntryName;
+    i = 0;
+    start = 0x1201B4;
+    end = 0x120800;
+    subStart = 0x120800;
+    subEnd = 0x121BD0;
+    addr = start;
+    lastEntryDataEnd = 0x1A42DE;
+    chunkEnd = 0x1A42DE;
+    ptName = "pt_Sprites";
+    entryName = "SpriteAnim";
+    subEntryName = "SpriteFrame";
+    binDir = "data/graphics/sprites/";
+    entryDirs = 0;
+    binName = "spriteanim";
+    indexLength = 3;
+    align = 15;
+    action=1;
+    // Cleaning whole chunk
+    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);
+    for(j=start;j<chunkEnd;j++){undefineByte(j);}
+    // Naming pointer table
+    MakeNameEx(addr,ptName,0);
+    // Prepare whole chunk with new names and Data XRefs
+    while(addr<end&&action==1){
+        MakeDword(addr);
+        dref = Dword(addr);
+        add_dref(addr,dref,dr_O);
+        dref = Dfirst(addr);        
+        //Jump(dref);
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){
+            index=form("0%s",index);
+        }
+        currentEntryName = form("%s%s",entryName,index);
+        MakeNameExC(dref,currentEntryName,0);
+        addr=addr+4;
+        i++;
+    }
+    addr = start;
+    i = 0;
+    while(addr<end&&action==1){
+        dref = Dfirst(addr);     
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){
+            index=form("0%s",index);
+        }
+        currentEntryName = form("%s%s",entryName,index);
+        subAddr = dref;
+        j=0;
+        while(GetTrueName(subAddr)==form("%s%s",entryName,index) || GetTrueName(subAddr)==""){
+	        MakeDword(subAddr);
+	        dref = Dword(subAddr);
+	        add_dref(subAddr,dref,dr_O);
+	        dref = Dfirst(subAddr);    
+	        MakeNameExC(dref,form("%s%sFrame%s",entryName,index,ltoa(j,10)),0);
+	        j++;
+	        subAddr = subAddr+4;
+        }
+        addr=addr+4;
+        i++;
+    }
+    /*
+     *  Each entry is delimited by its address and the next DATA XRef coming from current chunk
+     *  It can then be made into data and replaced by an incbin manual instruction.
+     */
+
+    addr = start;
+    i = 0;
+    while(addr<end&&action==1){
+        dref = Dfirst(addr);     
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){
+            index=form("0%s",index);
+        }
+        currentEntryName = form("%s%s",entryName,index);
+        subAddr = dref;
+        k=0;
+        while(GetTrueName(subAddr)==form("%s%s",entryName,index) || GetTrueName(subAddr)==""){
+	        dref = Dfirst(subAddr);    
+	               
+            //Jump(dref); 
+            dataEnd = 0;
+            j = dref+1;
+            // Finding entry's data end
+            while(dataEnd==0){
+                from = DfirstB(j);
+                while(from!=BADADDR){
+                    if(from>=start&&from<chunkEnd){
+                        dataEnd = j;
+                    }
+              from=DnextB(addr,from);      
+                }
+                j++;
+                if(j==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
+            }
+            index = ltoa(i,10);
+            while(strlen(index)<indexLength){
+                index=form("0%s",index);
+            }
+            Message(form("Processing entry %s%s from %s, to %s\n",entryName,index,ltoa(dref,16),ltoa(dataEnd,16)));
+            MakeData(dref,FF_BYTE,dataEnd-dref,1);
+            if(strstr(GetDisasm(dref),"incbin")==-1){    
+                if(entryDirs==0){
+                    binDirIndex = "";
+                    binNameIndex = index;
+                } else{
+                    binDirIndex = index;
+                    binNameIndex = "";
+                }
+                SetManualInsn   (dref, form("incbin \"%s%s%s%sframe%s.bin\"",binDir,binDirIndex,binName,binNameIndex,ltoa(k,10)));
+                writestr(file,form("#split\t0x%s,0x%s,%s%s%s%sframe%s.bin\n",ltoa(dref,16),ltoa(dataEnd,16),binDir,binDirIndex,binName,binNameIndex,ltoa(k,10)));
+            }
+            //action = AskYN(1,"Ok ?");
+        
+	        k++;
+	        subAddr = subAddr+4;
+        }
+        addr=addr+4;
+        i++;
+    }     
+    // Put align instruction for padding until chunkEnd
+    if(align!=0)MakeAlign(lastEntryDataEnd,chunkEnd-lastEntryDataEnd,align);
+}
+
+
+
 
 
 
