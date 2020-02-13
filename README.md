@@ -11,23 +11,23 @@ The main purposes of LSUSRE are :
 
 Usage workflow :
 1. IDB Initialization
-1.1. Open Landstalker (USA) ROM in IDA Pro to create a new IDB.
-1.2. Execute initialization scripts from ./10-IDB_INIT/ folder : 
-- init.idc
-- ImportGeneratedFunctionComments.idc
-1.3. Execute parsing scripts from ./20-IDB_PARSING/ folder :
-- 01.splits.idc
-- 02.traps.idc
-- (more advanced intermediate scripts should appear in the future)
-- 06.fixes.idc
-At this point, the IDB represents the current state of disassembly, with the ability to further format and document content.
+    1. Open Landstalker (USA) ROM in IDA Pro to create a new IDB.
+    2. Execute initialization scripts from ./10-IDB_INIT/ folder : 
+        1. init.idc
+        2. ImportGeneratedFunctionComments.idc
+    3. Execute parsing scripts from ./20-IDB_PARSING/ folder :
+        1. 01.splits.idc
+        2. 02.traps.idc
+        3. (more advanced intermediate scripts should appear in the future)
+        4. 06.fixes.idc\
+        At this point, the IDB represents the current state of disassembly, with the ability to further format and document content.
 2. Export the disassembly :
-2.1. In IDB folder, copy and execute ./30-ASM_EXPORT/dirs.bat, which will create ./disasm/ folder
-2.2. Execute ./30-ASM_EXPORT/produce.idc
-2.3. Copy disasm folder into LSUSDISASM project folder, in which you can build the ROM and check that a vanilla build still is bit-perfect.
+    1. In IDB folder, copy and execute ./30-ASM_EXPORT/dirs.bat, which will create ./disasm/ folder
+    2. Execute ./30-ASM_EXPORT/produce.idc
+    3. Copy disasm folder into LSUSDISASM project folder, in which you can build the ROM and check that a vanilla build still is bit-perfect.
 3. Export IDB updates :
-3.1 File > Produce file > Dump database to IDC file ... and overwrite ./10-IDB_INIT/init.idc
-3.2 Execute ./00-TOOLS/ExportFunctionComments.idc, which produces ImportGeneratedFunctionComments.idc in IDB folder, and then copy it into 10-IDB_INIT folder.
+    1. File > Produce file > Dump database to IDC file ... and overwrite ./10-IDB_INIT/init.idc
+    2. Execute ./00-TOOLS/ExportFunctionComments.idc, which produces ImportGeneratedFunctionComments.idc in IDB folder, and then copy it into 10-IDB_INIT folder.
 
 
 Naming conventions :
