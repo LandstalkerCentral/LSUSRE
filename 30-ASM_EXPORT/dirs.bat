@@ -68,7 +68,8 @@ REM mkdir disasm\data\stats\allies
 REM mkdir disasm\data\stats\allies\classes
 REM mkdir disasm\data\stats\allies\stats
 REM mkdir disasm\data\stats\enemies
-REM mkdir disasm\data\graphics
+mkdir disasm\data\graphics
+mkdir disasm\data\graphics\sprites\
 REM mkdir disasm\data\graphics\mapsprites
 REM mkdir disasm\data\graphics\maps
 REM mkdir disasm\data\graphics\maps\mappalettes

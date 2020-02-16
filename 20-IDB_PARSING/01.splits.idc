@@ -461,11 +461,11 @@ static splitSprites(file) {
     lastEntryDataEnd = 0x1A42DE;
     chunkEnd = 0x1A42DE;
     ptName = "pt_Sprites";
-    entryName = "SpriteAnim";
+    entryName = "Sprite";
     subEntryName = "SpriteFrame";
     binDir = "data/graphics/sprites/";
     entryDirs = 0;
-    binName = "spriteanim";
+    binName = "sprite";
     indexLength = 3;
     align = 15;
     action=1;
