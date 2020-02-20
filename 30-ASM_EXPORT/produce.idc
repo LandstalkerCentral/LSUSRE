@@ -137,7 +137,7 @@ static produceLayoutFile(){
     produceSection(file,        "05",    0x038600,    0x044010,    0x044010-0x043E70,    "0x038600..0x044010 : To figure out and describe succinctly");
     produceSection(file,        "06",    0x044010,    0x09B000,    0x09B000-0x09AC6C,    "0x044010..0x09B000 : To figure out and describe succinctly");
     produceSection(file,        "07",    0x09B000,    0x0A0A00,    0x0A0A00-0x0A08AC,    "0x09B000..0x0A0A00 : To figure out and describe succinctly");
-    produceSection(file,        "08",    0x0A0A00,    0x120000,    0x120000-0x11F314,    "0x0A0A00..0x120000 : Map data, region check");
+    produceSpecificSectionEight(file,        "08",    0x0A0A00,    0x120000,    0x120000-0x11F314,    "0x0A0A00..0x120000 : Map data, region check");
     produceSpecificSectionNine(file,"09",0x120000,    0x1A4400,    0x1A4400-0x1A42DE,    "0x120000..0x1A4400 : Sprite data");
     produceSection(file,        "10",    0x1A4400,    0x1AF800,    0x1AF800-0x1AF5FA,    "0x1A4400..0x1AF800 : To figure out and describe succinctly");
     produceSection(file,        "11",    0x1AF800,    0x1E0000,    0x1E0000-0x1DF9F8,    "0x1AF800..0x1E0000 : To figure out and describe succinctly");
@@ -149,6 +149,30 @@ static produceLayoutFile(){
 
 }
 
+
+
+
+
+static produceSpecificSectionEight(mainFile,sectionName,start,end,fs,sectionComment){
+    auto ea,itemSize,action,currentLine,previousLine,fileName,file;
+    auto output, name, indent, comment, commentEx, commentIndent;
+    fileName = form("layout\\ls-%s-0x0%s-0x%s.asm",sectionName,ltoa(start,16),ltoa(end,16));
+    Message(form("Writing assembly section %s to %s (%s) ... ",sectionName,fileName,sectionComment));    
+    action = 1;
+    writestr(mainFile,form("                include \"%s\"    ; %s\n",fileName,sectionComment));
+    file = fopen(form("disasm\\%s",fileName),"w");
+    writestr(file,form("\n; GAME SECTION %s :\n; %s\n",sectionName,sectionComment));
+    writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
+
+    produceAsmSection(file,"",0xA0A00,0xA0A12);
+    produceAsmScript(file,"data\\maps\\mapdata",0xA0A12,0x11CEA2,"Map data to format and split properly");
+    produceAsmScript(file,"data\\maps\\global\\mapwarps",0x11CEA2,0x11EA64,"Map warps");
+    produceAsmScript(file,"code\\common\\tech\\regioncheck",0x11EA64,0x11F314,"Region check code");
+    produceAsmSection(file,"",0x11F314,0x120000);
+
+    fclose(file);
+    Message("DONE.\n");    
+}
 
 
 
