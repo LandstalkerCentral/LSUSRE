@@ -165,7 +165,8 @@ static produceSpecificSectionEight(mainFile,sectionName,start,end,fs,sectionComm
     writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
 
     produceAsmSection(file,"",0xA0A00,0xA0A12);
-    produceAsmScript(file,"data\\maps\\mapdata",0xA0A12,0x11CEA2,"Map data to format and split properly");
+    produceAsmScript(file,"data\\maps\\entries",0xA0A12,0x11C926,"Map entry list");
+    produceAsmScript(file,"data\\graphics\\maps\\mappalettes\\entries",0x11C926,0x11CEA2,"Map palettes entry list");
     produceAsmScript(file,"data\\maps\\global\\mapwarps",0x11CEA2,0x11EA64,"Map warps");
     produceAsmScript(file,"code\\common\\tech\\regioncheck",0x11EA64,0x11F314,"Region check code");
     produceAsmSection(file,"",0x11F314,0x120000);
