@@ -32,6 +32,10 @@ static main()
     SetFunctionCmt(0x1164, 
         "d6=range", 1);
 
+    // sub_9F1C
+    SetFunctionCmt(0x9f1c, 
+        "uses map warp data", 1);
+
     // sub_C46A
     SetFunctionCmt(0xc46a, 
         "related to intro text", 1);
