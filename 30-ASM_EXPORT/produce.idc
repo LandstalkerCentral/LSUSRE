@@ -164,7 +164,8 @@ static produceSpecificSectionOne(mainFile,sectionName,start,end,fs,sectionCommen
     writestr(file,form("\n; GAME SECTION %s :\n; %s\n",sectionName,sectionComment));
     writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
 
-    produceAsmSection(file,"",0x0,0x14F2);
+    produceAsmScript(file,"code\\romheader",0x0,0x200,"ROM header");
+    produceAsmSection(file,"",0x200,0x14F2);
     produceAsmScript(file,"code\\common\\tech\\gamesaves",0x14F2,0x16B6,"Game save SRAM management");
     produceAsmSection(file,"",0x16B6,0x010300);
 
