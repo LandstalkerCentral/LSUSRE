@@ -135,7 +135,7 @@ static produceLayoutFile(){
     produceSection(file,             "03",    0x019514,    0x022E80,    0x022E80-0x022E50,    "0x019514..0x022E80 : To figure out and describe succinctly");
     produceSection(file,             "04",    0x022E80,    0x038600,    0x038600-0x03838C,    "0x022E80..0x038600 : To figure out and describe succinctly");
     produceSection(file,             "05",    0x038600,    0x044010,    0x044010-0x043E70,    "0x038600..0x044010 : To figure out and describe succinctly");
-    produceSection(file,             "06",    0x044010,    0x09B000,    0x09B000-0x09AC6C,    "0x044010..0x09B000 : To figure out and describe succinctly");
+    produceSpecificSectionSix(file,  "06",    0x044010,    0x09B000,    0x09B000-0x09AC6C,    "0x044010..0x09B000 : To figure out and describe succinctly");
     produceSection(file,             "07",    0x09B000,    0x0A0A00,    0x0A0A00-0x0A08AC,    "0x09B000..0x0A0A00 : To figure out and describe succinctly");
     produceSpecificSectionEight(file,"08",    0x0A0A00,    0x120000,    0x120000-0x11F314,    "0x0A0A00..0x120000 : Map data, region check");
     produceSpecificSectionNine(file, "09",    0x120000,    0x1A4400,    0x1A4400-0x1A42DE,    "0x120000..0x1A4400 : Sprite data");
@@ -174,6 +174,29 @@ static produceSpecificSectionOne(mainFile,sectionName,start,end,fs,sectionCommen
 }
 
 
+static produceSpecificSectionSix(mainFile,sectionName,start,end,fs,sectionComment){
+    auto ea,itemSize,action,currentLine,previousLine,fileName,file;
+    auto output, name, indent, comment, commentEx, commentIndent;
+    fileName = form("layout\\ls-%s-0x0%s-0x0%s.asm",sectionName,ltoa(start,16),ltoa(end,16));
+    Message(form("Writing assembly section %s to %s (%s) ... ",sectionName,fileName,sectionComment));    
+    action = 1;
+    writestr(mainFile,form("                include \"%s\"    ; %s\n",fileName,sectionComment));
+    file = fopen(form("disasm\\%s",fileName),"w");
+    writestr(file,form("\n; GAME SECTION %s :\n; %s\n",sectionName,sectionComment));
+    writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
+
+    produceAsmSection(file,"",0x44010,0x44014);
+    produceAsmScript(file,"data\\graphics\\maps\\tilesets\\animated\\entries",0x44014,0x4406C,"Animated Map Tileset Pointer Table");
+    produceAsmSection(file,"",0x4406C,0x44070);
+    produceAsmScript(file,"data\\graphics\\maps\\tilesets\\entries",0x44070,0x94F2A,"Map Tileset Entries");
+    produceAsmScript(file,"data\\graphics\\maps\\tilesets\\animated\\storage",0x94F2A,0x9A4EA,"Map Tileset Entries");
+    produceAsmSection(file,"",0x9A4EA,0x9B000);
+
+    fclose(file);
+    Message("DONE.\n");    
+}
+
+
 
 
 
@@ -190,7 +213,7 @@ static produceSpecificSectionEight(mainFile,sectionName,start,end,fs,sectionComm
 
     produceAsmSection(file,"",0xA0A00,0xA0A12);
     produceAsmScript(file,"data\\maps\\entries",0xA0A12,0x11C926,"Map entry list");
-    produceAsmScript(file,"data\\graphics\\maps\\mappalettes\\entries",0x11C926,0x11CEA2,"Map palettes entry list");
+    produceAsmScript(file,"data\\graphics\\maps\\palettes\\entries",0x11C926,0x11CEA2,"Map palettes entry list");
     produceAsmScript(file,"data\\maps\\global\\mapwarps",0x11CEA2,0x11EA64,"Map warps");
     produceAsmScript(file,"code\\common\\tech\\regioncheck",0x11EA64,0x11F314,"Region check code");
     produceAsmSection(file,"",0x11F314,0x120000);
@@ -1366,7 +1389,7 @@ static produceSpecificSectionEight(mainFile,sectionName,start,end,fs,sectionComm
     produceAsmSection(file,"",0x64000,0x6400C);
     produceAsmScript(file,"data\\graphics\\maps\\maptilesets\\entries",0x6400C,0x9494A,"Map Tilesets");    
     writestr(file,"                alignIfExpandedRom $C7000\n");
-    produceAsmScript(file,"data\\graphics\\maps\\mappalettes\\entries",0x9494A,0x94B8A,"Map palettes");
+    produceAsmScript(file,"data\\graphics\\maps\\palettes\\entries",0x9494A,0x94B8A,"Map palettes");
     //produceAsmScriptWithConditionalInclude(file,"","data\\maps\\entries",0x94B8A,0xC7ECC,"Map entries",1);
     produceMapEntries(file,"data\\maps\\entries",0x94B8A,0xC7ECC,"Map entries",1);
     produceAsmSection(file,"",0xC7ECC,0xC8000);

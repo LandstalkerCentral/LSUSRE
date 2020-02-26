@@ -1,6 +1,6 @@
 mkdir disasm
 
-REM mkdir disasm\code
+mkdir disasm\code
 REM mkdir disasm\code\gameflow
 REM mkdir disasm\code\gameflow\start
 REM mkdir disasm\code\gameflow\exploration
@@ -13,7 +13,7 @@ REM mkdir disasm\code\common\tech\interrupts
 REM mkdir disasm\code\common\tech\sram
 mkdir disasm\code\common\tech\sound
 REM mkdir disasm\code\common\tech\graphics
-REM mkdir disasm\code\common\maps
+mkdir disasm\code\common\maps
 REM mkdir disasm\code\common\stats
 REM mkdir disasm\code\common\stats\items
 REM mkdir disasm\code\common\menus\
@@ -43,8 +43,8 @@ REM mkdir disasm\data\battles\global
 REM mkdir disasm\data\battles\entries
 REM FOR /L %%G IN (0,1,9) DO mkdir disasm\data\battles\entries\battle0%%G
 REM FOR /L %%G IN (10,1,44) DO mkdir disasm\data\battles\entries\battle%%G
-REM mkdir disasm\data\maps
-REM mkdir disasm\data\maps\global
+mkdir disasm\data\maps
+mkdir disasm\data\maps\global
 REM mkdir disasm\data\maps\entries
 REM FOR /L %%G IN (0,1,9) DO mkdir disasm\data\maps\entries\map0%%G
 REM FOR /L %%G IN (10,1,78) DO mkdir disasm\data\maps\entries\map%%G
@@ -71,8 +71,10 @@ REM mkdir disasm\data\stats\enemies
 mkdir disasm\data\graphics
 mkdir disasm\data\graphics\sprites\
 REM mkdir disasm\data\graphics\mapsprites
-REM mkdir disasm\data\graphics\maps
-REM mkdir disasm\data\graphics\maps\mappalettes
+mkdir disasm\data\graphics\maps
+mkdir disasm\data\graphics\maps\palettes
+mkdir disasm\data\graphics\maps\tilesets
+mkdir disasm\data\graphics\maps\tilesets\animated
 REM mkdir disasm\data\graphics\maps\maptilesets
 REM mkdir disasm\data\graphics\portraits
 REM mkdir disasm\data\graphics\battles

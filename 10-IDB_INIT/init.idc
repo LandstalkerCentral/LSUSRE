@@ -1554,6 +1554,7 @@ static Bytes_0(void) {
 	OpOff		(x,	128,	0X0);
 	MakeCode	(0X2CDA);
 	MakeCode	(0X2CF6);
+	MakeName	(0X2CF6,	"LoadMapTileset");
 	MakeCode	(x=0X2D20);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -1565,6 +1566,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0X2D46);
 	OpHex		(x,	0);
 	MakeCode	(0X2D64);
+	MakeName	(0X2D64,	"SetMapPalette");
 	MakeCode	(x=0X2D68);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -1572,6 +1574,20 @@ static Bytes_0(void) {
 	MakeCode	(x=0X2D90);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeWord	(0X2DB4);
+	MakeName	(0X2DB4,	"DefaultMapPalette");
+	MakeWord	(0X2DB6);
+	MakeWord	(0X2DB8);
+	MakeWord	(0X2DBA);
+	MakeWord	(0X2DBC);
+	MakeWord	(0X2DBE);
+	MakeWord	(0X2DC0);
+	MakeWord	(0X2DC2);
+	MakeWord	(0X2DC4);
+	MakeWord	(0X2DC6);
+	MakeWord	(0X2DC8);
+	MakeWord	(0X2DCA);
+	MakeWord	(0X2DCC);
 	MakeCode	(0X2DCE);
 	MakeCode	(0X2E2E);
 	MakeName	(0X2E2E,	"LoadNextMapInDebugMode");
@@ -1931,29 +1947,8 @@ static Bytes_0(void) {
 	MakeCode	(0X4A7A);
 	MakeCode	(0X4A94);
 	MakeCode	(0X4AB2);
-	MakeRptCmt	(0X4AD8,	"Broken relative jump table ?\nNo plausible code at those destinations ...");
-	MakeWord	(0X4AD8);
-	MakeWord	(0X4ADA);
-	MakeWord	(0X4ADC);
-	MakeWord	(0X4ADE);
-	MakeWord	(0X4AE0);
-	MakeWord	(0X4AE2);
-	MakeWord	(0X4AE4);
-	MakeWord	(0X4AE6);
-	MakeWord	(0X4AE8);
-	MakeWord	(0X4AEA);
-	MakeWord	(0X4AEC);
-	MakeWord	(0X4AEE);
-	MakeWord	(0X4AF0);
-	MakeWord	(0X4AF2);
-	MakeWord	(0X4AF4);
-	MakeWord	(0X4AF6);
-	MakeWord	(0X4AF8);
-	MakeWord	(0X4AFA);
-	MakeWord	(0X4AFC);
-	MakeWord	(0X4AFE);
-	MakeWord	(0X4B00);
-	MakeWord	(0X4B02);
+	MakeName	(0X4AB2,	"DecompressLZ77Graphics");
+	MakeCode	(0X4AD8);
 	MakeCode	(0X4B04);
 	MakeCode	(0X4B12);
 	MakeCode	(0X4B14);
@@ -5678,6 +5673,11 @@ static Bytes_0(void) {
 	MakeCode	(x=0X12E4E);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeCode	(x=0X12E54);
+	OpHex		(x,	1);
+	MakeCode	(0X12EC0);
+	MakeCode	(0X12EE2);
+	MakeCode	(0X12F20);
 }
 
 //------------------------------------------------------------------------
@@ -5687,11 +5687,6 @@ static Bytes_1(void) {
         auto x;
 #define id x
 
-	MakeCode	(x=0X12E54);
-	OpHex		(x,	1);
-	MakeCode	(0X12EC0);
-	MakeCode	(0X12EE2);
-	MakeCode	(0X12F20);
 	MakeCode	(0X12F5C);
 	MakeCode	(0X12F86);
 	MakeCode	(0X12FA0);
@@ -9867,6 +9862,7 @@ static Bytes_1(void) {
 	MakeDword	(x=0X44010);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeName	(0X44010,	"p_pt_MapTilesets");
 	MakeDword	(x=0X44014);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -9940,6 +9936,7 @@ static Bytes_1(void) {
 	MakeDword	(x=0X44070);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeName	(0X44070,	"pt_MapTilesets");
 	MakeDword	(x=0X44074);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -10033,14 +10030,126 @@ static Bytes_1(void) {
 	MakeDword	(x=0X440EC);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-	MakeCode	(x=0X757D4);
-	OpSign		(x,	0);
-	MakeDword	(x=0X94F2A);
-	OpOff		(x,	0,	0X0);
-	OpOff		(x,	128,	0X0);
+	MakeByte	(0X440F0);
+	MakeArray	(0X440F0,	0X4A9C);
+	MakeName	(0X440F0,	"MapTileset00");
+	MakeByte	(0X48B8C);
+	MakeArray	(0X48B8C,	0X3E4E);
+	MakeName	(0X48B8C,	"MapTileset01");
+	MakeByte	(0X4C9DA);
+	MakeArray	(0X4C9DA,	0X41FF);
+	MakeName	(0X4C9DA,	"MapTileset02");
+	MakeByte	(0X50BD9);
+	MakeArray	(0X50BD9,	0X3FBE);
+	MakeName	(0X50BD9,	"MapTileset03");
+	MakeByte	(0X54B97);
+	MakeArray	(0X54B97,	0X4E2F);
+	MakeName	(0X54B97,	"MapTileset04");
+	MakeByte	(0X599C6);
+	MakeArray	(0X599C6,	0X4BE0);
+	MakeName	(0X599C6,	"MapTileset05");
+	MakeByte	(0X5E5A6);
+	MakeArray	(0X5E5A6,	0X42C1);
+	MakeName	(0X5E5A6,	"MapTileset06");
+	MakeByte	(0X62867);
+	MakeArray	(0X62867,	0X5B7B);
+	MakeName	(0X62867,	"MapTileset07");
+	MakeByte	(0X683E2);
+	MakeArray	(0X683E2,	0X46B5);
+	MakeName	(0X683E2,	"MapTileset08");
+	MakeByte	(0X6CA97);
+	MakeArray	(0X6CA97,	0X37F9);
+	MakeName	(0X6CA97,	"MapTileset09");
+	MakeByte	(0X70290);
+	MakeArray	(0X70290,	0X38EA);
+	MakeName	(0X70290,	"MapTileset10");
+	MakeByte	(0X73B7A);
+	MakeArray	(0X73B7A,	0X54B8);
+	MakeName	(0X73B7A,	"MapTileset11");
+	MakeByte	(0X79032);
+	MakeArray	(0X79032,	0X4E82);
+	MakeName	(0X79032,	"MapTileset12");
+	MakeByte	(0X7DEB4);
+	MakeArray	(0X7DEB4,	0X55A3);
+	MakeName	(0X7DEB4,	"MapTileset13");
+	MakeByte	(0X83457);
+	MakeArray	(0X83457,	0X53BB);
+	MakeName	(0X83457,	"MapTileset14");
+	MakeByte	(0X88812);
+	MakeArray	(0X88812,	0X3834);
+	MakeName	(0X88812,	"MapTileset15");
+	MakeByte	(0X8C046);
+	MakeArray	(0X8C046,	0X3D2F);
+	MakeName	(0X8C046,	"MapTileset16");
+	MakeByte	(0X8FD75);
+	MakeArray	(0X8FD75,	0X51B5);
+	MakeName	(0X8FD75,	"MapTileset17");
+	MakeByte	(0X94F2A);
+	MakeArray	(0X94F2A,	0X600);
+	MakeName	(0X94F2A,	"AnimatedMapTileset00");
+	MakeByte	(0X9552A);
+	MakeArray	(0X9552A,	0X2C0);
+	MakeName	(0X9552A,	"AnimatedMapTileset01");
+	MakeByte	(0X957EA);
+	MakeArray	(0X957EA,	0X3C0);
+	MakeName	(0X957EA,	"AnimatedMapTileset02");
+	MakeByte	(0X95BAA);
+	MakeArray	(0X95BAA,	0X4E0);
+	MakeName	(0X95BAA,	"AnimatedMapTileset03");
+	MakeByte	(0X9608A);
+	MakeArray	(0X9608A,	0XC0);
+	MakeName	(0X9608A,	"AnimatedMapTileset04");
+	MakeByte	(0X9614A);
+	MakeArray	(0X9614A,	0X780);
+	MakeName	(0X9614A,	"AnimatedMapTileset05");
+	MakeByte	(0X968CA);
+	MakeArray	(0X968CA,	0X5C0);
+	MakeName	(0X968CA,	"AnimatedMapTileset06");
 	MakeByte	(0X96E8A);
+	MakeArray	(0X96E8A,	0X180);
+	MakeName	(0X96E8A,	"AnimatedMapTileset07");
+	MakeByte	(0X9700A);
+	MakeArray	(0X9700A,	0X600);
+	MakeName	(0X9700A,	"AnimatedMapTileset08");
+	MakeByte	(0X9760A);
+	MakeArray	(0X9760A,	0X540);
+	MakeName	(0X9760A,	"AnimatedMapTileset09");
+	MakeByte	(0X97B4A);
+	MakeArray	(0X97B4A,	0X180);
+	MakeName	(0X97B4A,	"AnimatedMapTileset10");
+	MakeByte	(0X97CCA);
+	MakeArray	(0X97CCA,	0X540);
+	MakeName	(0X97CCA,	"AnimatedMapTileset11");
+	MakeByte	(0X9820A);
+	MakeArray	(0X9820A,	0X180);
+	MakeName	(0X9820A,	"AnimatedMapTileset12");
+	MakeByte	(0X9838A);
+	MakeArray	(0X9838A,	0X720);
+	MakeName	(0X9838A,	"AnimatedMapTileset13");
+	MakeByte	(0X98AAA);
+	MakeArray	(0X98AAA,	0X200);
+	MakeName	(0X98AAA,	"AnimatedMapTileset14");
+	MakeByte	(0X98CAA);
+	MakeArray	(0X98CAA,	0X200);
+	MakeName	(0X98CAA,	"AnimatedMapTileset15");
 	MakeByte	(0X98EAA);
+	MakeArray	(0X98EAA,	0X1C0);
+	MakeName	(0X98EAA,	"AnimatedMapTileset16");
 	MakeByte	(0X9906A);
+	MakeArray	(0X9906A,	0XC0);
+	MakeName	(0X9906A,	"AnimatedMapTileset17");
+	MakeByte	(0X9912A);
+	MakeArray	(0X9912A,	0X4E0);
+	MakeName	(0X9912A,	"AnimatedMapTileset18");
+	MakeByte	(0X9960A);
+	MakeArray	(0X9960A,	0X600);
+	MakeName	(0X9960A,	"AnimatedMapTileset19");
+	MakeByte	(0X99C0A);
+	MakeArray	(0X99C0A,	0X280);
+	MakeName	(0X99C0A,	"AnimatedMapTileset20");
+	MakeByte	(0X99E8A);
+	MakeArray	(0X99E8A,	0X660);
+	MakeName	(0X99E8A,	"AnimatedMapTileset21");
 	MakeRptCmt	(0X9A4EA,	"uncompressed 4bpp graphics");
 	MakeByte	(0X9A4EA);
 	MakeArray	(0X9A4EA,	0X782);
@@ -11316,6 +11425,15 @@ static Bytes_1(void) {
 	MakeDword	(x=0XA0EF2);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XA0EF6);
 	MakeByte	(0XA0EF7);
 	MakeByte	(0XA0EF8);
@@ -11526,15 +11644,6 @@ static Bytes_1(void) {
 	MakeDword	(x=0XA0FE2);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XA0FE6);
 	MakeByte	(0XA0FE7);
 	MakeByte	(0XA0FE8);
@@ -16866,6 +16975,15 @@ static Bytes_2(void) {
 	MakeByte	(0XDB6BB);
 	MakeArray	(0XDB6BB,	0X24C);
 	MakeName	(0XDB6BB,	"Map104");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XDB907);
 	MakeArray	(0XDB907,	0X180);
 	MakeName	(0XDB907,	"Map105");
@@ -17010,15 +17128,6 @@ static Bytes_2(void) {
 	MakeByte	(0XE2FBE);
 	MakeArray	(0XE2FBE,	0XAA);
 	MakeName	(0XE2FBE,	"Map579");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XE3068);
 	MakeArray	(0XE3068,	0X136);
 	MakeName	(0XE3068,	"Map580");
@@ -21625,6 +21734,15 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeName	(0X12098C,	"Sprite024");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_4(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0X120990);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -21818,15 +21936,6 @@ static Bytes_3(void) {
 	MakeDword	(x=0X120A84);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_4(void) {
-        auto x;
-#define id x
-
 	MakeDword	(x=0X120A88);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -26386,6 +26495,15 @@ static Bytes_4(void) {
 	MakeByte	(0X1515CA);
 	MakeArray	(0X1515CA,	0X234);
 	MakeName	(0X1515CA,	"Sprite344Frame1");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_5(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1517FE);
 	MakeArray	(0X1517FE,	0X250);
 	MakeName	(0X1517FE,	"Sprite344Frame2");
@@ -26503,15 +26621,6 @@ static Bytes_4(void) {
 	MakeByte	(0X1569F4);
 	MakeArray	(0X1569F4,	0X270);
 	MakeName	(0X1569F4,	"Sprite196Frame2");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_5(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X156C64);
 	MakeArray	(0X156C64,	0X248);
 	MakeName	(0X156C64,	"Sprite196Frame3");
@@ -30772,6 +30881,7 @@ static Bytes_5(void) {
 	MakeWord	(0XFF0082);
 	MakeByte	(0XFF0084);
 	MakeArray	(0XFF0084,	0X10);
+	MakeName	(0XFF0084,	"MAP_PALETTE");
 	MakeByte	(0XFF0094);
 	MakeArray	(0XFF0094,	0XA);
 	MakeWord	(0XFF009E);
@@ -30779,6 +30889,15 @@ static Bytes_5(void) {
 	MakeArray	(0XFF00A0,	0X2);
 	MakeByte	(0XFF00A2);
 	MakeArray	(0XFF00A2,	0X2);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_6(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XFF00A4);
 	MakeArray	(0XFF00A4,	0X8);
 	MakeByte	(0XFF00AC);
@@ -30928,15 +31047,6 @@ static Bytes_5(void) {
 	MakeRptCmt	(0XFF0FAA,	"Updated at input read, incremented at VInt");
 	MakeWord	(0XFF0FAA);
 	MakeName	(0XFF0FAA,	"RNG_SEED");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_6(void) {
-        auto x;
-#define id x
-
 	MakeWord	(0XFF0FAC);
 	MakeWord	(0XFF0FAE);
 	MakeByte	(0XFF0FB0);
@@ -31025,6 +31135,7 @@ static Bytes_6(void) {
 	MakeByte	(0XFF112D);
 	MakeByte	(0XFF112E);
 	MakeByte	(0XFF112F);
+	MakeName	(0XFF112F,	"MAP_PALETTE_INDEX");
 	MakeByte	(0XFF1130);
 	MakeByte	(0XFF1131);
 	MakeByte	(0XFF1132);
@@ -31403,6 +31514,7 @@ static Bytes_6(void) {
 	MakeArray	(0XFF5CB8,	0X96);
 	MakeByte	(0XFF5D4E);
 	MakeArray	(0XFF5D4E,	0X1EB4);
+	MakeRptCmt	(0XFF7C02,	"\"Scroll A\"");
 	MakeByte	(0XFF7C02);
 	MakeArray	(0XFF7C02,	0X17E);
 	MakeByte	(0XFF7D80);
