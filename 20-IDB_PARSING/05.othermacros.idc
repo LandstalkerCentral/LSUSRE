@@ -8,6 +8,7 @@ static main(void){
     Message("\nPARSING DATA STRUCTURES INTO MACROS ...\n");
     
     parseMapWarps();
+    parseSpritePalettes();
     
     /* SF2 examples */
     /*
@@ -66,6 +67,19 @@ static parseMapWarps(){
         word3 = Word(addr+6);
         SetManualInsn(addr, form("mapWarp $%s, $%s, $%s, $%s", ltoa(word0,16), ltoa(word1,16), ltoa(word2,16), ltoa(word3,16)));
         addr = addr+8;
+    }
+}
+
+static parseSpritePalettes(){
+    auto addr, j, byte0, byte1;
+    addr = 0x1A453A;
+    while(addr+2<0x1A47E0){
+        for(j=addr;j<addr+2;j++){undefineByte(j);}
+        MakeData(addr,FF_BYTE,2,1);
+        byte0 = Byte(addr);
+        byte1 = Byte(addr+1);
+        SetManualInsn(addr, form("spritePalette %s, %s", ltoa(byte0,10), ltoa(byte1,10)));
+        addr = addr+2;
     }
 }
 

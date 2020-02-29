@@ -70,6 +70,7 @@ REM mkdir disasm\data\stats\allies\stats
 REM mkdir disasm\data\stats\enemies
 mkdir disasm\data\graphics
 mkdir disasm\data\graphics\sprites\
+mkdir disasm\data\graphics\sprites\palettes\
 REM mkdir disasm\data\graphics\mapsprites
 mkdir disasm\data\graphics\maps
 mkdir disasm\data\graphics\maps\palettes

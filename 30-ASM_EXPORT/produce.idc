@@ -18,6 +18,34 @@ static main(void) {
 
 }
 
+static produceLayoutFile(){
+
+    auto file;
+    file = fopen("disasm\\layout\\ls-00-romlayout.asm","w");
+    
+    writestr(file,"\n; ROM LAYOUT FILE\n;\n; Original ROM layout results in a 2MB ROM.\n; Sections can be moved to get more free space by changing declaration order and by using align directives to pad section ends until desired end offset.");
+    writestr(file,"\n; (beware : ROMs over 2MB imply to manage SRAM bankswitching first)");
+    writestr(file,"\n\n");
+
+    produceSectionOne(file,    "01", 0x000000, 0x010300, 0x010300-0x01008C, "0x000000..0x010300 : Technical Layer, Initialization, Low Level Game Engine");
+    produceGenericSection(file,"02", 0x010300, 0x019514, 0x019514-0x019314, "0x010300..0x019514 : To figure out and describe succinctly");
+    produceGenericSection(file,"03", 0x019514, 0x022E80, 0x022E80-0x022E50, "0x019514..0x022E80 : To figure out and describe succinctly");
+    produceGenericSection(file,"04", 0x022E80, 0x038600, 0x038600-0x03838C, "0x022E80..0x038600 : To figure out and describe succinctly");
+    produceGenericSection(file,"05", 0x038600, 0x044010, 0x044010-0x043E70, "0x038600..0x044010 : To figure out and describe succinctly");
+    produceSectionSix(file,    "06", 0x044010, 0x09B000, 0x09B000-0x09AC6C, "0x044010..0x09B000 : To figure out and describe succinctly");
+    produceGenericSection(file,"07", 0x09B000, 0x0A0A00, 0x0A0A00-0x0A08AC, "0x09B000..0x0A0A00 : To figure out and describe succinctly");
+    produceSectionEight(file,  "08", 0x0A0A00, 0x120000, 0x120000-0x11F314, "0x0A0A00..0x120000 : Map data, region check");
+    produceSectionNine(file,   "09", 0x120000, 0x1A4400, 0x1A4400-0x1A42DE, "0x120000..0x1A4400 : Sprite data");
+    produceSectionTen(file,    "10", 0x1A4400, 0x1AF800, 0x1AF800-0x1AF5FA, "0x1A4400..0x1AF800 : Code to figure out, Sprite Palettes");
+    produceSectionEleven(file, "11", 0x1AF800, 0x1E0000, 0x1E0000-0x1DF9F8, "0x1AF800..0x1E0000 : Map Blocks");
+    produceGenericSection(file,"12", 0x1E0000, 0x200000, 0x200000-0x1E0000, "0x1E0000..0x1F6000 : PCM Bank 0, PCM Bank 1, Music bank 0, Sound driver, Music Bank 1.");
+    // Expanded 4MB layout to implement later
+    //writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
+
+    fclose(file);
+
+}
+
 static produceEnums(){
     auto i,j,enumQty,id,enumName,bmask,enumCount,constant,constId,output,file;
     file = fopen("disasm\\lsenums.asm","w");
@@ -121,34 +149,6 @@ static produceMain(){
     Message("\nDONE.");    
 }
 
-static produceLayoutFile(){
-
-    auto file;
-    file = fopen("disasm\\layout\\ls-00-romlayout.asm","w");
-    
-    writestr(file,"\n; ROM LAYOUT FILE\n;\n; Original ROM layout results in a 2MB ROM.\n; Sections can be moved to get more free space by changing declaration order and by using align directives to pad section ends until desired end offset.");
-    writestr(file,"\n; (beware : ROMs over 2MB imply to manage SRAM bankswitching first)");
-    writestr(file,"\n\n");
-
-    produceSectionOne(file,    "01", 0x000000, 0x010300, 0x010300-0x01008C, "0x000000..0x010300 : Technical Layer, Initialization, Low Level Game Engine");
-    produceGenericSection(file,"02", 0x010300, 0x019514, 0x019514-0x019314, "0x010300..0x019514 : To figure out and describe succinctly");
-    produceGenericSection(file,"03", 0x019514, 0x022E80, 0x022E80-0x022E50, "0x019514..0x022E80 : To figure out and describe succinctly");
-    produceGenericSection(file,"04", 0x022E80, 0x038600, 0x038600-0x03838C, "0x022E80..0x038600 : To figure out and describe succinctly");
-    produceGenericSection(file,"05", 0x038600, 0x044010, 0x044010-0x043E70, "0x038600..0x044010 : To figure out and describe succinctly");
-    produceSectionSix(file,    "06", 0x044010, 0x09B000, 0x09B000-0x09AC6C, "0x044010..0x09B000 : To figure out and describe succinctly");
-    produceGenericSection(file,"07", 0x09B000, 0x0A0A00, 0x0A0A00-0x0A08AC, "0x09B000..0x0A0A00 : To figure out and describe succinctly");
-    produceSectionEight(file,  "08", 0x0A0A00, 0x120000, 0x120000-0x11F314, "0x0A0A00..0x120000 : Map data, region check");
-    produceSectionNine(file,   "09", 0x120000, 0x1A4400, 0x1A4400-0x1A42DE, "0x120000..0x1A4400 : Sprite data");
-    produceGenericSection(file,"10", 0x1A4400, 0x1AF800, 0x1AF800-0x1AF5FA, "0x1A4400..0x1AF800 : To figure out and describe succinctly");
-    produceSectionEleven(file, "11", 0x1AF800, 0x1E0000, 0x1E0000-0x1DF9F8, "0x1AF800..0x1E0000 : Map Blocks");
-    produceGenericSection(file,"12", 0x1E0000, 0x200000, 0x200000-0x1E0000, "0x1E0000..0x1F6000 : PCM Bank 0, PCM Bank 1, Music bank 0, Sound driver, Music Bank 1.");
-    // Expanded 4MB layout to implement later
-    //writestr(file,"                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF");
-
-    fclose(file);
-
-}
-
 
 
 
@@ -239,6 +239,26 @@ static produceSectionNine(mainFile,sectionName,start,end,fs,sectionComment){
     produceAsmSection(file,"",0x120000,0x120004);
     produceAsmScript(file,"data\\graphics\\sprites\\entries",0x120004,0x1A42DE,"Sprite entry tables");
     produceAsmSection(file,"",0x1A42DE,0x1A4400);
+
+    fclose(file);
+    Message("DONE.\n");    
+}
+
+static produceSectionTen(mainFile,sectionName,start,end,fs,sectionComment){
+    auto ea,itemSize,action,currentLine,previousLine,fileName,file;
+    auto output, name, indent, comment, commentEx, commentIndent;
+    fileName = form("layout\\ls-%s-0x%s-0x%s.asm",sectionName,ltoa(start,16),ltoa(end,16));
+    Message(form("Writing assembly section %s to %s (%s) ... ",sectionName,fileName,sectionComment));    
+    action = 1;
+    writestr(mainFile,form("                include \"%s\"    ; %s\n",fileName,sectionComment));
+    file = fopen(form("disasm\\%s",fileName),"w");
+    writestr(file,form("\n; GAME SECTION %s :\n; %s\n",sectionName,sectionComment));
+    writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
+
+    produceAsmSection(file,"",0x1A4400,0x1A453A);
+    produceAsmScript(file,"data\\graphics\\sprites\\spritepalettes",0x1A453A,0x1A47E0,"Sprite Palette Map");
+    produceAsmScript(file,"data\\graphics\\sprites\\palettes\\entries",0x1A47E0,0x1A4C8E,"Sprite Palette Entries");
+    produceAsmSection(file,"",0x1A4C8E,0x1AF800);
 
     fclose(file);
     Message("DONE.\n");    
