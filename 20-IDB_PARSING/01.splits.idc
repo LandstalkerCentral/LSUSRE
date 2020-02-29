@@ -37,6 +37,8 @@ static splitAll(){
     splitMapTilesets(file);
     Message(" DONE.\nAnimated Map Tilesets ...");
     splitAnimatedMapTilesets(file);
+    Message(" DONE.\nMap Blocks ...");
+    splitMapBlocks(file);
     /* SF2-specific examples   
     Message(" DONE.\nMapsprites ...");
     splitMapsprites(file);
@@ -121,6 +123,7 @@ writestr(file,"#dir    data/graphics/maps\n");
 writestr(file,"#dir    data/graphics/maps/palettes\n");
 writestr(file,"#dir    data/graphics/maps/tilesets\n");
 writestr(file,"#dir    data/graphics/maps/tilesets/animated\n");
+writestr(file,"#dir    data/graphics/maps/blocks\n");
 writestr(file,"#dir    data/graphics/tech\n");
 writestr(file,"#dir    data/graphics/tech/fonts\n");
 writestr(file,"#dir    data/graphics/tech/menus\n");
@@ -1002,6 +1005,120 @@ static splitAnimatedMapTilesets(file) {
         addr=addr+4;
         i++;
         //action = AskYN(1,"Ok ?");
+    }
+}
+
+
+
+static splitMapBlocks(file) {
+    auto i,j,k,x,s,index,subindex,path;
+    auto start,end,firstEntryDataStart,lastEntryDataEnd,subptstart,subptend,subptaddr,chunkEnd,addr,dataEnd,from,dref,section,action,binDirIndex,binNameIndex,ptName,binDir,entryDirs,binName,indexLength,align,entryName;
+    auto facingId;
+    i = 0;
+    start = 0x1AF804;
+    end = 0x1AF8C8;
+    addr = start;
+    subptstart = 0x1AF904;
+    subptend = 0x1AFAD0;
+    firstEntryDataStart = 0x1AFAD0;
+    lastEntryDataEnd = 0x1DF9F8;
+    entryName = "MapBlock";
+    ptName = "pt_MapBlocks";
+    binDir = "data/graphics/maps/blocks";
+    entryDirs = 0;
+    binName = "mapblock";
+    indexLength = 2;
+    align = 15;
+    action=1;
+    // Cleaning whole chunk
+    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);
+    for(j=start;j<end;j++){undefineByte(j);}
+    for(j=subptstart;j<subptend;j++){undefineByte(j);}
+    for(j=firstEntryDataStart;j<lastEntryDataEnd;j++){undefineByte(j);}
+    // Naming pointer table
+    MakeNameEx(addr,ptName,0);
+    // Prepare whole chunk with new names and Data XRefs
+    while(addr<end&&action==1){
+        MakeDword(addr);
+        dref = Dword(addr);
+        add_dref(addr,dref,dr_O);
+        dref = Dfirst(addr);        
+        //Jump(dref);
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){index=form("0%s",index);}        
+        MakeNameExC(dref,form("%s%s",entryName,index),0);
+        addr=addr+4;
+        i++;
+    }
+    i = 0;
+    subindex=0;
+    addr = start;
+    while(addr<end&&action==1){
+        dref = Dword(addr);   
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){index=form("0%s",index);} 
+        j=0;
+        subptaddr = dref;
+        while(subptaddr==dref||GetTrueName(subptaddr)==""){ 
+          MakeDword(subptaddr);
+          dref = Dword(subptaddr);
+          add_dref(subptaddr,dref,dr_O);
+          dref = Dfirst(subptaddr);     
+          subindex = ltoa(j,10);
+          while(strlen(subindex)<indexLength){subindex=form("0%s",subindex);}        
+          MakeNameExC(dref,form("%s%s_%s",entryName,index,subindex),0);
+          MakeByte(dref);
+          subptaddr=subptaddr+4;
+          j++;
+        }
+        addr=addr+4;
+        i++;
+    }
+    /*
+     *  Each entry is delimited by its address and the next DATA XRef coming from current chunk
+     *  It can then be made into data and replaced by an incbin manual instruction.
+     */
+    i = 0;
+    subindex=0;
+    addr = start;
+    while(addr<end&&action==1){
+        dref = Dword(addr);   
+        index = ltoa(i,10);
+        while(strlen(index)<indexLength){index=form("0%s",index);} 
+        j=0;
+        subptaddr = dref;
+        while(subptaddr==dref||GetTrueName(subptaddr)==""){ 
+          dref = Dword(subptaddr);   
+          subindex = ltoa(j,10);
+          while(strlen(subindex)<indexLength){subindex=form("0%s",subindex);}
+          dataEnd = 0;
+          k = dref+1;
+          // Finding entry's data end
+          while(dataEnd==0){
+              k++;
+              if(GetTrueName(k)!="") dataEnd = k;
+              if(k==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
+          }
+          index = ltoa(i,10);
+          while(strlen(index)<indexLength){index=form("0%s",index);} 
+          //Message(form("Processing entry %s%s from %s, to %s\n",entryName,index,ltoa(dref,16),ltoa(dataEnd,16)));
+          MakeData(dref,FF_BYTE,dataEnd-dref,1);
+          if(strstr(GetDisasm(dref),"incbin")==-1){    
+              if(entryDirs==0){
+                  binDirIndex = "";
+                  binNameIndex = index;
+              } else{
+                  binDirIndex = index;
+                  binNameIndex = "";
+              }
+              SetManualInsn   (dref, form("incbin \"%s%s/%s%s-%s.bin\"",binDir,binDirIndex,binName,binNameIndex,subindex));
+              writestr(file,form("#split\t0x%s,0x%s,%s%s/%s%s-%s.bin\n",ltoa(dref,16),ltoa(dataEnd,16),binDir,binDirIndex,binName,binNameIndex,subindex));
+          }
+          subptaddr=subptaddr+4;
+          j++;
+        }
+        addr=addr+4;
+        i++;
     }
 }
 

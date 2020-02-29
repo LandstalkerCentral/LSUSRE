@@ -75,6 +75,7 @@ mkdir disasm\data\graphics\maps
 mkdir disasm\data\graphics\maps\palettes
 mkdir disasm\data\graphics\maps\tilesets
 mkdir disasm\data\graphics\maps\tilesets\animated
+mkdir disasm\data\graphics\maps\blocks
 REM mkdir disasm\data\graphics\maps\maptilesets
 REM mkdir disasm\data\graphics\portraits
 REM mkdir disasm\data\graphics\battles
