@@ -161,9 +161,30 @@ static fixSingleInstructions(){
     */
     
     /* Code parsing blocked by false offset recognition */
+    
     MakeUnkn(0x1C80,DOUNK_SIMPLE);
     MakeCode(0x1C7E);
     SetFunctionEnd(0x1C78,0x1D06);
+    
+    MakeDword(0xE80E);
+    MakeDword(0xE812);
+    MakeDword(0xE816);
+    MakeDword(0xE81A);
+    MakeDword(0xE81E);
+    MakeDword(0xE822);
+    MakeDword(0xE826);
+    MakeDword(0xE82A);
+    MakeDword(0xE82E);
+    OpHex(0xE80E,0);
+    OpHex(0xE812,0);
+    OpHex(0xE816,0);
+    OpHex(0xE81A,0);
+    OpHex(0xE81E,0);
+    OpHex(0xE822,0);
+    OpHex(0xE826,0);
+    OpHex(0xE82A,0);
+    OpHex(0xE82E,0);
+
 }
 
 static insertRomExpandTweaks(){

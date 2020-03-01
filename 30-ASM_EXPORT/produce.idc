@@ -165,9 +165,26 @@ static produceSectionOne(mainFile,sectionName,start,end,fs,sectionComment){
     writestr(file,form("; FREE SPACE : %d bytes.\n\n\n",fs));    
 
     produceAsmScript(file,"code\\romheader",0x0,0x200,"ROM header");
-    produceAsmSection(file,"",0x200,0x14F2);
+    produceAsmSection(file,"",0x200,0x4B8);
+    produceAsmScript(file,"code\\gameflow\\start\\systeminit",0x4B8,0x75E,"System Initialization");
+    produceAsmScript(file,"code\\common\\tech\\interrupts\\interrupts",0x75E,0x820,"Misc. Interruptions");
+    produceAsmScript(file,"code\\common\\tech\\sound\\musicend",0x820,0x868,"Music end-related functions");
+    produceAsmScript(file,"code\\common\\tech\\graphics\\vdp",0x868,0xFDA,"VDP functions");
+    produceAsmSection(file,"",0xFDA,0x1040);
+    produceAsmScript(file,"code\\common\\tech\\input",0x1040,0x1164,"Player input functions");
+    produceAsmScript(file,"code\\common\\tech\\randomnumbergenerator",0x1164,0x1184,"Random Number Generator");
+    produceAsmScript(file,"code\\common\\tech\\interrupts\\hint",0x1184,0x11DE,"Horizontal Interrupt");
+    produceAsmScript(file,"code\\common\\tech\\interrupts\\vint",0x11DE,0x14F2,"Vertical Interrupt");
     produceAsmScript(file,"code\\common\\tech\\sram\\gamesaves",0x14F2,0x16B6,"Game save SRAM management");
-    produceAsmSection(file,"",0x16B6,0x010300);
+    produceAsmScript(file,"code\\gameflow\\start\\gamestart",0x16B6,0x16DC,"Game start");
+    produceAsmScript(file,"code\\gameflow\\mainloop",0x16DC,0x1788,"Main Loop");
+    produceAsmSection(file,"",0x1788,0x2824);
+    produceAsmScript(file,"code\\common\\maps\\mapengine",0x2824,0x2DCE,"Map Engine");
+    produceAsmSection(file,"",0x2DCE,0xC59E);
+    produceAsmScript(file,"data\\scripting\\text\\intro\\entries",0xC59E,0xC74E,"Intro Text Block Entries");
+    produceAsmScript(file,"data\\maps\\global\\visitedmapsflags",0xC74E,0xCDAE,"Visited Maps Flag Map");
+    produceAsmScript(file,"code\\common\\maps\\maploading",0xCDAE,0xD25C,"Map Loading");
+    produceAsmSection(file,"",0xD25C,0x010300);
 
     fclose(file);
     Message("DONE.\n");    
