@@ -39,16 +39,6 @@ static splitAll(){
     splitAnimatedMapTilesets(file);
     Message(" DONE.\nMap Blocks ...");
     splitMapBlocks(file);
-    /* SF2-specific examples   
-    Message(" DONE.\nMapsprites ...");
-    splitMapsprites(file);
-    Message(" DONE.\nMaps ...");
-    splitMaps(file);
-    Message(" DONE.\nGrounds...");    
-    splitGrounds(file);
-    Message(" DONE.\nTextBanks...");    
-    splitTextbanks(file);
-    */
     Message(" DONE.\n");    
     
     writestr(file,"\nsplit    0x0,0x0,\\0x0 - .bin\n");
@@ -61,56 +51,6 @@ static splitAll(){
 static initFile(file){
 writestr(file,"/***********************Directories***************************/\n");
 writestr(file,"#dir    data/\n");
-/* SF2 examples
-writestr(file,"#dir    data/graphics/\n");
-writestr(file,"#dir    data/graphics/portraits\n");
-writestr(file,"#dir    data/graphics/mapsprites\n");
-writestr(file,"#dir    data/graphics/specialsprites\n");
-writestr(file,"#dir    data/graphics/battles\n");
-writestr(file,"#dir    data/graphics/battles/battlesprites\n");
-writestr(file,"#dir    data/graphics/battles/battlesprites/allies\n");
-writestr(file,"#dir    data/graphics/battles/battlesprites/allies/animations/\n");
-writestr(file,"#dir    data/graphics/battles/battlesprites/enemies\n");
-writestr(file,"#dir    data/graphics/battles/battlesprites/enemies/animations/\n");
-writestr(file,"#dir    data/graphics/battles/weapons\n");
-writestr(file,"#dir    data/graphics/battles/spells\n");
-writestr(file,"#dir    data/graphics/battles/spells/invocations/\n");
-writestr(file,"#dir    data/graphics/battles/spells/animations/\n");
-writestr(file,"#dir    data/graphics/battles/backgrounds\n");
-writestr(file,"#dir    data/graphics/battles/grounds\n");
-writestr(file,"#dir    data/graphics/specialscreens\n");
-writestr(file,"#dir    data/graphics/specialscreens/titlescreen\n");
-writestr(file,"#dir    data/graphics/specialscreens/witchscreen\n");
-writestr(file,"#dir    data/graphics/specialscreens/suspendscreen\n");
-writestr(file,"#dir    data/graphics/specialscreens/endingkiss\n");
-writestr(file,"#dir    data/graphics/specialscreens/endingjewels\n");
-writestr(file,"#dir    data/graphics/maps\n");
-writestr(file,"#dir    data/graphics/maps/tilesets\n");
-writestr(file,"#dir    data/graphics/maps/palettes\n");
-writestr(file,"#dir    data/graphics/icons\n");
-writestr(file,"#dir    data/graphics/tech\n");
-writestr(file,"#dir    data/graphics/tech/menus\n");
-writestr(file,"#dir    data/graphics/tech/fonts\n");
-writestr(file,"#dir    data/graphics/tech/windowlayouts\n");
-writestr(file,"#dir    data/maps/\n");
-writestr(file,"#dir    data/maps/global/\n");
-writestr(file,"#dir    data/maps/entries/\n");
-writeMapEntries(file);
-writestr(file,"#dir    data/battles/\n");
-writestr(file,"#dir    data/battles/global/\n");
-writestr(file,"#dir    data/battles/entries/\n");
-writeBattleEntries(file);
-writestr(file,"#dir    data/stats\n");
-writestr(file,"#dir    data/stats/items\n");
-writestr(file,"#dir    data/stats/spells\n");
-writestr(file,"#dir    data/stats/allies/\n");
-writestr(file,"#dir    data/stats/allies/classes\n");
-writestr(file,"#dir    data/stats/allies/stats\n");
-writestr(file,"#dir    data/stats/enemies/\n");
-writestr(file,"#dir    data/tech/\n");
-writestr(file,"#dir    data/scripting/\n");
-writestr(file,"#dir    data/scripting/text\n");
-*/
 writestr(file,"#dir    data/sound\n");
 writestr(file,"#dir    data/scripting\n");
 writestr(file,"#dir    data/scripting/text\n");
@@ -136,19 +76,6 @@ writestr(file,"/***********************Data***************************/\n");
 writestr(file,"\n");
 }
 
-/*
-
-static writeBattleEntries(file){
-    auto i,index;
-    for(i=0;i<=44;i++){
-        index = ltoa(i,10);
-        if(strlen(index)==1)index=form("0%s",index);
-        writestr(file,form("#dir\tdata/battles/entries/battle%s\n",index));
-    }
-}
-
-*/
-
 static writeMapEntries(file){
     auto i,index;
     for(i=0;i<=815;i++){
@@ -167,22 +94,6 @@ static splitPTs(file){
     /*  Template
      *  splitPT(start, end, lastEntryDataEnd, chunkEnd, "ptName", "entryName", "binDir", 0, "binName", indexLength, align, file);
      */
-     /* SF2 examples
-    splitPT(0x6400C, 0x641D8, 0x9494A, 0x9494A, "pt_MapTilesets", "MapTileset", "data/graphics/maps/maptilesets/", 0, "maptileset", 3, 0, file);
-    splitPT(0x9494A, 0x9498A, 0x94B8A, 0x94B8A, "pt_MapPalettes", "MapPalette", "data/graphics/maps/mappalettes/", 0, "mappalette", 2, 0, file);        
-    //splitPT(0xC8000, 0xC8B40, 0xFFC48, 0x100000, "pt_MapSprites", "MapSprite", "data/graphics/mapsprites/", 0, "mapsprite", 3, 15, file);    
-    splitPT(0x101EE0, 0x101F58, 0x12A2F8, 0x12A2F8, "pt_Backgrounds", "Background", "data/graphics/battles/backgrounds/", 0, "background", 2, 0, file);
-    splitPT(0x130004, 0x1300DC, 0x17FE4F, 0x180000, "pt_EnemyBattleSprites", "EnemyBattleSprite", "data/graphics/battles/battlesprites/enemies/", 0, "enemybattlesprite", 2, 15, file);
-    splitPT(0x18001C, 0x18009C, 0x1AA16E, 0x1AA16E, "pt_AllyBattleSprites", "AllyBattleSprite", "data/graphics/battles/battlesprites/allies/", 0, "allybattlesprite", 2, 0, file);
-    splitPT(0x1AAC3A, 0x1AAD96, 0x1AB79E, 0x1AB79E, "pt_AlliesAnimations", "AllyAnimation", "data/graphics/battles/battlesprites/allies/animations/", 0, "allybattlespriteanimation", 3, 0, file);
-    splitPT(0x1AB79E, 0x1AB982, 0x1ABE52, 0x1AC000, "pt_EnemyAnimations", "EnemyAnimation", "data/graphics/battles/battlesprites/enemies/animations/", 0, "enemybattlespriteanimation", 3, 14, file);
-    splitPT(0x1AD104, 0x1AD1B8, 0x1B120A, 0x1B120A, "pt_BattleTerrainData", "BattleTerrain", "data/battles/entries/battle", 1, "/terrain", 2, 0, file);
-    splitPT(0x1B30EE, 0x1B31A2, 0x1B6DB0, 0x1B6DB0, "pt_BattleSpriteSets", "BattleSpriteSet", "data/battles/entries/battle", 1, "/spriteset", 2, 0, file);
-    splitPT(0x1B9A9A, 0x1B9AF6, 0x1BEE38, 0x1BEE38, "pt_WeaponSprites", "WeaponSprite", "data/graphics/battles/weapons/", 0, "weaponsprite", 2, 0, file);                    
-    splitPT(0x1BEEE0, 0x1BEF3C, 0x1C46C2, 0x1C46C2, "pt_SpellGraphics", "SpellGraphics", "data/graphics/battles/spells/", 0, "spellgraphics", 2, 0, file);
-    splitPT(0x1C8004, 0x1C80E4, 0x1D7E26, 0x1D8000, "pt_Portraits", "Portrait", "data/graphics/portraits/", 0, "portrait", 2, 15, file);
-    //splitPT(0x1EE270, 0x1EE2F0, 0x1EE7D0, 0x1EE7D0, "pt_AllyStats", "AllyStats", "data/stats/allies/stats/", 0, "allystats", 2, 0, file);
-    */
 
 }
 
@@ -191,7 +102,6 @@ static splitSingleChunks(file) {
     auto start,base,addr,end,dref,section,action;
     
     // Template : splitSingleChunk(0x,0x,"","",file);
-    
     
     splitSingleChunk(0x009242, 0x0095AC, "StatusBarTileset","data/graphics/tech/menus/statusbartileset.bin",file);
     
@@ -394,7 +304,6 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x1A4BA0+14*14,  0x1A4BA0+14*14+14,  "SpritePalette142","data/graphics/sprites/palettes/spritepalette142.bin",file);
     splitSingleChunk(0x1A4BA0+14*15,  0x1A4BA0+14*15+14,  "SpritePalette143","data/graphics/sprites/palettes/spritepalette143.bin",file);
     splitSingleChunk(0x1A4BA0+14*16,  0x1A4BA0+14*16+14,  "SpritePalette144","data/graphics/sprites/palettes/spritepalette144.bin",file);
-
     
     splitSingleChunk(0x1E0000, 0x1E8000, "PCMBank0","data/sound/pcmbank0.bin",file);
     splitSingleChunk(0x1E8000, 0x1F0000, "PCMBank1","data/sound/pcmbank1.bin",file);
@@ -1120,319 +1029,6 @@ static splitMapBlocks(file) {
         addr=addr+4;
         i++;
     }
-}
-
-/* SF2 examples */
-
-static splitMapsprites(file) {
-    auto i,j,x,s,index,path;
-    auto start,end,lastEntryDataEnd,chunkEnd,addr,dataEnd,from,dref,section,action,binDirIndex,binNameIndex,ptName,binDir,entryDirs,binName,indexLength,align,entryName;
-    auto facingId;
-    i = 0;
-    start = 0xC8000;
-    end = 0xC8B40;
-    addr = start;
-    lastEntryDataEnd = 0xFFC48;
-    chunkEnd = 0x100000;
-    ptName = "pt_MapSprites";
-    entryName = "MapSprite";
-    binDir = "data/graphics/mapsprites/";
-    entryDirs = 0;
-    binName = "mapsprite";
-    indexLength = 3;
-    align = 15;
-    action=1;
-    // Cleaning whole chunk
-    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);
-    for(j=start;j<chunkEnd;j++){undefineByte(j);}
-    // Naming pointer table
-    MakeNameEx(addr,ptName,0);
-    // Prepare whole chunk with new names and Data XRefs
-    while(addr<end&&action==1){
-        MakeDword(addr);
-        dref = Dword(addr);
-        add_dref(addr,dref,dr_O);
-        dref = Dfirst(addr);        
-        //Jump(dref);
-        index = ltoa(i/3,10);
-        facingId = i%3;
-        while(strlen(index)<indexLength){
-            index=form("0%s",index);
-        }
-        MakeNameExC(dref,form("%s%s_%d",entryName,index,facingId),0);
-        addr=addr+4;
-        i++;
-    }
-    /*
-     *  Each entry is delimited by its address and the next DATA XRef coming from current chunk
-     *  It can then be made into data and replaced by an incbin manual instruction.
-     */
-    i = 0;
-    addr = start;
-    while(addr!=end&&action==1){
-        dref = Dfirst(addr);        
-        //Jump(dref); 
-        dataEnd = 0;
-        j = dref+1;
-        // Finding entry's data end
-        while(dataEnd==0){
-            from = DfirstB(j);
-            while(from!=BADADDR){
-                if(from>=start&&from<chunkEnd){
-                    dataEnd = j;
-                }
-          from=DnextB(addr,from);      
-            }
-            j++;
-            if(j==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
-        }
-        index = ltoa(i/3,10);
-        facingId = i%3;
-        while(strlen(index)<indexLength){
-            index=form("0%s",index);
-        }
-        index = form("%s-%d",index,facingId);
-        //Message(form("Processing entry %s%s from %s, to %s\n",entryName,index,ltoa(dref,16),ltoa(dataEnd,16)));
-        MakeData(dref,FF_BYTE,dataEnd-dref,1);
-        if(strstr(GetDisasm(dref),"incbin")==-1){    
-            if(entryDirs==0){
-                binDirIndex = "";
-                binNameIndex = index;
-            } else{
-                binDirIndex = index;
-                binNameIndex = "";
-            }
-            SetManualInsn   (dref, form("incbin \"%s%s%s%s.bin\"",binDir,binDirIndex,binName,binNameIndex));
-            writestr(file,form("#split\t0x%s,0x%s,%s%s%s%s.bin\n",ltoa(dref,16),ltoa(dataEnd,16),binDir,binDirIndex,binName,binNameIndex));
-        }
-        addr=addr+4;
-        i++;
-        //action = AskYN(1,"Ok ?");
-    }
-    // Put align instruction for padding until chunkEnd
-    if(align!=0)MakeAlign(lastEntryDataEnd,chunkEnd-lastEntryDataEnd,align);
-}
-
-static splitMapsSF2(file) {
-    auto i,j,x,s,index,path;
-    auto start,end,lastEntryDataEnd,chunkEnd,addr,dataEnd,from,dref,section,action,sectionNamesForFiles,sectionNamesForLabels,currentSectionName;
-    i = 0;
-    start = 0x94B8A;
-    end = 0x94CC6;
-    addr = start;
-    lastEntryDataEnd = 0xC7ECC;
-    chunkEnd = 0xC8000;
-    action=1;
-    sectionNamesForFiles="0=blocks;1=layout;2=areas;3=flag-events;4=step-events;5=roof-events;6=warp-events;7=chest-items;8=other-items;9=animations;10";
-    sectionNamesForLabels="0=Blocks;1=Layout;2=Areas;3=FlagEvents;4=StepEvents;5=RoofEvents;6=WarpEvents;7=ChestItems;8=OtherItems;9=Animations;10";
-    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);    
-    for(j=start;j<chunkEnd;j++){undefineByte(j);}
-    MakeNameEx(addr,"pt_MapData",0);
-    while(addr<end&&action==1){
-        MakeDword(addr);
-        dref = Dword(addr);
-        add_dref(addr,dref,dr_O);
-        dref = Dfirst(addr);        
-        //Jump(dref);
-        index = ltoa(i,10);
-        if(strlen(index)==1)index=form("0%s",index);
-        MakeNameEx(dref,form("Map%s",index),0);
-        //writestr(file,form("#dir\tdata/maps/entries/map%s\n",index));
-                MakeData(dref,FF_BYTE,0x6,0);
-                /*if(strstr(GetDisasm(dref),"incbin")==-1){    
-                    SetManualInsn(dref, form("incbin \"data/maps/entries/map%s/00-tilesets.bin\"",index));
-                    writestr(file,form("#split\t0x%s,0x%s,data/maps/entries/map%s/00-tilesets.bin\n",ltoa(dref,16),ltoa(dref+6,16),index));
-                }    */    
-                //Message(form("\nproduceAsmScript(file,\"data\\\\maps\\\\entries\\\\map%s\\\\00-tilesets.asm\",0x%s,0x%s,\"\");",index,ltoa(dref,16),ltoa(dref+6,16)));
-        for(s=0;s!=10;s++){
-            from = dref+6+4*s;
-            MakeDword(from);
-            section = Dword(from);
-            add_dref(from,section,dr_O);
-            currentSectionName = substr(sectionNamesForLabels,strstr(sectionNamesForLabels,form("%d",s))+2,strstr(sectionNamesForLabels,form("%d",s+1))-1);
-            MakeNameExC(section,form("Map%ss%d_%s",index,s,currentSectionName),0);
-        } 
-        addr=addr+4;
-        i++;
-    }
-    i = 0;
-    addr = start;
-    while(addr!=end&&action==1){
-        dref = Dfirst(addr);        
-        //Jump(dref); 
-        index = ltoa(i,10);
-        if(strlen(index)==1)index=form("0%s",index);
-        //Message(form("\nproduceAsmScript(file,\"data\\\\maps\\\\entries\\\\map%s\\\\00-tilesets.asm\",0x%s,0x%s,\"\");",index,ltoa(dref,16),ltoa(dref+6,16)));
-        //Message(form("\nproduceAsmSection(file,0x%s,0x%s);",ltoa(dref+6,16),ltoa(dref+6+10*4,16)));
-        for(s=0;s!=10;s++){
-            section = Dfirst(dref+6+4*s);
-            if(section!=BADADDR){
-                dataEnd = 0;
-                j = section+1;
-                while(dataEnd==0){
-                    from = DfirstB(j);
-                    while(from!=BADADDR){
-                        if(from>=start&&from<chunkEnd){
-                            dataEnd = j;
-                        }
-                  from=DnextB(addr,from);      
-                    }
-                    j++;
-                    if(j==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
-                }
-                currentSectionName = substr(sectionNamesForFiles,strstr(sectionNamesForFiles,form("%d",s))+2,strstr(sectionNamesForFiles,form("%d",s+1))-1);
-                //Message(form("Processing Map%s section%d at %s, dataEnd %s\n",index,s,ltoa(section,16),ltoa(dataEnd,16)));
-                MakeData(section,FF_BYTE,dataEnd-section,1);
-                if(strstr(GetDisasm(section),"incbin")==-1){    
-                    if(s<2){
-                        SetManualInsn(section, form("incbin \"data/maps/entries/map%s/%s-%s.bin\"",index,ltoa(s,10),currentSectionName));
-                        writestr(file,form("#split\t0x%s,0x%s,data/maps/entries/map%s/%s-%s.bin\n",ltoa(section,16),ltoa(dataEnd,16),index,ltoa(s,10),currentSectionName));
-                        //Message(form("\nproduceAsmSection(file,0x%s,0x%s);",ltoa(section,16),ltoa(dataEnd,16)));
-                    }else{
-                        SetManualInsn(section, "");
-                        //Message(form("\nproduceAsmScript(file,\"data\\\\maps\\\\entries\\\\map%s\\\\%s-%s.asm\",0x%s,0x%s,\"\");",index,ltoa(s,10),currentSectionName,ltoa(section,16),ltoa(dataEnd,16)));
-                    }
-                }
-            }
-        }
-        //Message("\n");
-        addr=addr+4;
-        i++;
-        //action = AskYN(1,"Ok ?");
-    }
-    MakeAlign(lastEntryDataEnd, chunkEnd-lastEntryDataEnd,15);
-}
-
-
-static splitGrounds(file) {
-
-    auto i,j,x,s,index,path;
-    auto start,end,lastEntryDataEnd,chunkEnd,addr,base,dataEnd,from,dref,section,action;
-    i = 0;
-    start = 0x1B8028;
-    end = 0x1B80A0;
-    addr = start;
-    lastEntryDataEnd = 0x1B9A9A;
-    chunkEnd = 0x1B9A9A;
-    action=1;
-    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);    
-    for(j=start;j<chunkEnd;j++){undefineByte(j);}
-    MakeNameExC(addr,"pt_Grounds",0);
-    while(addr<end&&action==1){
-        MakeDword(addr);
-        dref = Dword(addr);
-        add_dref(addr,dref,dr_O);
-        dref = Dfirst(addr);        
-        //Jump(dref);
-        if(strstr(GetTrueName(dref),"Ground")==-1){
-            index = ltoa(i,10);
-            if(strlen(index)==1)index=form("0%s",index);
-            MakeNameExC(dref,form("Ground%s",index),0);
-            /*MakeData(dref, FF_WORD, 0x2, 0);
-            MakeData(dref+2, FF_WORD, 0x2, 0);
-            MakeData(dref+4, FF_WORD, 0x2, 0);*/
-            splitSingleChunk(dref, dref+6, "", form("data/graphics/battles/grounds/groundpalette%s.bin",index),file);        
-            MakeData(dref+6, FF_WORD, 0x2, 0);
-            MakeNameExC(dref+6,form("bsg%s_rpbase",index),0);
-            base = dref+6;
-            OpOffEx(base, -1, REF_OFF32, -1, base, 0);
-            section = Word(base) + base;
-            add_dref(base,section,dr_O);
-            //Message("base %a, section %a\n",base, section);
-            MakeNameExC(section,form("GroundTiles%s",index),0);        
-        }
-        addr=addr+4;
-        i++;
-    }
-    i = 0;
-    addr = start;
-    while(addr!=end&&action==1){
-        dref = Dfirst(addr);
-        base = dref+6;
-        dref = Word(base) + base;    
-        //Jump(dref); 
-                dataEnd = 0;
-                j = dref+1;
-                while(dataEnd==0){
-                    from = DfirstB(j);
-                    while(from!=BADADDR){
-                        if(from>=start&&from<chunkEnd){
-                            dataEnd = j;
-                        }
-                  from=DnextB(addr,from);      
-                    }
-                    j++;
-                    if(j==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
-                }
-                index = ltoa(i,10);
-                if(strlen(index)==1)index=form("0%s",index);
-                //Message(form("Processing ground%s at %s, dataEnd %s\n",index,ltoa(dref,16),ltoa(dataEnd,16)));
-                MakeData(dref,FF_BYTE,dataEnd-dref,1);
-                if(strstr(GetDisasm(dref),"incbin")==-1){
-                    SetManualInsn   (dref, form("incbin \"data/graphics/battles/grounds/groundtiles%s.bin\"",index));
-                    writestr(file,form("#split\t0x%s,0x%s,data/graphics/battles/grounds/groundtiles%s.bin\n",ltoa(dref,16),ltoa(dataEnd,16),index));
-                }
-        addr=addr+4;
-        i++;
-        //action = AskYN(1,"Ok ?");
-    }
-
-}
-
-static splitTextbanks(file) {
-    auto i,j,x,s,index,path;
-    auto start,end,lastEntryDataEnd,chunkEnd,addr,dataEnd,from,dref,section,action;
-    i = 0;
-    start = 0x41FDA;
-    end = 0x4201E;
-    addr = start;
-    lastEntryDataEnd = 0x41FD9;
-    chunkEnd = 0x4201E;
-    action=1;
-    //Message("Cleaning from %a to %a ...\n",start,chunkEnd);        
-    for(j=0x2EB34;j<chunkEnd;j++){undefineByte(j);}
-    MakeNameEx(addr,"pt_TextBanks",0);
-    while(addr<end&&action==1){
-        MakeDword(addr);
-        dref = Dword(addr);
-        add_dref(addr,dref,dr_O);
-        dref = Dfirst(addr);        
-        //Jump(dref);
-        index = ltoa(i,10);
-        if(strlen(index)==1)index=form("0%s",index);
-        MakeNameEx(dref,form("TextBank%s",index),0);
-        addr=addr+4;
-        i++;
-    }
-    i = 0;
-    addr = start;
-    while(addr!=end&&action==1){
-        dref = Dfirst(addr);        
-        //Jump(dref); 
-        dataEnd = 0;
-        j = dref+1;
-        while(dataEnd==0){
-            from = DfirstB(j);
-            while(from!=BADADDR){
-                if(from>=start&&from<chunkEnd){
-                    dataEnd = j;
-                }
-          from=DnextB(addr,from);      
-            }
-            j++;
-            if(j==lastEntryDataEnd) dataEnd = lastEntryDataEnd;
-        }
-        index = ltoa(i,10);
-        if(strlen(index)==1)index=form("0%s",index);
-        //Message(form("dref %s, dataEnd %s\n",ltoa(dref,16),ltoa(dataEnd,16)));
-        MakeData(dref,FF_BYTE,dataEnd-dref,1);
-        SetManualInsn   (dref, form("incbin \"data/scripting/text/textbank%s.bin\"",index));
-        writestr(file,form("#split\t0x%s,0x%s,data/scripting/text/textbank%s.bin\n",ltoa(dref,16),ltoa(dataEnd,16),index));
-        addr=addr+4;
-        i++;
-        //action = AskYN(1,"Ok ?");
-    }
-    MakeAlign(0x41FD9, 0x41FDA-0x41FD9,1);
 }
 
 

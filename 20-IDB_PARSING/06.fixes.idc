@@ -49,35 +49,14 @@ static main(void) {
 }
 
 static fixRJTs() {
-
-    
-		/* SF2 examples
+		/* example
     makeRjt(0x4F1C,0x4FBC);
-    makeRjt(0x10408,0x10410);
-    makeRjt(0x107F8,0x10800);
-    makeRjt(0x10CBE,0x10CC6);
-    makeRjt(0x14080,0x14088);
-    makeRjt(0x183C0,0x183EA);
-    makeRjt(0x1B7E8,0x1B828);    
-    makeRjt(0x19F1C,0x19F5C);
-    makeRjt(0x1A048,0x1A088);
-    makeRjt(0x2200C,0x22014);
-    makeRjt(0x2217E,0x22186);
-    makeRjt(0x22562,0x2256A);
-    makeRjtWithOneWordBetweenEachEntry(0x22A22,0x22A48);
-    makeRjt(0x25C5A,0x25C6C);
-    makeRjt(0x25D2E,0x25D40);
-    makeRjt(0x4681A,0x4683A);
-    makeRjt(0x47180,0x47234);
     */
 }
 
 static fixRPTs() {
-    /* SF2 examples
+    /* example
     makeRpt(0x47A88,0x47AE8);
-    makeRpt(0x47B2C,0x47B8C);
-    makeRpt(0x47BE8,0x47C48);
-    makeRpt(0x47CF4,0x47D54);
     */
 }
 
@@ -167,24 +146,8 @@ static fixInstructionRepresentations(){
 static fixSingleInstructions(){
 
     /* Operators being interpreted as offsets wrongly */
-    /* SF2 examples 
+    /* examples 
     OpHex(0x128C0,1);
-    OpHex(0x18A08,0);
-    OpHex(0x18AF2,0);
-    OpHex(0x19C58,0);    
-    OpHex(0x19C7C,0);
-    OpHex(0x1B3A0,0);
-    OpHex(0x27982,1);
-    OpHex(0x27A36,1);
-    OpHex(0x27B16,0);
-    OpHex(0x478A6,0);
-    
-    OpHex(0x55FE8,0);
-    OpHex(0x55FD0,0);
-    OpHex(0x55FD8,0);
-    OpHex(0x55FE8,0);
-    OpHex(0x56008,0);
-    OpHex(0x56030,0);
     MakeNameEx(0xFC,"",0);
     */
     
@@ -192,14 +155,15 @@ static fixSingleInstructions(){
     //OpSign(0x11BC,0);
     
     /* Convert operands to symbolic constants */
-    /* SF2 examples
+    /* examples
     OpEnum(0x9B96,1,GetEnum("Battle_Cutscene"));
-    OpEnum(0x16286,1,GetEnum("Windowing"));
-    
-    SetManualInsn(0x1A4,"declareRomEnd");
-    SetManualInsn(0x1F0,"headerRegion");
-    SetManualInsn(0x279D8,"enableSram");    
+    SetManualInsn(0x1A4,"declareRomEnd"); 
     */
+    
+    /* Code parsing blocked by false offset recognition */
+    MakeUnkn(0x1C80,DOUNK_SIMPLE);
+    MakeCode(0x1C7E);
+    SetFunctionEnd(0x1C78,0x1D06);
 }
 
 static insertRomExpandTweaks(){
@@ -222,45 +186,13 @@ static insertRomExpandTweaks(){
     SetManualInsn(0x1A42DE,"align $1A4400");
     SetManualInsn(0x1AF5FA,"align $1AF800");
     SetManualInsn(0x1DF9F8,"align $1E0000");
-    /* SF2 examples
-    SetManualInsn(0x17FDA,"align $18000");
-    SetManualInsn(0x27D8E,"align $28000");
-    SetManualInsn(0x425ED,"align $44000");
-    SetManualInsn(0x6348C,"align $64000");
-    SetManualInsn(0xC7ECC,"align $C8000");
-    SetManualInsn(0xFFC48,"align $100000");
-    SetManualInsn(0x12FADE,"align $130000");
-    SetManualInsn(0x17FE4F,"align $180000");
-    SetManualInsn(0x1ABE52,"align $1AC000");
-    SetManualInsn(0x1B7C9A,"align $1B8000");
-    SetManualInsn(0x1C7F7C,"align $1C8000");
-    SetManualInsn(0x1D7E26,"align $1D8000");
-    SetManualInsn(0x1DFA46,"align $1E0000");
-    SetManualInsn(0x1EFE33,"align $1F0000");
-    */
     
     
     /* Conditional manual instructions when implied by moved data */
-    /* SF2 examples
-    SetManualInsn(0x1B1640,"conditionalPc lea,pt_BattleSpriteSets,a0");
-    SetManualInsn(0x25CBA,"conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0");
-    SetManualInsn(0x25CC8,"conditionalPc lea,SpecialSprites_EvilSpiritAlt,a0");
-    SetManualInsn(0x25CCE,"conditionalPc lea,(SpecialSprites_Zeon+$20),a0");
-    SetManualInsn(0x10003C,"conditionalPc lea,TitleScreenTiles,a0");
-    SetManualInsn(0x10005E,"conditionalPc lea,TitleScreenLayoutA,a0");
-    SetManualInsn(0x100070,"conditionalPc lea,TitleScreenLayoutA,a0");
-    SetManualInsn(0x1000AC,"conditionalPc lea,TitleScreenLayoutB,a0");
-    SetManualInsn(0x10010E,"conditionalPc lea,plt_TitleScreen,a0");
-    SetManualInsn(0x100248,"conditionalPc lea,TitleScreenLayoutA,a0");
-    //SetManualInsn(0x4481A,"conditionalPc lea,BattleNeutralEntities,a0");
-    SetManualInsn(0x1AD0E0,"conditionalPc lea,pt_BattleTerrainData,a0");
-    //SetManualInsn(0x477A8,"conditionalPc lea,MapSetups,a1");
-    //SetManualInsn(0x54CAA,"conditionalBsr sub_4F48A");
+    /* examples
+    SetManualInsn(0x477A8,"conditionalPc lea,MapSetups,a1");
+    SetManualInsn(0x54CAA,"conditionalBsr sub_4F48A");
     SetManualInsn(0x427C,"conditionalWordAddr lea,BattleMapCoordinates,a0");
-    SetManualInsn(0x783A,"conditionalPc lea,BattleMapCoordinates,a0");
-    SetManualInsn(0x79B2,"conditionalPc lea,BattleMapCoordinates,a0");
-    SetManualInsn(0x7604,"conditionalPc lea,SavepointMapCoordinates,a0");
-    SetManualInsn(0x7626,"conditionalPc lea,RaftResetMapCoordinates-4,a0");
     */
     
 

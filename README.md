@@ -16,10 +16,11 @@ Usage workflow :
         1. init.idc
         2. ImportGeneratedFunctionComments.idc
     3. Execute parsing scripts from ./20-IDB_PARSING/ folder :
-        1. 01.splits.idc
-        2. 02.traps.idc
+        1. 01.traps.idc
+        2. 02.splits.idc
         3. (more advanced intermediate scripts should appear in the future)
-        4. 06.fixes.idc\
+        4. 05.othermacros.idc\
+        5. 06.fixes.idc\
         At this point, the IDB represents the current state of disassembly, with the ability to further format and document content.
 2. Export the disassembly :
     1. In IDB folder, copy and execute ./30-ASM_EXPORT/dirs.bat, which will create ./disasm/ folder
