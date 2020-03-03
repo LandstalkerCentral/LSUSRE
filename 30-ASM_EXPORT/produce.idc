@@ -461,7 +461,7 @@ static produceAsmSectionWithPrettyParam(file,extName,start,end,prettyWriteFuncti
 static writeHeader(file){
     writestr(file,"\n");
     writestr(file,"   include \"lsmacros.asm\"\n");
-    //writestr(file,"   include \"lspatches.asm\"\n");    
+    writestr(file,"   include \"lspatches.asm\"\n");    
     writestr(file,"   include \"lsenums.asm\"\n");
     writestr(file,"   include \"lsconst.asm\"\n");
     writestr(file,"\n");
