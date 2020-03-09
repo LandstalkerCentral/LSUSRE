@@ -49,9 +49,9 @@ static main(void) {
 }
 
 static fixRJTs() {
-		/* example
-    makeRjt(0x4F1C,0x4FBC);
-    */
+    makeRjt(0x28D9C,0x28DAC);
+    makeRjt(0x28EB2,0x28EBA);
+    //makeRjt(0x2A49A,0x2A4AA);
 }
 
 static fixRPTs() {

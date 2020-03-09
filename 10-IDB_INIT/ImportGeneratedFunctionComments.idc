@@ -32,6 +32,19 @@ static main()
     SetFunctionCmt(0x1164, 
         "d6=range", 1);
 
+    // sub_468A
+    SetFunctionCmt(0x468a, 
+        "Loads sprite\n\
+d0=sprite index", 1);
+
+    // sub_9D36
+    SetFunctionCmt(0x9d36, 
+        "related to animated map tileset", 1);
+
+    // sub_9EF8
+    SetFunctionCmt(0x9ef8, 
+        "related to map warp data", 1);
+
     // sub_9F1C
     SetFunctionCmt(0x9f1c, 
         "uses map warp data", 1);
@@ -39,6 +52,14 @@ static main()
     // sub_C46A
     SetFunctionCmt(0xc46a, 
         "related to intro text", 1);
+
+    // sub_F13A
+    SetFunctionCmt(0xf13a, 
+        "loads Nigel sprite in game save screen ?", 1);
+
+    // sub_FA24
+    SetFunctionCmt(0xfa24, 
+        "Game save menu behaviour", 1);
 
     // sub_253F8
     SetFunctionCmt(0x253f8, 
