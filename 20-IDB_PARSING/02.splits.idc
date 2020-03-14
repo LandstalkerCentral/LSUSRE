@@ -831,7 +831,8 @@ static splitAnimatedMapTilesets(file) {
         dref = Dfirst(addr);        
         //Jump(dref);
         index = ltoa(i,10);
-        while(strlen(index)<indexLength){index=form("0%s",index);}        
+        while(strlen(index)<indexLength){index=form("0%s",index);}
+        MakeNameExC(addr,form("p_%s%s",entryName,index),0);       
         MakeNameExC(dref,form("%s%s",entryName,index),0);
         addr=addr+4;
         i++;

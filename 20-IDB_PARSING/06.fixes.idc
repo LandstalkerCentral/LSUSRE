@@ -35,10 +35,10 @@ static main(void) {
     fixRJTs();
     Message(" DONE.\nRelative Pointer Tables...");        
     fixRPTs();
-    Message(" DONE.\nInstruction Representations...");            
-    fixInstructionRepresentations();
     Message(" DONE.\nSingle Instructions...");        
     fixSingleInstructions();
+    Message(" DONE.\nInstruction Representations...");            
+    fixInstructionRepresentations();
     Message(" DONE.\nROM Expand Tweaks...");        
     insertRomExpandTweaks();
     Message(" DONE.\n");
@@ -184,6 +184,18 @@ static fixSingleInstructions(){
     OpHex(0xE826,0);
     OpHex(0xE82A,0);
     OpHex(0xE82E,0);
+    
+    /* Parsing code falsely recognized as data */
+    MakeUnkn(0x403C,DOUNK_SIMPLE);
+    MakeUnkn(0x403C+2,DOUNK_SIMPLE);
+    MakeUnkn(0x403C+4,DOUNK_SIMPLE);
+    MakeCode(0x403C);
+    MakeUnkn(0x436E,DOUNK_SIMPLE);
+    MakeUnkn(0x436E+2,DOUNK_SIMPLE);
+    MakeUnkn(0x436E+4,DOUNK_SIMPLE);
+    MakeCode(0x436E);
+    MakeUnkn(0x165C6,DOUNK_SIMPLE);
+    MakeCode(0x165C6);
 
 }
 
