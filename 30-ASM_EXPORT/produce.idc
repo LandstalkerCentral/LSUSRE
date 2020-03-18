@@ -10,6 +10,7 @@ static main(void) {
 
     Message("PRODUCING ASM...\n");
 
+    produceStructMacros();
     produceEnums();
     produceConst();
     produceMain();
@@ -44,6 +45,41 @@ static produceLayoutFile(){
 
     fclose(file);
 
+}
+
+static produceStructMacros() {
+    auto file, strucQty, i, id, memberId, prevOffset, offset, length, dataType;
+
+    file = fopen("disasm\\lsstructs.asm","w");
+    Message("\nWriting Structs as macros to lsstructs.asm ...");
+
+    strucQty = GetStrucQty();
+    for(i=0 ; i<strucQty ; i++) {
+        id = GetStrucId(i);
+        writestr(file,"\n\n; ---------------------------------------------------------------------------\n");
+        writestr(file, form("\n%s: macro", GetStrucName(id)));
+        
+        memberId = 1;
+        prevOffset = 0;
+        while( (offset = GetStrucNextOff(id, prevOffset)) > 0 ) {
+            length = offset - prevOffset;
+            if(length == 1)
+                dataType = "dc.b";
+            else if(length == 2)
+                dataType = "dc.w";
+            else if(length == 4)
+                dataType = "dc.l";
+            else
+                dataType = "???";
+  
+            writestr(file, form("\n\t%s \\%d", dataType, memberId++));
+            prevOffset = offset;
+        }
+    
+        writestr(file, "\n\tendm");
+    }
+    fclose(file);
+    Message("DONE.");
 }
 
 static produceEnums(){
@@ -461,7 +497,8 @@ static produceAsmSectionWithPrettyParam(file,extName,start,end,prettyWriteFuncti
 static writeHeader(file){
     writestr(file,"\n");
     writestr(file,"   include \"lsmacros.asm\"\n");
-    writestr(file,"   include \"lspatches.asm\"\n");    
+    writestr(file,"   include \"lspatches.asm\"\n");
+    writestr(file,"   include \"lsstructs.asm\"\n");  
     writestr(file,"   include \"lsenums.asm\"\n");
     writestr(file,"   include \"lsconst.asm\"\n");
     writestr(file,"\n");
@@ -538,6 +575,19 @@ static writeItem(file,extName,ea){
     writeItemWithPrettyPrintParam(file,extName,ea,1);
 }
 
+static removeStructSyntaxFromDisasm(str) {
+    auto firstBracket;
+
+    while( (firstBracket = strstr(str,"<")) > 0 ) {
+        str = form("%s%s", substr(str,0,firstBracket), substr(str,firstBracket+1,strlen(str)));
+    }
+    while( (firstBracket = strstr(str,">")) > 0 ) {
+        str = form("%s%s", substr(str,0,firstBracket), substr(str,firstBracket+1,strlen(str)));
+    }
+
+    return str;
+}
+
 static writeItemWithPrettyPrintParam(file,extName,ea,prettyPrint){
     auto name,ln,indent,disasm,cmtIdx,commentIndent,comment,commentEx,lineA,lineB,disasmLen,manualInsn,output;
     auto i,next;
@@ -580,6 +630,7 @@ static writeItemWithPrettyPrintParam(file,extName,ea,prettyPrint){
     }
     //lineA = LineA(ea,0);
     disasm = GetDisasm(ea);
+    disasm = removeStructSyntaxFromDisasm(disasm);
     cmtIdx = strstr(disasm,";");
     //lineB = LineB(ea,0);
     if(cmtIdx!=-1){

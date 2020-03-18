@@ -214,6 +214,71 @@ static Enums_0(id) {
 	AddConstEx(id,"SFX_TELEPORT",	0X79,	-1);
 	AddConstEx(id,"SFX_POISON",	0X7A,	-1);
 	AddConstEx(id,"SFX_NONE",	0X7F,	-1);
+	id = AddEnum(-1,"Item",0x1100000);
+	AddConstEx(id,"ITEM_EKEEKE",	0X0,	-1);
+	AddConstEx(id,"ITEM_MAGIC_SWORD",	0X1,	-1);
+	AddConstEx(id,"ITEM_SWORD_OF_ICE",	0X2,	-1);
+	AddConstEx(id,"ITEM_THUNDER_SWORD",	0X3,	-1);
+	AddConstEx(id,"ITEM_SWORD_OF_GAIA",	0X4,	-1);
+	AddConstEx(id,"ITEM_FIREPROOF",	0X5,	-1);
+	AddConstEx(id,"ITEM_IRON_BOOTS",	0X6,	-1);
+	AddConstEx(id,"ITEM_HEALING_BOOTS",	0X7,	-1);
+	AddConstEx(id,"ITEM_SNOW_SPIKES",	0X8,	-1);
+	AddConstEx(id,"ITEM_STEEL_BREAST",	0X9,	-1);
+	AddConstEx(id,"ITEM_CHROME_BREAST",	0XA,	-1);
+	AddConstEx(id,"ITEM_SHELL_BREAST",	0XB,	-1);
+	AddConstEx(id,"ITEM_HYPER_BREAST",	0XC,	-1);
+	AddConstEx(id,"ITEM_MARS_STONE",	0XD,	-1);
+	AddConstEx(id,"ITEM_MOON_STONE",	0XE,	-1);
+	AddConstEx(id,"ITEM_SATURN_STONE",	0XF,	-1);
+	AddConstEx(id,"ITEM_VENUS_STONE",	0X10,	-1);
+	AddConstEx(id,"ITEM_AWAKENING_BOOK",	0X11,	-1);
+	AddConstEx(id,"ITEM_DETOX_GRASS",	0X12,	-1);
+	AddConstEx(id,"ITEM_STATUE_OF_GAIA",	0X13,	-1);
+	AddConstEx(id,"ITEM_GOLDEN_STATUE",	0X14,	-1);
+	AddConstEx(id,"ITEM_MIND_REPAIR",	0X15,	-1);
+	AddConstEx(id,"ITEM_CASINO_TICKET",	0X16,	-1);
+	AddConstEx(id,"ITEM_AXE_MAGIC",	0X17,	-1);
+	AddConstEx(id,"ITEM_BLUE_RIBBON",	0X18,	-1);
+	AddConstEx(id,"ITEM_BUYER_CARD",	0X19,	-1);
+	AddConstEx(id,"ITEM_LANTERN",	0X1A,	-1);
+	AddConstEx(id,"ITEM_GARLIC",	0X1B,	-1);
+	AddConstEx(id,"ITEM_ANTIPARALYZE",	0X1C,	-1);
+	AddConstEx(id,"ITEM_STATUE_OF_JYPTA",	0X1D,	-1);
+	AddConstEx(id,"ITEM_SUN_STONE",	0X1E,	-1);
+	AddConstEx(id,"ITEM_ARMLET",	0X1F,	-1);
+	AddConstEx(id,"ITEM_EINSTEIN_WHISTLE",	0X20,	-1);
+	AddConstEx(id,"ITEM_DETOX_BOOK",	0X21,	-1);
+	AddConstEx(id,"ITEM_ANTICURSE",	0X22,	-1);
+	AddConstEx(id,"ITEM_RECORD_BOOK",	0X23,	-1);
+	AddConstEx(id,"ITEM_SPELL_BOOK",	0X24,	-1);
+	AddConstEx(id,"ITEM_HOTEL_REGISTER",	0X25,	-1);
+	AddConstEx(id,"ITEM_ISLAND_MAP",	0X26,	-1);
+	AddConstEx(id,"ITEM_LITHOGRAPH",	0X27,	-1);
+	AddConstEx(id,"ITEM_RED_JEWEL",	0X28,	-1);
+	AddConstEx(id,"ITEM_PAWN_TICKET",	0X29,	-1);
+	AddConstEx(id,"ITEM_PURPLE_JEWEL",	0X2A,	-1);
+	AddConstEx(id,"ITEM_GOLA_EYE",	0X2B,	-1);
+	AddConstEx(id,"ITEM_DEATH_STATUE",	0X2C,	-1);
+	AddConstEx(id,"ITEM_DAHL",	0X2D,	-1);
+	AddConstEx(id,"ITEM_RESTORATION",	0X2E,	-1);
+	AddConstEx(id,"ITEM_LOGS",	0X2F,	-1);
+	AddConstEx(id,"ITEM_ORACLE_STONE",	0X30,	-1);
+	AddConstEx(id,"ITEM_IDOL_STONE",	0X31,	-1);
+	AddConstEx(id,"ITEM_KEY",	0X32,	-1);
+	AddConstEx(id,"ITEM_SAFETY_PASS",	0X33,	-1);
+	AddConstEx(id,"ITEM_NO52",	0X34,	-1);
+	AddConstEx(id,"ITEM_BELL",	0X35,	-1);
+	AddConstEx(id,"ITEM_SHORT_CAKE",	0X36,	-1);
+	AddConstEx(id,"ITEM_GOLA_NAIL",	0X37,	-1);
+	AddConstEx(id,"ITEM_GOLA_HORN",	0X38,	-1);
+	AddConstEx(id,"ITEM_GOLA_FANG",	0X39,	-1);
+	AddConstEx(id,"ITEM_5_GOLDS",	0X3A,	-1);
+	AddConstEx(id,"ITEM_20_GOLDS",	0X3B,	-1);
+	AddConstEx(id,"ITEM_50_GOLDS",	0X3C,	-1);
+	AddConstEx(id,"ITEM_200_GOLDS",	0X3D,	-1);
+	AddConstEx(id,"ITEM_LIFESTOCK",	0X3E,	-1);
+	AddConstEx(id,"ITEM_EMPTY",	0X3F,	-1);
 	return id;
 }
 
@@ -225,11 +290,29 @@ static Enums(void) {
 	id = Enums_0(id);
 }
 
+static Structures_0(id) {
+
+	id = AddStrucEx(-1,"MapVariantTrigger",0);
+	SetStrucComment(id,"This structure represents a map variant check which is always performed on map entrance and can change the loaded map on-the-fly.",0);
+	
+	id = GetStrucIdByName("MapVariantTrigger");
+	AddStrucMember(id,"origMapID",	0X0,	0x10000400,	-1,	2);
+	SetMemberComment(id,	0X0,	"The map where player will trigger the check on entrance",	0);
+	AddStrucMember(id,"destMapID",	0X2,	0x10000400,	-1,	2);
+	SetMemberComment(id,	0X2,	"The destination map if check returns true",	0);
+	AddStrucMember(id,"flagOffset",	0X4,	0x000400,	-1,	1);
+	SetMemberComment(id,	0X4,	"The flag which will be tested (e.g. $2A --> $FF102A)",	0);
+	AddStrucMember(id,"bitToTest",	0X5,	0x000400,	-1,	1);
+	SetMemberComment(id,	0X5,	"The bit which will be tested on the corresponding flag",	0);
+	return id;
+}
+
 //------------------------------------------------------------------------
 // Information about structure types
 
 static Structures(void) {
         auto id;
+	id = Structures_0(id);
 }
 
 //------------------------------------------------------------------------
@@ -4133,50 +4216,102 @@ static Bytes_0(void) {
 	MakeWord	(0XA3D2);
 	MakeWord	(0XA3D4);
 	MakeWord	(0XA3D6);
-	MakeWord	(0XA3D8);
-	MakeWord	(0XA3DA);
-	MakeWord	(0XA3DE);
-	MakeWord	(0XA3E0);
-	MakeWord	(0XA3E4);
-	MakeWord	(0XA3E6);
-	MakeWord	(0XA3EA);
-	MakeWord	(0XA3EC);
-	MakeWord	(0XA3F0);
-	MakeWord	(0XA3F2);
-	MakeWord	(0XA3F6);
-	MakeWord	(0XA3F8);
-	MakeWord	(0XA3FC);
-	MakeWord	(0XA3FE);
-	MakeWord	(0XA402);
-	MakeWord	(0XA404);
-	MakeWord	(0XA408);
-	MakeWord	(0XA40A);
-	MakeWord	(0XA40E);
-	MakeWord	(0XA410);
-	MakeWord	(0XA414);
-	MakeWord	(0XA416);
-	MakeWord	(0XA41A);
-	MakeWord	(0XA41C);
-	MakeWord	(0XA420);
-	MakeWord	(0XA422);
-	MakeWord	(0XA426);
-	MakeWord	(0XA428);
-	MakeWord	(0XA42C);
-	MakeWord	(0XA42E);
-	MakeWord	(0XA432);
-	MakeWord	(0XA434);
-	MakeWord	(0XA438);
-	MakeWord	(0XA43A);
-	MakeWord	(0XA43E);
-	MakeWord	(0XA440);
-	MakeWord	(0XA444);
-	MakeWord	(0XA446);
-	MakeWord	(0XA44A);
-	MakeWord	(0XA44C);
-	MakeWord	(0XA450);
-	MakeWord	(0XA452);
-	MakeWord	(0XA456);
-	MakeWord	(0XA458);
+	MakeStruct	(0XA3D8,	"MapVariantTrigger");
+	MakeStruct	(0XA3DE,	"MapVariantTrigger");
+	MakeStruct	(0XA3E4,	"MapVariantTrigger");
+	MakeStruct	(0XA3EA,	"MapVariantTrigger");
+	MakeStruct	(0XA3F0,	"MapVariantTrigger");
+	MakeStruct	(0XA3F6,	"MapVariantTrigger");
+	MakeStruct	(0XA3FC,	"MapVariantTrigger");
+	MakeStruct	(0XA402,	"MapVariantTrigger");
+	MakeStruct	(0XA408,	"MapVariantTrigger");
+	MakeStruct	(0XA40E,	"MapVariantTrigger");
+	MakeStruct	(0XA414,	"MapVariantTrigger");
+	MakeStruct	(0XA41A,	"MapVariantTrigger");
+	MakeStruct	(0XA420,	"MapVariantTrigger");
+	MakeStruct	(0XA426,	"MapVariantTrigger");
+	MakeStruct	(0XA42C,	"MapVariantTrigger");
+	MakeStruct	(0XA432,	"MapVariantTrigger");
+	MakeStruct	(0XA438,	"MapVariantTrigger");
+	MakeStruct	(0XA43E,	"MapVariantTrigger");
+	MakeStruct	(0XA444,	"MapVariantTrigger");
+	MakeStruct	(0XA44A,	"MapVariantTrigger");
+	MakeStruct	(0XA450,	"MapVariantTrigger");
+	MakeStruct	(0XA456,	"MapVariantTrigger");
+	MakeStruct	(0XA45C,	"MapVariantTrigger");
+	MakeStruct	(0XA462,	"MapVariantTrigger");
+	MakeStruct	(0XA468,	"MapVariantTrigger");
+	MakeStruct	(0XA46E,	"MapVariantTrigger");
+	MakeStruct	(0XA474,	"MapVariantTrigger");
+	MakeStruct	(0XA47A,	"MapVariantTrigger");
+	MakeStruct	(0XA480,	"MapVariantTrigger");
+	MakeStruct	(0XA486,	"MapVariantTrigger");
+	MakeStruct	(0XA48C,	"MapVariantTrigger");
+	MakeStruct	(0XA492,	"MapVariantTrigger");
+	MakeStruct	(0XA498,	"MapVariantTrigger");
+	MakeStruct	(0XA49E,	"MapVariantTrigger");
+	MakeStruct	(0XA4A4,	"MapVariantTrigger");
+	MakeStruct	(0XA4AA,	"MapVariantTrigger");
+	MakeStruct	(0XA4B0,	"MapVariantTrigger");
+	MakeStruct	(0XA4B6,	"MapVariantTrigger");
+	MakeStruct	(0XA4BC,	"MapVariantTrigger");
+	MakeStruct	(0XA4C2,	"MapVariantTrigger");
+	MakeStruct	(0XA4C8,	"MapVariantTrigger");
+	MakeStruct	(0XA4CE,	"MapVariantTrigger");
+	MakeStruct	(0XA4D4,	"MapVariantTrigger");
+	MakeStruct	(0XA4DA,	"MapVariantTrigger");
+	MakeStruct	(0XA4E0,	"MapVariantTrigger");
+	MakeStruct	(0XA4E6,	"MapVariantTrigger");
+	MakeStruct	(0XA4EC,	"MapVariantTrigger");
+	MakeStruct	(0XA4F2,	"MapVariantTrigger");
+	MakeStruct	(0XA4F8,	"MapVariantTrigger");
+	MakeStruct	(0XA4FE,	"MapVariantTrigger");
+	MakeStruct	(0XA504,	"MapVariantTrigger");
+	MakeStruct	(0XA50A,	"MapVariantTrigger");
+	MakeStruct	(0XA510,	"MapVariantTrigger");
+	MakeStruct	(0XA516,	"MapVariantTrigger");
+	MakeStruct	(0XA51C,	"MapVariantTrigger");
+	MakeStruct	(0XA522,	"MapVariantTrigger");
+	MakeStruct	(0XA528,	"MapVariantTrigger");
+	MakeStruct	(0XA52E,	"MapVariantTrigger");
+	MakeStruct	(0XA534,	"MapVariantTrigger");
+	MakeStruct	(0XA53A,	"MapVariantTrigger");
+	MakeStruct	(0XA540,	"MapVariantTrigger");
+	MakeStruct	(0XA546,	"MapVariantTrigger");
+	MakeStruct	(0XA54C,	"MapVariantTrigger");
+	MakeStruct	(0XA552,	"MapVariantTrigger");
+	MakeStruct	(0XA558,	"MapVariantTrigger");
+	MakeStruct	(0XA55E,	"MapVariantTrigger");
+	MakeStruct	(0XA564,	"MapVariantTrigger");
+	MakeStruct	(0XA56A,	"MapVariantTrigger");
+	MakeStruct	(0XA570,	"MapVariantTrigger");
+	MakeStruct	(0XA576,	"MapVariantTrigger");
+	MakeStruct	(0XA57C,	"MapVariantTrigger");
+	MakeStruct	(0XA582,	"MapVariantTrigger");
+	MakeStruct	(0XA588,	"MapVariantTrigger");
+	MakeStruct	(0XA58E,	"MapVariantTrigger");
+	MakeStruct	(0XA594,	"MapVariantTrigger");
+	MakeStruct	(0XA59A,	"MapVariantTrigger");
+	MakeStruct	(0XA5A0,	"MapVariantTrigger");
+	MakeStruct	(0XA5A6,	"MapVariantTrigger");
+	MakeStruct	(0XA5AC,	"MapVariantTrigger");
+	MakeStruct	(0XA5B2,	"MapVariantTrigger");
+	MakeStruct	(0XA5B8,	"MapVariantTrigger");
+	MakeStruct	(0XA5BE,	"MapVariantTrigger");
+	MakeStruct	(0XA5C4,	"MapVariantTrigger");
+	MakeStruct	(0XA5CA,	"MapVariantTrigger");
+	MakeStruct	(0XA5D0,	"MapVariantTrigger");
+	MakeStruct	(0XA5D6,	"MapVariantTrigger");
+	MakeStruct	(0XA5DC,	"MapVariantTrigger");
+	MakeStruct	(0XA5E2,	"MapVariantTrigger");
+	MakeStruct	(0XA5E8,	"MapVariantTrigger");
+	MakeStruct	(0XA5EE,	"MapVariantTrigger");
+	MakeStruct	(0XA5F4,	"MapVariantTrigger");
+	MakeStruct	(0XA5FA,	"MapVariantTrigger");
+	MakeStruct	(0XA600,	"MapVariantTrigger");
+	MakeStruct	(0XA606,	"MapVariantTrigger");
+	MakeStruct	(0XA60C,	"MapVariantTrigger");
+	MakeStruct	(0XA612,	"MapVariantTrigger");
 	MakeCode	(0XA61C);
 	MakeCode	(x=0XA62C);
 	OpOff		(x,	0,	0X0);
@@ -5480,6 +5615,15 @@ static Bytes_0(void) {
 	MakeCode	(x=0XD730);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_1(void) {
+        auto x;
+#define id x
+
 	MakeCode	(x=0XD738);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -5717,15 +5861,6 @@ static Bytes_0(void) {
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XE32C);
 	OpStkvar	(x,	1);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_1(void) {
-        auto x;
-#define id x
-
 	MakeCode	(x=0XE332);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XE338);
@@ -6795,7 +6930,8 @@ static Bytes_1(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeCode	(0X117CC);
-	MakeCode	(0X117E8);
+	MakeCode	(x=0X117E8);
+	OpEnumEx		(x,	0,	GetEnum("Item"),0);
 	MakeCode	(0X117FC);
 	MakeCode	(0X11822);
 	MakeCode	(0X1183E);
@@ -11475,6 +11611,15 @@ static Bytes_1(void) {
 	MakeWord	(0X25C94);
 	MakeWord	(0X25C96);
 	MakeWord	(0X25C98);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeWord	(0X25C9A);
 	MakeWord	(0X25C9C);
 	MakeWord	(0X25C9E);
@@ -11718,15 +11863,6 @@ static Bytes_1(void) {
 	MakeByte	(0X25FB6);
 	MakeByte	(0X25FBA);
 	MakeByte	(0X25FBE);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X25FC2);
 	MakeCode	(0X25FC8);
 	MakeByte	(0X25FCC);
@@ -13795,6 +13931,7 @@ static Bytes_2(void) {
 	MakeCode	(0X399AA);
 	MakeCode	(0X399C6);
 	MakeCode	(x=0X399CC);
+	OpSign		(x,	1);
 	OpHex		(x,	1);
 	MakeByte	(0X399DC);
 	MakeArray	(0X399DC,	0X4);
@@ -17228,6 +17365,15 @@ static Bytes_2(void) {
 	OpOff		(x,	128,	0X0);
 	MakeByte	(0XA1526);
 	MakeByte	(0XA1527);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XA1528);
 	MakeByte	(0XA1529);
 	MakeDword	(x=0XA152A);
@@ -17464,15 +17610,6 @@ static Bytes_2(void) {
 	MakeDword	(x=0XA1632);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XA1636);
 	MakeByte	(0XA1637);
 	MakeByte	(0XA1638);
@@ -22341,6 +22478,15 @@ static Bytes_3(void) {
 	MakeByte	(0X118245);
 	MakeArray	(0X118245,	0X3BA);
 	MakeName	(0X118245,	"Map515");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_4(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1185FF);
 	MakeArray	(0X1185FF,	0X724);
 	MakeName	(0X1185FF,	"Map641");
@@ -22489,15 +22635,6 @@ static Bytes_3(void) {
 	MakeByte	(0X11CC4C);
 	MakeArray	(0X11CC4C,	0X1A);
 	MakeName	(0X11CC4C,	"MapPalette31");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_4(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X11CC66);
 	MakeArray	(0X11CC66,	0X1A);
 	MakeName	(0X11CC66,	"MapPalette32");
@@ -27394,6 +27531,15 @@ static Bytes_4(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeName	(0X120F94,	"Sprite110");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_5(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0X120F98);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -27601,15 +27747,6 @@ static Bytes_4(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeName	(0X12108C,	"Sprite131");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_5(void) {
-        auto x;
-#define id x
-
 	MakeDword	(x=0X121090);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -31703,6 +31840,15 @@ static Bytes_5(void) {
 	MakeByte	(0X172742);
 	MakeArray	(0X172742,	0X27E);
 	MakeName	(0X172742,	"Sprite380Frame1");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_6(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1729C0);
 	MakeArray	(0X1729C0,	0X286);
 	MakeName	(0X1729C0,	"Sprite380Frame2");
@@ -31838,15 +31984,6 @@ static Bytes_5(void) {
 	MakeByte	(0X17A088);
 	MakeArray	(0X17A088,	0X458);
 	MakeName	(0X17A088,	"Sprite214Frame0");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_6(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X17A4E0);
 	MakeArray	(0X17A4E0,	0X36A);
 	MakeName	(0X17A4E0,	"Sprite214Frame1");
@@ -36291,6 +36428,15 @@ static Bytes_6(void) {
 	MakeName	(0XA10017,	"RxDATA2");
 	MakeWord	(0XA10019);
 	MakeName	(0XA10019,	"SCTRL2");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_7(void) {
+        auto x;
+#define id x
+
 	MakeWord	(0XA1001B);
 	MakeName	(0XA1001B,	"TxDATA3");
 	MakeWord	(0XA1001D);
@@ -36452,15 +36598,6 @@ static Bytes_6(void) {
 	MakeWord	(0XFF0F4E);
 	MakeWord	(0XFF0F50);
 	MakeWord	(0XFF0F52);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_7(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XFF0F54);
 	MakeArray	(0XFF0F54,	0X2B);
 	MakeByte	(0XFF0F7F);
@@ -38798,7 +38935,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0X16248,0x0);
 	MakeFunction    (0X16420,0X16512);
 	SetFunctionFlags(0X16420,0x0);
-	MakeFunction    (0X1657E,0X165C8);
+	MakeFunction    (0X1657E,0X165C6);
 	SetFunctionFlags(0X1657E,0x0);
 	MakeFunction    (0X165D0,0X16602);
 	SetFunctionFlags(0X165D0,0x0);
