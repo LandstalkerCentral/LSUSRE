@@ -294,6 +294,7 @@ static Structures_0(id) {
 
 	id = AddStrucEx(-1,"MapVariantTrigger",0);
 	SetStrucComment(id,"This structure represents a map variant check which is always performed on map entrance and can change the loaded map on-the-fly.",0);
+	id = AddStrucEx(-1,"ItemDescription",0);
 	
 	id = GetStrucIdByName("MapVariantTrigger");
 	AddStrucMember(id,"origMapID",	0X0,	0x10000400,	-1,	2);
@@ -304,6 +305,13 @@ static Structures_0(id) {
 	SetMemberComment(id,	0X4,	"The flag which will be tested (e.g. $2A --> $FF102A)",	0);
 	AddStrucMember(id,"bitToTest",	0X5,	0x000400,	-1,	1);
 	SetMemberComment(id,	0X5,	"The bit which will be tested on the corresponding flag",	0);
+	
+	id = GetStrucIdByName("ItemDescription");
+	AddStrucMember(id,"maxAmount",	0X0,	0x000400,	-1,	1);
+	SetMemberComment(id,	0X0,	"Maximum quantity of the item that can be carried by the player",	0);
+	AddStrucMember(id,"field_1",	0X1,	0x000400,	-1,	1);
+	AddStrucMember(id,"field_2",	0X2,	0x000400,	-1,	1);
+	AddStrucMember(id,"field_3",	0X3,	0x000400,	-1,	1);
 	return id;
 }
 
@@ -4217,6 +4225,7 @@ static Bytes_0(void) {
 	MakeWord	(0XA3D4);
 	MakeWord	(0XA3D6);
 	MakeStruct	(0XA3D8,	"MapVariantTrigger");
+	MakeName	(0XA3D8,	"MapVariantTriggersTable");
 	MakeStruct	(0XA3DE,	"MapVariantTrigger");
 	MakeStruct	(0XA3E4,	"MapVariantTrigger");
 	MakeStruct	(0XA3EA,	"MapVariantTrigger");
@@ -5611,10 +5620,6 @@ static Bytes_0(void) {
 	MakeCode	(x=0XD6F4);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-	MakeCode	(0XD710);
-	MakeCode	(x=0XD730);
-	OpOff		(x,	0,	0X0);
-	OpOff		(x,	128,	0X0);
 }
 
 //------------------------------------------------------------------------
@@ -5624,6 +5629,10 @@ static Bytes_1(void) {
         auto x;
 #define id x
 
+	MakeCode	(0XD710);
+	MakeCode	(x=0XD730);
+	OpOff		(x,	0,	0X0);
+	OpOff		(x,	128,	0X0);
 	MakeCode	(x=0XD738);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -7670,6 +7679,8 @@ static Bytes_1(void) {
 	MakeCode	(x=0X13A76);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeCode	(x=0X13A86);
+	OpEnumEx		(x,	0,	GetEnum("Item"),0);
 	MakeCode	(0X13A90);
 	MakeCode	(0X13AAC);
 	MakeCode	(0X13AB6);
@@ -9943,7 +9954,9 @@ static Bytes_1(void) {
 	MakeCode	(0X22EC8);
 	MakeCode	(0X22ECC);
 	MakeCode	(0X22ED0);
+	MakeName	(0X22ED0,	"j_GetOwnedItemQuantityEnriched");
 	MakeCode	(0X22ED4);
+	MakeName	(0X22ED4,	"j_CheckAndSetOwnedItemQuantity");
 	MakeCode	(0X22ED8);
 	MakeCode	(0X22EDC);
 	MakeCode	(0X22EE0);
@@ -9958,6 +9971,7 @@ static Bytes_1(void) {
 	MakeCode	(0X22F04);
 	MakeCode	(0X22F08);
 	MakeCode	(0X22F0C);
+	MakeName	(0X22F0C,	"j_ConsumeOneItem");
 	MakeCode	(0X22F10);
 	MakeCode	(0X22F14);
 	MakeCode	(0X22F18);
@@ -11592,6 +11606,15 @@ static Bytes_1(void) {
 	MakeWord	(0X25C6E);
 	MakeWord	(0X25C70);
 	MakeWord	(0X25C72);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeWord	(0X25C74);
 	MakeWord	(0X25C76);
 	MakeWord	(0X25C78);
@@ -11611,15 +11634,6 @@ static Bytes_1(void) {
 	MakeWord	(0X25C94);
 	MakeWord	(0X25C96);
 	MakeWord	(0X25C98);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeWord	(0X25C9A);
 	MakeWord	(0X25C9C);
 	MakeWord	(0X25C9E);
@@ -12980,34 +12994,112 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeCode	(0X29192);
+	MakeName	(0X29192,	"GetOwnedItemQuantityEnriched");
 	MakeCode	(0X291AE);
 	MakeCode	(0X291B6);
+	MakeName	(0X291B6,	"CheckAndSetOwnedItemQuantity");
 	MakeCode	(0X291D6);
 	MakeCode	(x=0X291E4);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeCode	(0X29202);
 	MakeCode	(0X2921C);
+	MakeName	(0X2921C,	"ConsumeOneItem");
 	MakeCode	(0X29232);
 	MakeCode	(0X2924C);
 	MakeCode	(0X29260);
+	MakeName	(0X29260,	"GetOwnedItemQuantity");
 	MakeCode	(x=0X29264);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeCode	(x=0X2926A);
+	OpEnumEx		(x,	0,	GetEnum("Item"),0);
 	MakeCode	(0X2927A);
 	MakeCode	(0X29288);
+	MakeName	(0X29288,	"SetOwnedItemQuantity");
 	MakeCode	(x=0X2928C);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeCode	(x=0X29292);
+	OpEnumEx		(x,	0,	GetEnum("Item"),0);
 	MakeCode	(0X292A4);
 	MakeCode	(0X292B8);
+	MakeName	(0X292B8,	"GetMaxQuantityForItem");
 	MakeCode	(0X292C6);
 	MakeCode	(0X292DA);
 	MakeCode	(0X292E8);
 	MakeCode	(0X292F4);
+	MakeName	(0X292F4,	"GetItemDescriptionAddress");
+	MakeCode	(x=0X292F6);
+	OpEnumEx		(x,	0,	GetEnum("Item"),0);
 	MakeCode	(x=0X292FC);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeStruct	(0X29304,	"ItemDescription");
+	MakeName	(0X29304,	"ItemDescriptionTable");
+	MakeStruct	(0X29308,	"ItemDescription");
+	MakeStruct	(0X2930C,	"ItemDescription");
+	MakeStruct	(0X29310,	"ItemDescription");
+	MakeStruct	(0X29314,	"ItemDescription");
+	MakeStruct	(0X29318,	"ItemDescription");
+	MakeStruct	(0X2931C,	"ItemDescription");
+	MakeStruct	(0X29320,	"ItemDescription");
+	MakeStruct	(0X29324,	"ItemDescription");
+	MakeStruct	(0X29328,	"ItemDescription");
+	MakeStruct	(0X2932C,	"ItemDescription");
+	MakeStruct	(0X29330,	"ItemDescription");
+	MakeStruct	(0X29334,	"ItemDescription");
+	MakeStruct	(0X29338,	"ItemDescription");
+	MakeStruct	(0X2933C,	"ItemDescription");
+	MakeStruct	(0X29340,	"ItemDescription");
+	MakeStruct	(0X29344,	"ItemDescription");
+	MakeStruct	(0X29348,	"ItemDescription");
+	MakeStruct	(0X2934C,	"ItemDescription");
+	MakeStruct	(0X29350,	"ItemDescription");
+	MakeStruct	(0X29354,	"ItemDescription");
+	MakeStruct	(0X29358,	"ItemDescription");
+	MakeStruct	(0X2935C,	"ItemDescription");
+	MakeStruct	(0X29360,	"ItemDescription");
+	MakeStruct	(0X29364,	"ItemDescription");
+	MakeStruct	(0X29368,	"ItemDescription");
+	MakeStruct	(0X2936C,	"ItemDescription");
+	MakeStruct	(0X29370,	"ItemDescription");
+	MakeStruct	(0X29374,	"ItemDescription");
+	MakeStruct	(0X29378,	"ItemDescription");
+	MakeStruct	(0X2937C,	"ItemDescription");
+	MakeStruct	(0X29380,	"ItemDescription");
+	MakeStruct	(0X29384,	"ItemDescription");
+	MakeStruct	(0X29388,	"ItemDescription");
+	MakeStruct	(0X2938C,	"ItemDescription");
+	MakeStruct	(0X29390,	"ItemDescription");
+	MakeStruct	(0X29394,	"ItemDescription");
+	MakeStruct	(0X29398,	"ItemDescription");
+	MakeStruct	(0X2939C,	"ItemDescription");
+	MakeStruct	(0X293A0,	"ItemDescription");
+	MakeStruct	(0X293A4,	"ItemDescription");
+	MakeStruct	(0X293A8,	"ItemDescription");
+	MakeStruct	(0X293AC,	"ItemDescription");
+	MakeStruct	(0X293B0,	"ItemDescription");
+	MakeStruct	(0X293B4,	"ItemDescription");
+	MakeStruct	(0X293B8,	"ItemDescription");
+	MakeStruct	(0X293BC,	"ItemDescription");
+	MakeStruct	(0X293C0,	"ItemDescription");
+	MakeStruct	(0X293C4,	"ItemDescription");
+	MakeStruct	(0X293C8,	"ItemDescription");
+	MakeStruct	(0X293CC,	"ItemDescription");
+	MakeStruct	(0X293D0,	"ItemDescription");
+	MakeStruct	(0X293D4,	"ItemDescription");
+	MakeStruct	(0X293D8,	"ItemDescription");
+	MakeStruct	(0X293DC,	"ItemDescription");
+	MakeStruct	(0X293E0,	"ItemDescription");
+	MakeStruct	(0X293E4,	"ItemDescription");
+	MakeStruct	(0X293E8,	"ItemDescription");
+	MakeStruct	(0X293EC,	"ItemDescription");
+	MakeStruct	(0X293F0,	"ItemDescription");
+	MakeStruct	(0X293F4,	"ItemDescription");
+	MakeStruct	(0X293F8,	"ItemDescription");
+	MakeStruct	(0X293FC,	"ItemDescription");
+	MakeStruct	(0X29400,	"ItemDescription");
 	MakeCode	(0X29404);
 	MakeCode	(0X29422);
 	MakeCode	(0X29430);
@@ -17135,6 +17227,15 @@ static Bytes_2(void) {
 	MakeByte	(0XA141E);
 	MakeByte	(0XA141F);
 	MakeByte	(0XA1420);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XA1421);
 	MakeDword	(x=0XA1422);
 	OpOff		(x,	0,	0X0);
@@ -17365,15 +17466,6 @@ static Bytes_2(void) {
 	OpOff		(x,	128,	0X0);
 	MakeByte	(0XA1526);
 	MakeByte	(0XA1527);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XA1528);
 	MakeByte	(0XA1529);
 	MakeDword	(x=0XA152A);
@@ -22319,6 +22411,15 @@ static Bytes_3(void) {
 	MakeByte	(0X109EBD);
 	MakeArray	(0X109EBD,	0X215);
 	MakeName	(0X109EBD,	"Map664");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_4(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X10A0D2);
 	MakeArray	(0X10A0D2,	0X15F);
 	MakeName	(0X10A0D2,	"Map554");
@@ -22478,15 +22579,6 @@ static Bytes_3(void) {
 	MakeByte	(0X118245);
 	MakeArray	(0X118245,	0X3BA);
 	MakeName	(0X118245,	"Map515");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_4(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X1185FF);
 	MakeArray	(0X1185FF,	0X724);
 	MakeName	(0X1185FF,	"Map641");
@@ -27327,6 +27419,15 @@ static Bytes_4(void) {
 	MakeDword	(x=0X120EA0);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_5(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0X120EA4);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -27531,15 +27632,6 @@ static Bytes_4(void) {
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
 	MakeName	(0X120F94,	"Sprite110");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_5(void) {
-        auto x;
-#define id x
-
 	MakeDword	(x=0X120F98);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -31705,6 +31797,15 @@ static Bytes_5(void) {
 	MakeByte	(0X16C312);
 	MakeArray	(0X16C312,	0X1A4);
 	MakeName	(0X16C312,	"Sprite209Frame1");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_6(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X16C4B6);
 	MakeArray	(0X16C4B6,	0XB6);
 	MakeName	(0X16C4B6,	"Sprite209Frame2");
@@ -31840,15 +31941,6 @@ static Bytes_5(void) {
 	MakeByte	(0X172742);
 	MakeArray	(0X172742,	0X27E);
 	MakeName	(0X172742,	"Sprite380Frame1");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_6(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X1729C0);
 	MakeArray	(0X1729C0,	0X286);
 	MakeName	(0X1729C0,	"Sprite380Frame2");
@@ -36308,6 +36400,15 @@ static Bytes_6(void) {
 	MakeByte	(0X1D9759);
 	MakeArray	(0X1D9759,	0X927);
 	MakeName	(0X1D9759,	"MapBlock45_00");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_7(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1DA080);
 	MakeArray	(0X1DA080,	0X7C3);
 	MakeName	(0X1DA080,	"MapBlock45_01");
@@ -36428,15 +36529,6 @@ static Bytes_6(void) {
 	MakeName	(0XA10017,	"RxDATA2");
 	MakeWord	(0XA10019);
 	MakeName	(0XA10019,	"SCTRL2");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_7(void) {
-        auto x;
-#define id x
-
 	MakeWord	(0XA1001B);
 	MakeName	(0XA1001B,	"TxDATA3");
 	MakeWord	(0XA1001D);
@@ -39210,9 +39302,9 @@ static Functions_0(void) {
 	MakeFunction    (0X22ECC,0X22ED0);
 	SetFunctionFlags(0X22ECC,0x80);
 	MakeFunction    (0X22ED0,0X22ED4);
-	SetFunctionFlags(0X22ED0,0x80);
+	SetFunctionFlags(0X22ED0,0xc0);
 	MakeFunction    (0X22ED4,0X22ED8);
-	SetFunctionFlags(0X22ED4,0x80);
+	SetFunctionFlags(0X22ED4,0xc0);
 	MakeFunction    (0X22ED8,0X22EDC);
 	SetFunctionFlags(0X22ED8,0x80);
 	MakeFunction    (0X22EDC,0X22EE0);
