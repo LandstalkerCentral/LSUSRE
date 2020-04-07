@@ -65,4 +65,32 @@ d0=sprite index", 1);
     SetFunctionCmt(0x253f8, 
         "main trap 1/2 function, crucial to figure out", 1);
 
+    // GetOwnedItemQuantityEnriched
+    SetFunctionCmt(0x29192, 
+        "d0=item index | d1=quantity owned, d2=can carry multiple units", 1);
+
+    // CheckAndSetOwnedItemQuantity
+    SetFunctionCmt(0x291b6, 
+        "d0=item index, d1=quantity owned", 1);
+
+    // ConsumeOneItem
+    SetFunctionCmt(0x2921c, 
+        "d0=item index", 1);
+
+    // GetOwnedItemQuantity
+    SetFunctionCmt(0x29260, 
+        "d0=item index | d1=quantity owned", 1);
+
+    // SetOwnedItemQuantity
+    SetFunctionCmt(0x29288, 
+        "d0=item index, d1=item quantity", 1);
+
+    // GetMaxQuantityForItem
+    SetFunctionCmt(0x292b8, 
+        "d0=item index | d1=max quantity for item", 1);
+
+    // GetItemDescriptionAddress
+    SetFunctionCmt(0x292f4, 
+        "d0=item index | a0=item description address", 1);
+
 }
