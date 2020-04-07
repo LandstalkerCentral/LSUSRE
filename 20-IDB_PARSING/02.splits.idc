@@ -121,6 +121,9 @@ static splitSingleChunks(file) {
     splitSingleChunk(0x00FD5C, 0x00FE37, "SaveScreenTileset1","data/graphics/specialscreens/savescreentileset1.bin",file);
     splitSingleChunk(0x00FE37, 0x00FF12, "SaveScreenTileset2","data/graphics/specialscreens/savescreentileset2.bin",file);
     
+    splitSingleChunk(0x023D60, 0x023E38, "TextBankTreeOffsets","data/scripting/text/huffmantreeoffsets.bin",file);
+    splitSingleChunk(0x023E38, 0x02469C, "TextBankTreeData","data/scripting/text/huffmantrees.bin",file);
+    
     splitSingleChunk(0x02A884, 0x02B27A, "MainFont","data/graphics/tech/fonts/mainfont.bin",file);
     splitSingleChunk(0x02B27A, 0x02C29B, "TextBank0","data/scripting/text/textbank0.bin",file);
     splitSingleChunk(0x02C29B, 0x02DCC8, "TextBank1","data/scripting/text/textbank1.bin",file);

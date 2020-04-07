@@ -10772,127 +10772,52 @@ static Bytes_1(void) {
 	MakeWord	(0X23D5A);
 	MakeWord	(0X23D5C);
 	MakeWord	(0X23D5E);
-	MakeWord	(0X23D60);
-	MakeWord	(0X23D62);
-	MakeWord	(0X23D64);
-	MakeWord	(0X23D66);
-	MakeWord	(0X23D68);
-	MakeWord	(0X23D6A);
-	MakeWord	(0X23D6C);
-	MakeWord	(0X23D6E);
-	MakeWord	(0X23D70);
-	MakeWord	(0X23D72);
-	MakeWord	(0X23D74);
-	MakeWord	(0X23D76);
-	MakeWord	(0X23D78);
-	MakeWord	(0X23D7A);
-	MakeWord	(0X23D7C);
-	MakeWord	(0X23D7E);
-	MakeWord	(0X23D80);
-	MakeWord	(0X23D82);
-	MakeWord	(0X23D84);
-	MakeWord	(0X23D86);
-	MakeWord	(0X23D88);
-	MakeWord	(0X23D8A);
-	MakeWord	(0X23D8C);
-	MakeWord	(0X23D8E);
-	MakeWord	(0X23D90);
-	MakeWord	(0X23D92);
-	MakeWord	(0X23D94);
-	MakeWord	(0X23D96);
-	MakeWord	(0X23D98);
-	MakeWord	(0X23D9A);
-	MakeWord	(0X23D9C);
-	MakeWord	(0X23D9E);
-	MakeWord	(0X23DA0);
-	MakeWord	(0X23DA2);
-	MakeWord	(0X23DA4);
-	MakeWord	(0X23DA6);
-	MakeWord	(0X23DA8);
-	MakeWord	(0X23DAA);
-	MakeWord	(0X23DAC);
-	MakeWord	(0X23DAE);
-	MakeWord	(0X23DB0);
-	MakeWord	(0X23DB2);
-	MakeWord	(0X23DB4);
-	MakeWord	(0X23DB6);
-	MakeWord	(0X23DB8);
-	MakeWord	(0X23DBA);
-	MakeWord	(0X23DBC);
-	MakeWord	(0X23DBE);
-	MakeWord	(0X23DC0);
-	MakeWord	(0X23DC2);
-	MakeWord	(0X23DC4);
-	MakeWord	(0X23DC6);
-	MakeWord	(0X23DC8);
-	MakeWord	(0X23DCA);
-	MakeWord	(0X23DCC);
-	MakeWord	(0X23DCE);
-	MakeWord	(0X23DD0);
-	MakeWord	(0X23DD2);
-	MakeWord	(0X23DD4);
-	MakeWord	(0X23DD6);
-	MakeWord	(0X23DD8);
-	MakeWord	(0X23DDA);
-	MakeWord	(0X23DDC);
-	MakeWord	(0X23DDE);
-	MakeWord	(0X23DE0);
-	MakeWord	(0X23DE2);
-	MakeWord	(0X23DE4);
-	MakeWord	(0X23DE6);
-	MakeWord	(0X23DE8);
-	MakeWord	(0X23DEA);
-	MakeWord	(0X23DEC);
-	MakeWord	(0X23DEE);
-	MakeWord	(0X23DF0);
-	MakeWord	(0X23DF2);
-	MakeWord	(0X23DF4);
-	MakeWord	(0X23DF6);
-	MakeWord	(0X23DF8);
-	MakeWord	(0X23DFA);
-	MakeWord	(0X23DFC);
-	MakeWord	(0X23DFE);
-	MakeWord	(0X23E00);
-	MakeWord	(0X23E02);
-	MakeWord	(0X23E04);
-	MakeWord	(0X23E06);
-	MakeWord	(0X23E08);
-	MakeWord	(0X23E0A);
-	MakeWord	(0X23E0C);
-	MakeWord	(0X23E0E);
-	MakeWord	(0X23E10);
-	MakeWord	(0X23E12);
-	MakeWord	(0X23E14);
-	MakeWord	(0X23E16);
-	MakeWord	(0X23E18);
-	MakeWord	(0X23E1A);
-	MakeWord	(0X23E1C);
-	MakeWord	(0X23E1E);
-	MakeWord	(0X23E20);
-	MakeWord	(0X23E22);
-	MakeWord	(0X23E24);
-	MakeWord	(0X23E26);
-	MakeWord	(0X23E28);
-	MakeWord	(0X23E2A);
-	MakeWord	(0X23E2C);
-	MakeWord	(0X23E2E);
-	MakeWord	(0X23E30);
-	MakeWord	(0X23E32);
-	MakeWord	(0X23E34);
-	MakeWord	(0X23E36);
+	MakeByte	(0X23D60);
+	MakeArray	(0X23D60,	0XD8);
+	MakeName	(0X23D60,	"TextBankTreeOffsets");
+	MakeByte	(0X23E38);
+	MakeArray	(0X23E38,	0X864);
+	MakeName	(0X23E38,	"TextBankTreeData");
 	MakeCode	(0X2469C);
 	MakeCode	(0X246B2);
+	MakeName	(0X246B2,	"DecodeHuffmanSymbol");
 	MakeCode	(x=0X246B6);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeRptCmt	(0X246BC,	"huffman length : current progress in reading current barrel");
+	MakeRptCmt	(0X246BE,	"huffman barrel : current compressed string byte to read");
+	MakeRptCmt	(0X246C4,	"Get last decoded text symbol -> huffman tree to use");
 	MakeCode	(x=0X246CA);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeRptCmt	(0X246CE,	"get tree offset");
 	MakeCode	(x=0X246D2);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+	MakeRptCmt	(0X246D8,	"a1 = a2 = current tree start address");
+	MakeRptCmt	(0X246DA,	"clear Huffman tree bit counter");
+	MakeRptCmt	(0X246DC,	"clear skipped symbols counter");
+	MakeRptCmt	(0X246E4,	"Load next Huffman tree byte");
+	MakeRptCmt	(0X246E6,	"Get next Huffman tree bit into Carry");
+	MakeRptCmt	(0X246E8,	"C = 1 --> Leaf node, go get symbol\nC = 0 --> Non-leaf node, read next string bit");
+	MakeRptCmt	(0X246F0,	"Load next compressed string byte");
+	MakeRptCmt	(0X246F2,	"Get next compressed string bit into Carry");
+	MakeRptCmt	(0X246F4,	"C = 0 --> Travel left, go get next Huffman tree bit\nC = 1 --> Travel right, count left side symbols to skip");
+	MakeRptCmt	(0X246F6,	"Clear non-leaf node counter");
+	MakeRptCmt	(0X246F8,	"count left sub-tree symbols to skip");
+	MakeRptCmt	(0X246FE,	"Load next huffman tree byte");
+	MakeRptCmt	(0X24700,	"Get next Huffman tree bit into Carry");
+	MakeRptCmt	(0X24702,	"C = 1 --> leaf-node, go add one symbol to skip\nC = 0 --> non-leaf node, add one node to read");
+	MakeRptCmt	(0X24704,	"increment non-leaf node counter");
+	MakeRptCmt	(0X24708,	"increment skipped symbols counter");
 	MakeCode	(0X24708);
+	MakeRptCmt	(0X2470A,	"Continue until all nodes in left subtree exhausted");
+	MakeRptCmt	(0X2470E,	"Examine next tree node");
+	MakeRptCmt	(0X24710,	"Load decoded symbol");
 	MakeCode	(0X24710);
+	MakeRptCmt	(0X24714,	"save current string bit counter");
+	MakeRptCmt	(0X24716,	"save current string byte");
+	MakeRptCmt	(0X2471A,	"save decoded symbol");
 	MakeCode	(0X24724);
 	MakeCode	(0X247AE);
 	MakeByte	(0X247D4);
@@ -11561,6 +11486,15 @@ static Bytes_1(void) {
 	MakeWord	(0X25C14);
 	MakeWord	(0X25C16);
 	MakeWord	(0X25C18);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeWord	(0X25C1A);
 	MakeWord	(0X25C1C);
 	MakeWord	(0X25C1E);
@@ -11606,15 +11540,6 @@ static Bytes_1(void) {
 	MakeWord	(0X25C6E);
 	MakeWord	(0X25C70);
 	MakeWord	(0X25C72);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeWord	(0X25C74);
 	MakeWord	(0X25C76);
 	MakeWord	(0X25C78);
@@ -14023,7 +13948,6 @@ static Bytes_2(void) {
 	MakeCode	(0X399AA);
 	MakeCode	(0X399C6);
 	MakeCode	(x=0X399CC);
-	OpSign		(x,	1);
 	OpHex		(x,	1);
 	MakeByte	(0X399DC);
 	MakeArray	(0X399DC,	0X4);
@@ -17184,6 +17108,15 @@ static Bytes_2(void) {
 	OpOff		(x,	128,	0X0);
 	MakeByte	(0XA13EE);
 	MakeByte	(0XA13EF);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XA13F0);
 	MakeByte	(0XA13F1);
 	MakeDword	(x=0XA13F2);
@@ -17227,15 +17160,6 @@ static Bytes_2(void) {
 	MakeByte	(0XA141E);
 	MakeByte	(0XA141F);
 	MakeByte	(0XA1420);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XA1421);
 	MakeDword	(x=0XA1422);
 	OpOff		(x,	0,	0X0);
@@ -22384,6 +22308,15 @@ static Bytes_3(void) {
 	MakeByte	(0X108712);
 	MakeArray	(0X108712,	0X29B);
 	MakeName	(0X108712,	"Map420");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_4(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1089AD);
 	MakeArray	(0X1089AD,	0X1D9);
 	MakeName	(0X1089AD,	"Map553");
@@ -22411,15 +22344,6 @@ static Bytes_3(void) {
 	MakeByte	(0X109EBD);
 	MakeArray	(0X109EBD,	0X215);
 	MakeName	(0X109EBD,	"Map664");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_4(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X10A0D2);
 	MakeArray	(0X10A0D2,	0X15F);
 	MakeName	(0X10A0D2,	"Map554");
@@ -27383,6 +27307,15 @@ static Bytes_4(void) {
 	MakeDword	(x=0X120E74);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_5(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0X120E78);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -27419,15 +27352,6 @@ static Bytes_4(void) {
 	MakeDword	(x=0X120EA0);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_5(void) {
-        auto x;
-#define id x
-
 	MakeDword	(x=0X120EA4);
 	OpOff		(x,	0,	0X0);
 	OpOff		(x,	128,	0X0);
@@ -31773,6 +31697,15 @@ static Bytes_5(void) {
 	MakeByte	(0X16AC96);
 	MakeArray	(0X16AC96,	0X3CE);
 	MakeName	(0X16AC96,	"Sprite205Frame3");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_6(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X16B064);
 	MakeArray	(0X16B064,	0X24C);
 	MakeName	(0X16B064,	"Sprite206Frame0");
@@ -31797,15 +31730,6 @@ static Bytes_5(void) {
 	MakeByte	(0X16C312);
 	MakeArray	(0X16C312,	0X1A4);
 	MakeName	(0X16C312,	"Sprite209Frame1");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_6(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X16C4B6);
 	MakeArray	(0X16C4B6,	0XB6);
 	MakeName	(0X16C4B6,	"Sprite209Frame2");
@@ -36376,6 +36300,15 @@ static Bytes_6(void) {
 	MakeByte	(0X1D4ACC);
 	MakeArray	(0X1D4ACC,	0XC92);
 	MakeName	(0X1D4ACC,	"MapBlock38_02");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_7(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0X1D575E);
 	MakeArray	(0X1D575E,	0XC92);
 	MakeName	(0X1D575E,	"MapBlock38_03");
@@ -36400,15 +36333,6 @@ static Bytes_6(void) {
 	MakeByte	(0X1D9759);
 	MakeArray	(0X1D9759,	0X927);
 	MakeName	(0X1D9759,	"MapBlock45_00");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_7(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0X1DA080);
 	MakeArray	(0X1DA080,	0X7C3);
 	MakeName	(0X1DA080,	"MapBlock45_01");
@@ -36953,6 +36877,7 @@ static Bytes_7(void) {
 	MakeArray	(0XFF1917,	0X9);
 	MakeWord	(0XFF1920);
 	MakeWord	(0XFF1922);
+	MakeName	(0XFF1922,	"STRING_BIT_COUNTER");
 	MakeWord	(0XFF1924);
 	MakeWord	(0XFF1926);
 	MakeWord	(0XFF1928);
