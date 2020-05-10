@@ -34,33 +34,24 @@ static produceMain(){
 
 static produceMusicBank1(mainFile){
 
-	produceAsmSection(mainFile,0x8910,0x8950);
-	produceAsmScriptWithConditionalInclude(mainFile,"music33",0x8950,0x9582,"Music 33",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music34",0x9582,0x97B3,"Music 34",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music42",0x97B3,0x9D0E,"Music 42",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music50",0x9D0E,0xA792,"Music 50",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music51",0xA792,0xB272,"Music 51",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music52",0xB272,0xB6A0,"Music 52",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music53",0xB6A0,0xBCCF,"Music 53",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music54",0xBCCF,0xC477,"Music 54",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music61",0xC477,0xC971,"Music 61",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music49",0xC971,0xCDD1,"Music 49",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music35",0xCDD1,0xD277,"Music 35",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music63",0xD277,0xD938,"Music 63",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music36",0xD938,0xDAB3,"Music 36",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music37",0xDAB3,0xDB74,"Music 37",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music38",0xDB74,0xDC96,"Music 38",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music39",0xDC96,0xDD8B,"Music 39",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music40",0xDD8B,0xDE62,"Music 40",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music41",0xDE62,0xDEFC,"Music 41",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music44",0xDEFC,0xE05C,"Music 44",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music43",0xE05C,0xE340,"Music 43",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music45",0xE340,0xE4A6,"Music 45",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music46",0xE4A6,0xE6E2,"Music 46",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music47",0xE6E2,0xE74E,"Music 47",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music48",0xE74E,0xE92B,"Music 48",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music59",0xE92B,0xFA96,"Music 59",0);
-	produceAsmScriptWithConditionalInclude(mainFile,"music64",0xFA96,0xFDB9,"Music 64",0);
+	produceAsmSection(mainFile,0x8000,0x8040);
+	produceAsmScriptWithConditionalInclude(mainFile,"music33",0x8040,0x8294,"Music 33",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music34",0x8294,0x847F,"Music 34",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music35",0x847F,0x8C16,"Music 35",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music36",0x8C16,0x937C,"Music 36",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music37",0x937C,0x99AD,"Music 37",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music38",0x99AD,0x9E3F,"Music 38",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music39",0x9E3F,0xA7C8,"Music 39",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music40",0xA7C8,0xA945,"Music 40",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music41",0xA945,0xB0CB,"Music 41",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music42",0xB0CB,0xC19E,"Music 42",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music43",0xC19E,0xC7A1,"Music 43",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music44",0xC7A1,0xCC97,"Music 44",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music45",0xCC97,0xCFFB,"Music 45",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music46",0xCFFB,0xD7CC,"Music 46",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music47",0xD7CC,0xDD2D,"Music 47",0);
+	produceAsmScriptWithConditionalInclude(mainFile,"music64",0xDD2D,0xDD48,"Music 64",0);
+	produceAsmSection(mainFile,0xDD48,0x10000);
 
 
 

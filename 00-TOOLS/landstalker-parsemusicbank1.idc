@@ -47,11 +47,12 @@ static parseMusicBank(){
 	auto i;
 	auto addr,target;
 	undefineByte(0);
+	
 	for(i=1;i<=32;i++){
-		addr = 0x8910+(i-1)*2;
+		addr = 0x8000+(i-1)*2;
 		MakeWord(addr);
 		target = Word(addr);
-		MakeNameEx(target,form("Music_%s",ltoa(i+32,10)),0);
+		MakeNameEx(target,form("Music%s",ltoa(i+32,10)),0);
 		OpOff(addr,0,0);
 		Message(form("\n  Music %d at 0x%s...",i+32,ltoa(target,16)));	
 		parseMusic(target,target+0x1000,i+32);
@@ -60,8 +61,13 @@ static parseMusicBank(){
 			break;
 		}*/	
 	}	
-	MakeArray(0xFDB9,583);		
-	SetManualInsn(0xFDB9,"align 8000h");
+	
+	MakeArray(0xDD48,0xE000-0xDD48);		
+	SetManualInsn(0xDD48,"org 0E000h");
+	
+	MakeArray(0xE000,0x2000);		
+	SetManualInsn(0xE000,"binclude \"../sounddriver.bin\"");
+	
 }
 
 
@@ -105,7 +111,7 @@ static parseMusic(start,end,index){
 		MakeUnknown(addr,2,DOUNK_SIMPLE);
 		MakeWord(addr);
 		SetManualInsn(addr,"");
-		MakeNameEx(target,form("Music_%d_Channel_%d",index,channel),0);
+		MakeNameEx(target,form("Music%d_Channel%d",index,channel),0);
 		OpOff(addr,0,0);
 		Message(form("\n  Music %d channel %d at 0x%s",index,channel,ltoa(target,16)));
 	}
@@ -116,7 +122,7 @@ static parseMusic(start,end,index){
 		while(action==1){
 			//Jump(ea);
 			cmd = Byte(ea);
-			if(strstr(GetTrueName(ea),form("Music_%d_Channel_%d",index,ymChannel))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
+			if(strstr(GetTrueName(ea),form("Music%d_Channel%d",index,ymChannel))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
 				break;
 			}
 			if(cmd==0xFF){
@@ -248,7 +254,7 @@ static parseMusic(start,end,index){
 		while(action==1){
 			//Jump(ea);
 			cmd = Byte(ea);
-			if(strstr(GetTrueName(ea),form("Music_%d_Channel_%d",index,psgChannel+6))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
+			if(strstr(GetTrueName(ea),form("Music%d_Channel%d",index,psgChannel+6))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
 				break;
 			}
 			if(cmd==0xFF){
@@ -327,7 +333,7 @@ static parseMusic(start,end,index){
 				cmdLength = 2;
 				MakeUnknown(ea,cmdLength,DOUNK_SIMPLE);
 				MakeData(ea,FF_BYTE,cmdLength,1);
-				SetManualInsn(ea,form("        waitL %s",ltoa(Byte(ea+1),10)));
+				SetManualInsn(ea,form("        waitL    %s",ltoa(Byte(ea+1),10)));
 			}else if(cmd==0x70){
 				cmdLength = 1;
 				MakeUnknown(ea,cmdLength,DOUNK_SIMPLE);

@@ -45,23 +45,33 @@ static createNotes(){
 
 static parseMusicBank(){
 	auto i;
-	auto addr,target;
+	auto addr,target,index;
 	undefineByte(0);
+	
+	MakeData(0x8000,FF_BYTE,0x910,1);
+	SetManualInsn(0x8000, "binclude \"../yminst.bin\"");
+	
 	for(i=1;i<=32;i++){
-		addr = 0x8000+(i-1)*2;
+		addr = 0x8910+(i-1)*2;
 		MakeWord(addr);
 		target = Word(addr);
-		MakeNameEx(target,form("Music_%s",ltoa(i,10)),0);
+		index = ltoa(i+0,10);
+		while(strlen(index)<2){
+			index = form("0%s",index);
+		}
+		MakeNameEx(target,form("Music%s",index),0);
 		OpOff(addr,0,0);
-		Message(form("\n  Music %d at 0x%s...",i,ltoa(target,16)));	
-		parseMusic(target,target+0x1000,i);
+		Message(form("\n  Music %d at 0x%s...",i+0,ltoa(target,16)));	
+		parseMusic(target,target+0x1000,index);
 		Message(" DONE.\n");
 		/*if(AskYN(1,"Next Music ?")!=1){
 			break;
 		}*/	
 	}	
-	MakeArray(0xFE37,457);		
-	SetManualInsn(0xFE37,"align 8000h");
+	
+	MakeArray(0xFAB1,0x10000-0xFAB1);		
+	SetManualInsn(0xFAB1,"align 8000h");
+	
 }
 
 
@@ -105,9 +115,9 @@ static parseMusic(start,end,index){
 		MakeUnknown(addr,2,DOUNK_SIMPLE);
 		MakeWord(addr);
 		SetManualInsn(addr,"");
-		MakeNameEx(target,form("Music_%d_Channel_%d",index,channel),0);
+		MakeNameEx(target,form("Music%s_Channel%d",index,channel),0);
 		OpOff(addr,0,0);
-		Message(form("\n  Music %d channel %d at 0x%s",index,channel,ltoa(target,16)));
+		Message(form("\n  Music %s channel %d at 0x%s",index,channel,ltoa(target,16)));
 	}
 	
 	for(ymChannel=0;ymChannel<6;ymChannel++){
@@ -116,7 +126,7 @@ static parseMusic(start,end,index){
 		while(action==1){
 			//Jump(ea);
 			cmd = Byte(ea);
-			if(strstr(GetTrueName(ea),form("Music_%d_Channel_%d",index,ymChannel))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
+			if(strstr(GetTrueName(ea),form("Music%s_Channel%d",index,ymChannel))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
 				break;
 			}
 			if(cmd==0xFF){
@@ -248,7 +258,7 @@ static parseMusic(start,end,index){
 		while(action==1){
 			//Jump(ea);
 			cmd = Byte(ea);
-			if(strstr(GetTrueName(ea),form("Music_%d_Channel_%d",index,psgChannel+6))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
+			if(strstr(GetTrueName(ea),form("Music%s_Channel%d",index,psgChannel+6))==-1 && strstr(GetTrueName(ea),"Music")!=-1){
 				break;
 			}
 			if(cmd==0xFF){

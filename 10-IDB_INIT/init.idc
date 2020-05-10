@@ -36384,14 +36384,11 @@ static Bytes_7(void) {
 	MakeArray	(0X1E8000,	0X8000);
 	MakeName	(0X1E8000,	"PCMBank1");
 	MakeByte	(0X1F0000);
-	MakeArray	(0X1F0000,	0X6000);
-	MakeName	(0X1F0000,	"MusibBank0");
-	MakeByte	(0X1F6000);
-	MakeArray	(0X1F6000,	0X2000);
-	MakeName	(0X1F6000,	"SoundDriver");
+	MakeArray	(0X1F0000,	0X8000);
+	MakeName	(0X1F0000,	"MusicBank1");
 	MakeByte	(0X1F8000);
 	MakeArray	(0X1F8000,	0X8000);
-	MakeName	(0X1F8000,	"MusicBank1");
+	MakeName	(0X1F8000,	"MusicBank0");
 	MakeByte	(0X200000);
 	MakeArray	(0X200000,	0X10);
 	MakeByte	(0X200010);
